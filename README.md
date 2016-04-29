@@ -12,7 +12,7 @@ You can decide wether to show the list as soon as the field is focused or when h
 You can also detects when the user stops typing, very useful when you can get a suggestion list from a remote server.   
    
    
-   
+------   
 ![alt_tag](https://raw.githubusercontent.com/apasccon/SearchTextField/master/Example/SearchTextField/SearchTextField_Demo.gif)
 
 ## Requirements
