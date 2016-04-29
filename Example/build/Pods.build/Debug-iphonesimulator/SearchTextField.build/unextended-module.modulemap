@@ -1,0 +1,10 @@
+framework module SearchTextField {
+  umbrella header "SearchTextField-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module SearchTextField.__Swift {
+    exclude header "SearchTextField-Swift.h"
+}

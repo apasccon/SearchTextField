@@ -1,0 +1,33 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [
+    {
+      'type': 'directory',
+      'name': "/Users/Alejandro/Documents/Projects/iOS/Libraries/SearchTextField/Example/build/Debug-iphonesimulator/SearchTextField.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "SearchTextField-Swift.h",
+          'external-contents': "/Users/Alejandro/Documents/Projects/iOS/Libraries/SearchTextField/Example/build/Debug-iphonesimulator/SearchTextField.framework/Headers/SearchTextField-Swift.h"
+        },
+        {
+          'type': 'file',
+          'name': "SearchTextField-umbrella.h",
+          'external-contents': "/Users/Alejandro/Documents/Projects/iOS/Libraries/SearchTextField/Example/Pods/Target Support Files/SearchTextField/SearchTextField-umbrella.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/Alejandro/Documents/Projects/iOS/Libraries/SearchTextField/Example/build/Debug-iphonesimulator/SearchTextField.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/Alejandro/Documents/Projects/iOS/Libraries/SearchTextField/Example/build/Pods.build/Debug-iphonesimulator/SearchTextField.build/module.modulemap"
+        }
+      ]
+    }
+  ]
+}

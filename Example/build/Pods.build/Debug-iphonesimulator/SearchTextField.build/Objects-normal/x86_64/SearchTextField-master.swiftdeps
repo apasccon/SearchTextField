@@ -1,0 +1,5 @@
+version: "Apple Swift version 2.2 (swiftlang-703.0.18.1 clang-703.0.29)"
+options: "9095560e77736ed25275d9d861e6824b"
+build_time: [514998422, 588048000]
+inputs:
+  "/Users/Alejandro/Documents/Projects/iOS/Libraries/SearchTextField/SearchTextField/Classes/SearchTextField.swift": [514995684, 0]

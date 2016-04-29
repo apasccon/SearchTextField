@@ -1,0 +1,6 @@
+framework module Pods_SearchTextField_Example {
+  umbrella header "Pods-SearchTextField_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

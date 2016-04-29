@@ -1,0 +1,6 @@
+framework module SearchTextField {
+  umbrella header "SearchTextField-umbrella.h"
+
+  export *
+  module * { export * }
+}

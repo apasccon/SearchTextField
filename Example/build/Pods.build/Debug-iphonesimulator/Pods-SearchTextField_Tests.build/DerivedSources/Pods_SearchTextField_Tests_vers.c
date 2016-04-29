@@ -1,0 +1,1 @@
+ const unsigned char Pods_SearchTextField_TestsVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:Pods_SearchTextField_Tests  PROJECT:Pods-1" "\n"; const double Pods_SearchTextField_TestsVersionNumber __attribute__ ((used)) = (double)1.;
