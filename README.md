@@ -24,7 +24,9 @@ You can also detects when the user stops typing, very useful when you can get a 
 SearchTextField is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
-```ruby
+```swift
+use_frameworks!
+
 pod "SearchTextField"
 ```
 
