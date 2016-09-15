@@ -61,6 +61,8 @@ public class SearchTextField: UITextField {
         indicator.stopAnimating()
     }
     
+    public var inlineMode = false
+    
 
     ////////////////////////////////////////////////////////////////////////
     // Private implementation
@@ -71,6 +73,7 @@ public class SearchTextField: UITextField {
     private var fontConversionRate: CGFloat = 0.7
     private var keyboardFrame: CGRect?
     private var timer: NSTimer? = nil
+    private var placeholderLabel: UILabel?
     private static let cellIdentifier = "APSearchTextFieldCell"
     private let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     
@@ -81,6 +84,8 @@ public class SearchTextField: UITextField {
             redrawSearchTableView()
         }
     }
+    
+    private var currentInlineItem = ""
 
     override public func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
@@ -88,6 +93,7 @@ public class SearchTextField: UITextField {
         self.addTarget(self, action: #selector(SearchTextField.textFieldDidChange), forControlEvents: .EditingChanged)
         self.addTarget(self, action: #selector(SearchTextField.textFieldDidBeginEditing), forControlEvents: .EditingDidBegin)
         self.addTarget(self, action: #selector(SearchTextField.textFieldDidEndEditing), forControlEvents: .EditingDidEnd)
+        self.addTarget(self, action: #selector(SearchTextField.textFieldDidEndEditingOnExit), forControlEvents: .EditingDidEndOnExit)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SearchTextField.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SearchTextField.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
@@ -97,6 +103,7 @@ public class SearchTextField: UITextField {
         super.layoutSubviews()
         
         buildSearchTableView()
+        buildPlaceholderLabel()
         
         // Create the loading indicator
         indicator.hidesWhenStopped = true
@@ -133,8 +140,31 @@ public class SearchTextField: UITextField {
         redrawSearchTableView()
     }
     
+    private func buildPlaceholderLabel() {
+        var textRect = self.textRectForBounds(self.bounds)
+        textRect.origin.y -= 1
+        
+        if let placeholderLabel = placeholderLabel {
+            placeholderLabel.font = self.font
+            placeholderLabel.frame = textRect
+        } else {
+            placeholderLabel = UILabel(frame: textRect)
+            placeholderLabel?.font = self.font
+            placeholderLabel?.textColor = UIColor ( red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0 )
+            placeholderLabel?.backgroundColor = UIColor.clearColor()
+            placeholderLabel?.lineBreakMode = .ByClipping
+
+            self.addSubview(placeholderLabel!)
+        }
+    }
+    
     // Re-set frames and theme colors
     private func redrawSearchTableView() {
+        if inlineMode {
+            tableView?.hidden = true
+            return
+        }
+        
         if let tableView = tableView {
             let positionGap: CGFloat = 10
             
@@ -205,6 +235,7 @@ public class SearchTextField: UITextField {
         if text!.isEmpty {
             clearResults()
             tableView?.reloadData()
+            self.placeholderLabel?.text = ""
         } else {
             filter(false)
         }
@@ -215,11 +246,17 @@ public class SearchTextField: UITextField {
             clearResults()
             filter(true)
         }
+        placeholderLabel?.attributedText = nil
     }
     
     public func textFieldDidEndEditing() {
         clearResults()
         tableView?.reloadData()
+        placeholderLabel?.attributedText = nil
+    }
+
+    public func textFieldDidEndEditingOnExit() {
+        self.text = filteredResults.first?.title
     }
 
     private func filter(addAll: Bool) {
@@ -229,32 +266,44 @@ public class SearchTextField: UITextField {
             
             var item = filterDataSource[i]
             
-            // Find text in title and subtitle
-            let titleFilterRange = (item.title as NSString).rangeOfString(text!, options: .CaseInsensitiveSearch)
-            let subtitleFilterRange = item.subtitle != nil ? (item.subtitle! as NSString).rangeOfString(text!, options: .CaseInsensitiveSearch) : NSMakeRange(NSNotFound, 0)
-            
-            if titleFilterRange.location != NSNotFound || subtitleFilterRange.location != NSNotFound || addAll {
-                item.attributedTitle = NSMutableAttributedString(string: item.title)
-                item.attributedSubtitle = NSMutableAttributedString(string: (item.subtitle != nil ? item.subtitle! : ""))
-
-                item.attributedTitle!.setAttributes(highlightAttributes, range: titleFilterRange)
+            if !inlineMode {
+                // Find text in title and subtitle
+                let titleFilterRange = (item.title as NSString).rangeOfString(text!, options: .CaseInsensitiveSearch)
+                let subtitleFilterRange = item.subtitle != nil ? (item.subtitle! as NSString).rangeOfString(text!, options: .CaseInsensitiveSearch) : NSMakeRange(NSNotFound, 0)
                 
-                if subtitleFilterRange.location != NSNotFound {
-                    item.attributedSubtitle!.setAttributes(highlightAttributesForSubtitle(), range: subtitleFilterRange)
+                if titleFilterRange.location != NSNotFound || subtitleFilterRange.location != NSNotFound || addAll {
+                    item.attributedTitle = NSMutableAttributedString(string: item.title)
+                    item.attributedSubtitle = NSMutableAttributedString(string: (item.subtitle != nil ? item.subtitle! : ""))
+                    
+                    item.attributedTitle!.setAttributes(highlightAttributes, range: titleFilterRange)
+                    
+                    if subtitleFilterRange.location != NSNotFound {
+                        item.attributedSubtitle!.setAttributes(highlightAttributesForSubtitle(), range: subtitleFilterRange)
+                    }
+                    
+                    filteredResults.append(item)
                 }
-                
-                filteredResults.append(item)
+            } else {
+                if item.title.lowercaseString.hasPrefix(text!.lowercaseString) {
+                    item.attributedTitle = NSMutableAttributedString(string: item.title)
+                    item.attributedTitle?.addAttribute(NSForegroundColorAttributeName, value: UIColor.clearColor(), range: NSRange(location:0, length:text!.characters.count))
+                    filteredResults.append(item)
+                }
             }
+            
         }
     
         tableView?.reloadData()
+        
+        if inlineMode {
+            handleInlineFiltering()
+        }
     }
     
     // Clean filtered results
     private func clearResults() {
         filteredResults.removeAll()
     }
-    
     
     // Look for Font attribute, and if it exists, adapt to the subtitle font size
     private func highlightAttributesForSubtitle() -> [String: AnyObject] {
@@ -271,6 +320,21 @@ public class SearchTextField: UITextField {
         }
         
         return highlightAttributesForSubtitle
+    }
+    
+    // Handle inline behaviour
+    func handleInlineFiltering() {
+        if let text = self.text {
+            if text == "" {
+                self.placeholderLabel?.attributedText = nil
+            } else {
+                if let firstResult = filteredResults.first {
+                    self.placeholderLabel?.attributedText = firstResult.attributedTitle
+                } else {
+                    self.placeholderLabel?.attributedText = nil
+                }
+            }
+        }
     }
 }
 

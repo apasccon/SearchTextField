@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="lGh-8H-ch5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="lGh-8H-ch5">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -28,9 +28,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a country name (inline)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cfX-6h-rI0" customClass="SearchTextField" customModule="SearchTextField">
+                                <rect key="frame" x="120" y="284" width="360" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="cfX-6h-rI0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7Dn-WD-6Eq"/>
+                            <constraint firstItem="cfX-6h-rI0" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.6" id="DwB-OF-TYf"/>
+                            <constraint firstItem="cfX-6h-rI0" firstAttribute="top" secondItem="Cfa-y1-G0b" secondAttribute="bottom" constant="40" id="Leu-co-Bvx"/>
                             <constraint firstItem="iwE-T3-dBX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="80" id="TfP-RW-JDo"/>
                             <constraint firstItem="Cfa-y1-G0b" firstAttribute="top" secondItem="iwE-T3-dBX" secondAttribute="bottom" constant="40" id="W1s-MA-PBY"/>
                             <constraint firstItem="Cfa-y1-G0b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="acS-NY-BTl"/>
@@ -42,6 +50,7 @@
                     <navigationItem key="navigationItem" title="SearchTextField Example" id="IBx-UY-cET"/>
                     <connections>
                         <outlet property="acronymTextField" destination="Cfa-y1-G0b" id="r4S-dg-J24"/>
+                        <outlet property="countryInlineTextField" destination="cfX-6h-rI0" id="R7a-k1-1SX"/>
                         <outlet property="countryTextField" destination="iwE-T3-dBX" id="sdx-CX-kMZ"/>
                     </connections>
                 </viewController>
