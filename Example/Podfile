@@ -1,11 +1,8 @@
 use_frameworks!
 
-target 'SearchTextField_Example', :exclusive => true do
+project 'SearchTextField.xcodeproj'
+
+target 'SearchTextField_Example' do
   pod 'SearchTextField', :path => '../'
 end
 
-target 'SearchTextField_Tests', :exclusive => true do
-  pod 'SearchTextField', :path => '../'
-
-  
-end

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0730"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "61BDBD59F3C0709D61F017D4511C7805"
+               BlueprintIdentifier = "950EB4A661B9872B61B7633048F02CC8"
                BuildableName = "Pods_SearchTextField_Example.framework"
                BlueprintName = "Pods-SearchTextField_Example"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "61BDBD59F3C0709D61F017D4511C7805"
+            BlueprintIdentifier = "950EB4A661B9872B61B7633048F02CC8"
             BuildableName = "Pods_SearchTextField_Example.framework"
             BlueprintName = "Pods-SearchTextField_Example"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -60,15 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "61BDBD59F3C0709D61F017D4511C7805"
-            BuildableName = "Pods_SearchTextField_Example.framework"
-            BlueprintName = "Pods-SearchTextField_Example"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
