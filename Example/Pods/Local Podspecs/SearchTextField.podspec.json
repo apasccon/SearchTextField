@@ -15,10 +15,5 @@
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "SearchTextField/Classes/**/*",
-  "resource_bundles": {
-    "SearchTextField": [
-      "SearchTextField/Assets/*.png"
-    ]
-  }
+  "source_files": "SearchTextField/Classes/**/*"
 }

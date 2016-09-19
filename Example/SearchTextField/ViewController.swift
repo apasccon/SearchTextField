@@ -28,7 +28,7 @@ class ViewController: UIViewController {
     
     
     // 1 - Configure a simple search text view
-    private func configureSimpleSearchTextField() {
+    fileprivate func configureSimpleSearchTextField() {
         // Start visible - Default: false
         countryTextField.startVisible = true
         
@@ -39,12 +39,12 @@ class ViewController: UIViewController {
     
     
     // 2 - Configure a custom search text view
-    private func configureCustomSearchTextField() {
+    fileprivate func configureCustomSearchTextField() {
         // Set theme - Default: light
         acronymTextField.theme = SearchTextFieldTheme.lightTheme()
         
         // Modify current theme properties
-        acronymTextField.theme.font = UIFont.systemFontOfSize(12)
+        acronymTextField.theme.font = UIFont.systemFont(ofSize: 12)
         acronymTextField.theme.bgColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.3)
         acronymTextField.theme.borderColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
         acronymTextField.theme.separatorColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.5)
@@ -54,7 +54,7 @@ class ViewController: UIViewController {
         acronymTextField.maxNumberOfResults = 5
         
         // Customize highlight attributes - Default: Bold
-        acronymTextField.highlightAttributes = [NSBackgroundColorAttributeName: UIColor.yellowColor(), NSFontAttributeName:UIFont.boldSystemFontOfSize(12)]
+        acronymTextField.highlightAttributes = [NSBackgroundColorAttributeName: UIColor.yellow, NSFontAttributeName:UIFont.boldSystemFont(ofSize: 12)]
         
         // Handle item selection - Default: title set to the text field
         acronymTextField.itemSelectionHandler = {item in
@@ -82,18 +82,18 @@ class ViewController: UIViewController {
     }
     
     // Hide keyboard when touching the screen
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
     ////////////////////////////////////////////////////////
     // Data Sources
     
-    private func localCountries() -> [String] {
-        if let path = NSBundle.mainBundle().pathForResource("countries", ofType: "json") {
+    fileprivate func localCountries() -> [String] {
+        if let path = Bundle.main.path(forResource: "countries", ofType: "json") {
             do {
-                let jsonData = try NSData(contentsOfFile: path, options: .DataReadingMapped)
-                let jsonResult = try NSJSONSerialization.JSONObjectWithData(jsonData, options: .AllowFragments) as! [[String:String]]
+                let jsonData = try Data(contentsOf: URL(fileURLWithPath: path), options: .dataReadingMapped)
+                let jsonResult = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as! [[String:String]]
                 
                 var countryNames = [String]()
                 for country in jsonResult {
@@ -109,14 +109,14 @@ class ViewController: UIViewController {
         return []
     }
     
-    private func filterAcronymInBackground(criteria: String, callback: ((results: [SearchTextFieldItem]) -> Void)) {
-        let url = NSURL(string: "http://www.nactem.ac.uk/software/acromine/dictionary.py?sf=\(criteria)")
+    fileprivate func filterAcronymInBackground(_ criteria: String, callback: @escaping ((_ results: [SearchTextFieldItem]) -> Void)) {
+        let url = URL(string: "http://www.nactem.ac.uk/software/acromine/dictionary.py?sf=\(criteria)")
         
         if let url = url {
-            let task = NSURLSession.sharedSession().dataTaskWithURL(url) {(data, response, error) in
+            let task = URLSession.shared.dataTask(with: url, completionHandler: {(data, response, error) in
                 do {
                     if let data = data {
-                        let jsonData = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as! [[String:AnyObject]]
+                        let jsonData = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [[String:AnyObject]]
                         
                         if let firstElement = jsonData.first {
                             let jsonResults = firstElement["lfs"] as! [[String: AnyObject]]
@@ -124,32 +124,32 @@ class ViewController: UIViewController {
                             var results = [SearchTextFieldItem]()
                             
                             for result in jsonResults {
-                                results.append(SearchTextFieldItem(title: result["lf"] as! String, subtitle: criteria.uppercaseString, image: UIImage(named: "acronym_icon")))
+                                results.append(SearchTextFieldItem(title: result["lf"] as! String, subtitle: criteria.uppercased(), image: UIImage(named: "acronym_icon")))
                             }
                             
-                            dispatch_async(dispatch_get_main_queue()) {
-                                callback(results: results)
+                            DispatchQueue.main.async {
+                                callback(results)
                             }
                         } else {
-                            dispatch_async(dispatch_get_main_queue()) {
-                                callback(results: [])
+                            DispatchQueue.main.async {
+                                callback([])
                             }
                         }
                     }
                 }
                 catch {
                     print("Network error: \(error)")
-                    dispatch_async(dispatch_get_main_queue()) {
-                        callback(results: [])
+                    DispatchQueue.main.async {
+                        callback([])
                     }
                 }
-            }
+            }) 
             
             task.resume()
         }
     }
     
-    private func providers() -> [String] {
+    fileprivate func providers() -> [String] {
         return ["gmail", "yahoo", "outlook"]
     }
 }

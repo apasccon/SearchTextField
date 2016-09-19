@@ -3,5 +3,5 @@ use_frameworks!
 project 'SearchTextField.xcodeproj'
 
 target 'SearchTextField_Example' do
-  pod 'SearchTextField', :path => '../'
+    pod 'SearchTextField', :path => '../'
 end

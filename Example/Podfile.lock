@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  SearchTextField: f524f0dcae8b7eabbdb2d6bab7b8ac14673e2e3a
+  SearchTextField: 630857ed61e8fbe5a2bb5239b3098decbfec9250
 
-PODFILE CHECKSUM: afbca0646134fc0a306adab066c4cf43af573fec
+PODFILE CHECKSUM: 8b2a9df470cea7c58b966be7694652ab080fdc69
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.0.rc.2
