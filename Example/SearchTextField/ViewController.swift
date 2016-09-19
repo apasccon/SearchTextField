@@ -13,7 +13,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var countryTextField: SearchTextField!
     @IBOutlet weak var acronymTextField: SearchTextField!
-    @IBOutlet weak var countryInlineTextField: SearchTextField!
     
     
     override func viewDidLoad() {
@@ -24,9 +23,6 @@ class ViewController: UIViewController {
         
         // 2 - Configure a custom search text view
         configureCustomSearchTextField()
-
-        // 3 - Configure inline search text view
-        configureInlineSearchTextField()
     }
     
     
@@ -83,16 +79,6 @@ class ViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    // 3 - Configure inline search text view
-    private func configureInlineSearchTextField() {
-        // Set inline mode
-        countryInlineTextField.inlineMode = true
-        
-        // Set data source
-        let countries = localCountries()
-        countryInlineTextField.filterStrings(countries)
     }
     
     // Hide keyboard when touching the screen
