@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "SearchTextField"
-  s.version          = "1.0.1"
+  s.version          = "1.0.2"
   s.summary          = "SearchTextField extends UITextField allowing you to add the autocomplete feature in a really easy way"
 
 # This description is used to generate tags and improve search results.
@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/apasccon/SearchTextField.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
 
   s.source_files = 'SearchTextField/Classes/**/*'
   #s.resource_bundles = {
