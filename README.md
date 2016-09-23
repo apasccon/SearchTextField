@@ -73,6 +73,9 @@ mySearchTextField.theme.cellHeight = 50
 // Set the max number of results. By default it's not limited
 mySearchTextField.maxNumberOfResults = 5
 
+// You can also limit the max height of the results list
+mySearchTextField.maxResultsListHeight = 200
+
 // Customize the way it highlights the search string. By default it bolds the string
 mySearchTextField.highlightAttributes = [NSBackgroundColorAttributeName: UIColor.yellowColor(), NSFontAttributeName:UIFont.boldSystemFontOfSize(12)]
 

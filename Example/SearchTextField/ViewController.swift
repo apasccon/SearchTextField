@@ -53,6 +53,9 @@ class ViewController: UIViewController {
         // Max number of results - Default: No limit
         acronymTextField.maxNumberOfResults = 5
         
+        // Max results list height - Default: No limit
+        acronymTextField.maxResultsListHeight = 200
+        
         // Customize highlight attributes - Default: Bold
         acronymTextField.highlightAttributes = [NSBackgroundColorAttributeName: UIColor.yellow, NSFontAttributeName:UIFont.boldSystemFont(ofSize: 12)]
         

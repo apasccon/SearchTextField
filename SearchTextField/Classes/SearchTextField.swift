@@ -15,7 +15,10 @@ open class SearchTextField: UITextField {
     
     /// Maximum number of results to be shown in the suggestions list
     open var maxNumberOfResults = 0
-    
+
+    /// Maximum height of the results list
+    open var maxResultsListHeight = 0
+
     /// Set your custom visual theme, or just choose between pre-defined SearchTextFieldTheme.lightTheme() and SearchTextFieldTheme.darkTheme() themes
     open var theme = SearchTextFieldTheme.lightTheme() {
         didSet {
@@ -169,7 +172,12 @@ open class SearchTextField: UITextField {
             let positionGap: CGFloat = 10
             
             if self.direction == .down {
-                let tableHeight = min((tableView.contentSize.height + positionGap), (UIScreen.main.bounds.size.height - frame.origin.y - theme.cellHeight))
+                var tableHeight = min((tableView.contentSize.height + positionGap), (UIScreen.main.bounds.size.height - frame.origin.y - theme.cellHeight))
+                
+                if maxResultsListHeight > 0 {
+                    tableHeight = min(tableHeight, CGFloat(self.maxResultsListHeight))
+                }
+                
                 tableView.frame = CGRect(x: frame.origin.x + 2, y: (frame.origin.y + frame.size.height - positionGap), width: frame.size.width - 4, height: tableHeight)
                 shadowView!.frame = CGRect(x: frame.origin.x + 3, y: (frame.origin.y + frame.size.height - 3), width: frame.size.width - 6, height: 1)
                 tableView.contentInset = UIEdgeInsets(top: positionGap, left: 0, bottom: 0, right: 0)
