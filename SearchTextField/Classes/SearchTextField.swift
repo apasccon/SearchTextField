@@ -18,6 +18,9 @@ open class SearchTextField: UITextField {
 
     /// Maximum height of the results list
     open var maxResultsListHeight = 0
+    
+    /// Indicate if this field has been interacted with yet
+    open var interactedWith = false
 
     /// Set your custom visual theme, or just choose between pre-defined SearchTextFieldTheme.lightTheme() and SearchTextFieldTheme.darkTheme() themes
     open var theme = SearchTextFieldTheme.lightTheme() {
@@ -208,6 +211,7 @@ open class SearchTextField: UITextField {
     // Handle keyboard events
     open func keyboardWillShow(_ notification: Notification) {
         keyboardFrame = ((notification as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        interactedWith = true
         
         if let keyboardFrame = keyboardFrame {
             var newFrame = frame
@@ -348,8 +352,8 @@ open class SearchTextField: UITextField {
 
 extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tableView.isHidden = (filteredResults.count == 0)
-        shadowView?.isHidden = (filteredResults.count == 0)
+        tableView.isHidden = !interactedWith || (filteredResults.count == 0)
+        shadowView?.isHidden = !interactedWith || (filteredResults.count == 0)
         
         if maxNumberOfResults > 0 {
             return min(filteredResults.count, maxNumberOfResults)
