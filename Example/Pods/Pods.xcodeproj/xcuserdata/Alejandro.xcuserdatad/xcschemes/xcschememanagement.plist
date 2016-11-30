@@ -7,22 +7,31 @@
 		<key>Pods-SearchTextField_Example.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<true/>
+			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>SearchTextField 2.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 		<key>SearchTextField.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<true/>
+			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>950EB4A661B9872B61B7633048F02CC8</key>
+		<key>940DEB8A330B442C8CDDB6B1CC001414</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D1E48CC69CEDC219C79877E1CE7A1D63</key>
+		<key>BFAF6D30694C1DB8654DFF52BF9F5268</key>
 		<dict>
 			<key>primary</key>
 			<true/>
