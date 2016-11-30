@@ -131,13 +131,17 @@ open class SearchTextField: UITextField {
             tableView.delegate = self
             tableView.separatorInset = UIEdgeInsets.zero
             
-            shadowView.backgroundColor = UIColor.white
+            shadowView.backgroundColor = UIColor.lightText
             shadowView.layer.shadowColor = UIColor.black.cgColor
             shadowView.layer.shadowOffset = CGSize.zero
             shadowView.layer.shadowOpacity = 1
             
-            superview?.addSubview(tableView)
-            superview?.addSubview(shadowView)
+            self.window?.addSubview(tableView)
+            //self.window?.addSubview(shadowView)
+            
+            
+            //superview?.addSubview(tableView)
+            //superview?.addSubview(shadowView)
         } else {
             tableView = UITableView(frame: CGRect.zero)
             shadowView = UIView(frame: CGRect.zero)
@@ -172,7 +176,7 @@ open class SearchTextField: UITextField {
         }
         
         if let tableView = tableView {
-            let positionGap: CGFloat = 10
+            let positionGap: CGFloat = 0
             
             if self.direction == .down {
                 var tableHeight = min((tableView.contentSize.height + positionGap), (UIScreen.main.bounds.size.height - frame.origin.y - theme.cellHeight))
@@ -181,16 +185,21 @@ open class SearchTextField: UITextField {
                     tableHeight = min(tableHeight, CGFloat(self.maxResultsListHeight))
                 }
                 
-                tableView.frame = CGRect(x: frame.origin.x + 2, y: (frame.origin.y + frame.size.height - positionGap), width: frame.size.width - 4, height: tableHeight)
-                shadowView!.frame = CGRect(x: frame.origin.x + 3, y: (frame.origin.y + frame.size.height - 3), width: frame.size.width - 6, height: 1)
-                tableView.contentInset = UIEdgeInsets(top: positionGap, left: 0, bottom: 0, right: 0)
-                tableView.contentOffset = CGPoint(x: 0, y: -positionGap)
+                var tableViewFrame = CGRect(x: 0, y: 0, width: frame.size.width - 4, height: tableHeight)
+                tableViewFrame.origin = self.convert(tableViewFrame.origin, to: nil)
+                tableViewFrame.origin.x += 2
+                tableViewFrame.origin.y += frame.size.height + 2
+                tableView.frame = tableViewFrame
+                
+                var shadowFrame = CGRect(x: 0, y: 0, width: frame.size.width - 6, height: 1)
+                shadowFrame.origin = self.convert(shadowFrame.origin, to: nil)
+                shadowFrame.origin.x += 3
+                shadowFrame.origin.y = tableView.frame.origin.y
+                shadowView!.frame = shadowFrame
             } else {
                 let tableHeight = min((tableView.contentSize.height + positionGap), (UIScreen.main.bounds.size.height - frame.origin.y - theme.cellHeight * 2))
                 tableView.frame = CGRect(x: frame.origin.x + 2, y: (frame.origin.y - tableHeight + positionGap), width: frame.size.width - 4, height: tableHeight)
                 shadowView!.frame = CGRect(x: frame.origin.x + 3, y: (frame.origin.y + 3), width: frame.size.width - 6, height: 1)
-                tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
-                tableView.contentOffset = CGPoint(x: 0, y: 0)
             }
             
             superview?.bringSubview(toFront: tableView)

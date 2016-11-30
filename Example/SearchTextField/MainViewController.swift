@@ -1,22 +1,23 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  SearchTextField
 //
-//  Created by Alejandro Pasccon on 04/25/2016.
-//  Copyright (c) 2016 Alejandro Pasccon. All rights reserved.
+//  Created by Alejandro Pasccon on 11/30/16.
+//  Copyright © 2016 CocoaPods. All rights reserved.
 //
 
 import UIKit
 import SearchTextField
 
-class ViewController: UIViewController {
-    
+class MainViewController: UITableViewController {
+
     @IBOutlet weak var countryTextField: SearchTextField!
     @IBOutlet weak var acronymTextField: SearchTextField!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.tableFooterView = UIView()
         
         // 1 - Configure a simple search text view
         configureSimpleSearchTextField()
@@ -146,13 +147,11 @@ class ViewController: UIViewController {
                         callback([])
                     }
                 }
-            }) 
+            })
             
             task.resume()
         }
     }
-    
-    fileprivate func providers() -> [String] {
-        return ["gmail", "yahoo", "outlook"]
-    }
+
+
 }
