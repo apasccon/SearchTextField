@@ -268,7 +268,9 @@ open class SearchTextField: UITextField {
     }
 
     open func textFieldDidEndEditingOnExit() {
-        self.text = filteredResults.first?.title
+        if let title = filteredResults.first?.title {
+            self.text = title
+        }
     }
 
     fileprivate func filter(_ addAll: Bool) {
