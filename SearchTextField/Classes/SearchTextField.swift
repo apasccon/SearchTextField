@@ -408,7 +408,8 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
         if itemSelectionHandler == nil {
             self.text = filteredResults[(indexPath as NSIndexPath).row].title
         } else {
-            itemSelectionHandler!(filteredResults[(indexPath as NSIndexPath).row])
+            let index = indexPath.row
+            itemSelectionHandler!(filteredResults[index], index)
         }
         
         clearResults()
@@ -474,7 +475,7 @@ public struct SearchTextFieldItem {
     }
 }
 
-public typealias SearchTextFieldItemHandler = (_ item: SearchTextFieldItem) -> Void
+public typealias SearchTextFieldItemHandler = (_ item: SearchTextFieldItem, _ index: Int) -> Void
 
 ////////////////////////////////////////////////////////////////////////
 // Suggestions List Direction
