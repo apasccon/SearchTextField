@@ -121,7 +121,10 @@ open class SearchTextField: UITextField {
         super.layoutSubviews()
         
         buildSearchTableView()
-        buildPlaceholderLabel()
+        
+        if inlineMode {
+            buildPlaceholderLabel()
+        }
         
         // Create the loading indicator
         indicator.hidesWhenStopped = true
@@ -149,11 +152,6 @@ open class SearchTextField: UITextField {
             shadowView.layer.shadowOpacity = 1
             
             self.window?.addSubview(tableView)
-            //self.window?.addSubview(shadowView)
-            
-            
-            //superview?.addSubview(tableView)
-            //superview?.addSubview(shadowView)
         } else {
             tableView = UITableView(frame: CGRect.zero)
             shadowView = UIView(frame: CGRect.zero)
@@ -163,19 +161,19 @@ open class SearchTextField: UITextField {
     }
     
     fileprivate func buildPlaceholderLabel() {
-        var textRect = self.textRect(forBounds: self.bounds)
-        textRect.origin.y -= 1
+        var textRect = self.editingRect(forBounds: self.bounds)
+        //textRect.origin.y -= 1
         
         if let placeholderLabel = placeholderLabel {
             placeholderLabel.font = self.font
-            placeholderLabel.frame = textRect
+            placeholderLabel.frame = self.bounds
         } else {
             placeholderLabel = UILabel(frame: textRect)
             placeholderLabel?.font = self.font
             placeholderLabel?.textColor = UIColor ( red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0 )
             placeholderLabel?.backgroundColor = UIColor.clear
             placeholderLabel?.lineBreakMode = .byClipping
-
+            
             self.addSubview(placeholderLabel!)
         }
     }
