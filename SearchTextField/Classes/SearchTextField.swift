@@ -9,7 +9,7 @@
 import UIKit
 
 open class SearchTextField: UITextField {
-
+    
     ////////////////////////////////////////////////////////////////////////
     // Public interface
     
@@ -72,6 +72,18 @@ open class SearchTextField: UITextField {
 
     ////////////////////////////////////////////////////////////////////////
     // Private implementation
+    
+    open override var text: String? {
+        didSet (newValue) {
+            if self.startVisible {
+                filter(false)
+                redrawSearchTableView()
+            } else {
+                clearResults()
+                tableView?.reloadData()
+            }
+        }
+    }
     
     fileprivate var tableView: UITableView?
     fileprivate var shadowView: UIView?
@@ -215,6 +227,10 @@ open class SearchTextField: UITextField {
             
             tableView.reloadData()
         }
+    }
+    
+    fileprivate func filterCurrentText() {
+        
     }
     
     // Handle keyboard events
