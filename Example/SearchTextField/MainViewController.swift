@@ -26,8 +26,6 @@ class MainViewController: UITableViewController {
         configureCustomSearchTextField()
     }
     
-    
-    
     // 1 - Configure a simple search text view
     fileprivate func configureSimpleSearchTextField() {
         // Start visible - Default: false
