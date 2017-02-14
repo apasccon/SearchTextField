@@ -70,7 +70,14 @@ open class SearchTextField: UITextField {
         indicator.stopAnimating()
     }
     
-    open var inlineMode = false
+    open var inlineMode: Bool = false {
+        didSet {
+            if inlineMode == true {
+                autocorrectionType = .no
+                spellCheckingType = .no
+            }
+        }
+    }
 
     ////////////////////////////////////////////////////////////////////////
     // Private implementation
@@ -156,18 +163,26 @@ open class SearchTextField: UITextField {
     }
     
     fileprivate func buildPlaceholderLabel() {
-        let textRect = self.editingRect(forBounds: self.bounds)
-        //textRect.origin.y -= 1
+        var textRect = self.placeholderRect(forBounds: self.bounds)
+        if self.borderStyle == .roundedRect {
+            textRect.origin.y -= 0.5
+        }
         
         if let placeholderLabel = placeholderLabel {
             placeholderLabel.font = self.font
-            placeholderLabel.frame = self.bounds
+            placeholderLabel.frame = textRect
         } else {
             placeholderLabel = UILabel(frame: textRect)
             placeholderLabel?.font = self.font
-            placeholderLabel?.textColor = UIColor ( red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0 )
             placeholderLabel?.backgroundColor = UIColor.clear
             placeholderLabel?.lineBreakMode = .byClipping
+            
+            if let placeholderColor = self.attributedPlaceholder?.attribute(NSForegroundColorAttributeName, at: 0, effectiveRange: nil) as? UIColor {
+                placeholderLabel?.textColor = placeholderColor
+            } else {
+                placeholderLabel?.textColor = UIColor ( red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0 )
+            }
+
             
             self.addSubview(placeholderLabel!)
         }

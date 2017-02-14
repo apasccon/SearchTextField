@@ -10,7 +10,9 @@
 **SearchTextField** is a subclass of UITextField, written in Swift that makes really easy the ability to show an autocomplete suggestions list.   
 You can decide wether to show the list as soon as the field is focused or when the user starts typing.   
 You can also detects when the user stops typing, very useful when you can get a suggestion list from a remote server.   
-   
+
+**New Feature!**
+Now you can make suggestions "inline", showing the first matched result as the placeholder (instead of the results list) and selecting it when the user touches the enter key.
    
 ------   
 ![alt_tag](https://raw.githubusercontent.com/apasccon/SearchTextField/master/Example/SearchTextField/SearchTextField_Demo.gif)
@@ -80,7 +82,7 @@ mySearchTextField.maxResultsListHeight = 200
 mySearchTextField.highlightAttributes = [NSBackgroundColorAttributeName: UIColor.yellowColor(), NSFontAttributeName:UIFont.boldSystemFontOfSize(12)]
 
 // Handle what happens when the user picks an item. By default the title is set to the text field
-mySearchTextField.itemSelectionHandler = {item in
+mySearchTextField.itemSelectionHandler = {item, itemPosition in
     mySearchTextField.text = item.title
 }
 
@@ -105,6 +107,12 @@ mySearchTextField.userStoppedTypingHandler = {
         }
     }
 }
+
+// Show the first result as placeholder (instead of the results list) and allow it to be selected using the enter key
+mySearchTextField.inlineMode = true
+
+
+
 ```
 
 ## Swift Versions
