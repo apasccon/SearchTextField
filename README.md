@@ -108,12 +108,18 @@ mySearchTextField.userStoppedTypingHandler = {
     }
 }
 
-// Show the first result as placeholder (instead of the results list) and allow it to be selected using the enter key
-mySearchTextField.inlineMode = true
-
-
-
 ```
+
+### New feature: show the first matched result as placeholder (inline mode)
+
+```swift
+// Set the array of strings you want to suggest
+mySearchTextField.filterStrings(["Red", "Blue", "Yellow"])
+
+// Then set the inline mode in true
+mySearchTextField.inlineMode = true
+```
+
 
 ## Swift Versions
 
