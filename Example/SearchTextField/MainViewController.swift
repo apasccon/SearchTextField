@@ -63,9 +63,9 @@ class MainViewController: UITableViewController {
         acronymTextField.highlightAttributes = [NSBackgroundColorAttributeName: UIColor.yellow, NSFontAttributeName:UIFont.boldSystemFont(ofSize: 12)]
         
         // Handle item selection - Default behaviour: item title set to the text field
-        acronymTextField.itemSelectionHandler = { item, itemIndex in
+        acronymTextField.itemSelectionHandler = { item, itemPosition in
             // Just in case you need the item position (thanks to @hernangonzalez)
-            print("Item position \(itemIndex)")
+            print("Item position \(itemPosition)")
             
             // Do whatever you want with the picked item
             self.acronymTextField.text = item.title
