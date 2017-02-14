@@ -13,17 +13,21 @@ class MainViewController: UITableViewController {
 
     @IBOutlet weak var countryTextField: SearchTextField!
     @IBOutlet weak var acronymTextField: SearchTextField!
+    @IBOutlet weak var countryInLineTextField: SearchTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()
         
-        // 1 - Configure a simple search text view
+        // 1 - Configure a simple search text field
         configureSimpleSearchTextField()
         
-        // 2 - Configure a custom search text view
+        // 2 - Configure a custom search text field
         configureCustomSearchTextField()
+
+        // 3 - Configure an "inline" suggestions search text field
+        configureSimpleInLineSearchTextField()
     }
     
     // 1 - Configure a simple search text view
@@ -85,6 +89,16 @@ class MainViewController: UITableViewController {
                 }
             }
         }
+    }
+    
+    // 3 - Configure a simple inline search text view
+    fileprivate func configureSimpleInLineSearchTextField() {
+        // Define the inline mode
+        countryInLineTextField.inlineMode = true
+        
+        // Set data source
+        let countries = localCountries()
+        countryInLineTextField.filterStrings(countries)
     }
     
     // Hide keyboard when touching the screen
