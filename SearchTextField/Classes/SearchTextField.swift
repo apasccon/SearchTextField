@@ -315,7 +315,7 @@ open class SearchTextField: UITextField {
     open func textFieldDidEndEditingOnExit() {
         if let firstElement = filteredResults.first {
             if let itemSelectionHandler = self.itemSelectionHandler {
-                itemSelectionHandler(firstElement)
+                itemSelectionHandler(firstElement, 0)
             }
             else {
                 self.text = firstElement.title
