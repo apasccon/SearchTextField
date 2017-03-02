@@ -252,7 +252,7 @@ open class SearchTextField: UITextField {
     
     // Handle keyboard events
     open func keyboardWillShow(_ notification: Notification) {
-        if !keyboardIsShowing {
+        if !keyboardIsShowing && isEditing {
             keyboardIsShowing = true
             keyboardFrame = ((notification as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             interactedWith = true
