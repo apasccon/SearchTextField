@@ -78,6 +78,8 @@ open class SearchTextField: UITextField {
             }
         }
     }
+    
+    open var comparisonOptions: NSString.CompareOptions = [.caseInsensitive]
 
     ////////////////////////////////////////////////////////////////////////
     // Private implementation
@@ -332,8 +334,8 @@ open class SearchTextField: UITextField {
             
             if !inlineMode {
                 // Find text in title and subtitle
-                let titleFilterRange = (item.title as NSString).range(of: text!, options: .caseInsensitive)
-                let subtitleFilterRange = item.subtitle != nil ? (item.subtitle! as NSString).range(of: text!, options: .caseInsensitive) : NSMakeRange(NSNotFound, 0)
+                let titleFilterRange = (item.title as NSString).range(of: text!, options: comparisonOptions)
+                let subtitleFilterRange = item.subtitle != nil ? (item.subtitle! as NSString).range(of: text!, options: comparisonOptions) : NSMakeRange(NSNotFound, 0)
                 
                 if titleFilterRange.location != NSNotFound || subtitleFilterRange.location != NSNotFound || addAll {
                     item.attributedTitle = NSMutableAttributedString(string: item.title)
