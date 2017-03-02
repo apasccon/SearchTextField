@@ -59,6 +59,9 @@ class MainViewController: UITableViewController {
         // Max results list height - Default: No limit
         acronymTextField.maxResultsListHeight = 200
         
+        // Set specific comparision options - Default: .caseInsensitive
+        acronymTextField.comparisonOptions = [.caseInsensitive]
+
         // Customize highlight attributes - Default: Bold
         acronymTextField.highlightAttributes = [NSBackgroundColorAttributeName: UIColor.yellow, NSFontAttributeName:UIFont.boldSystemFont(ofSize: 12)]
         

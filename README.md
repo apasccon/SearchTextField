@@ -72,6 +72,9 @@ mySearchTextField.theme.borderColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, 
 mySearchTextField.theme.separatorColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.5)
 mySearchTextField.theme.cellHeight = 50
 
+// Set specific comparision options - Default: .caseInsensitive
+mySearchTextField.comparisonOptions = [.caseInsensitive]
+
 // Set the max number of results. By default it's not limited
 mySearchTextField.maxNumberOfResults = 5
 
