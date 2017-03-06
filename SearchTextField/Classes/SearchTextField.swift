@@ -165,27 +165,32 @@ open class SearchTextField: UITextField {
     }
     
     fileprivate func buildPlaceholderLabel() {
-        var textRect = self.placeholderRect(forBounds: self.bounds)
-        if self.borderStyle == .roundedRect {
-            textRect.origin.y -= 0.5
+        var newRect = self.placeholderRect(forBounds: self.bounds)
+        var caretRect = self.caretRect(for: self.beginningOfDocument)
+        let textRect = self.textRect(forBounds: self.bounds)
+
+        if let range = textRange(from: beginningOfDocument, to: endOfDocument) {
+            caretRect = self.firstRect(for: range)
         }
         
+        newRect.origin.x = caretRect.origin.x + caretRect.size.width + textRect.origin.x
+        newRect.size.width = newRect.size.width - newRect.origin.x
+
         if let placeholderLabel = placeholderLabel {
             placeholderLabel.font = self.font
-            placeholderLabel.frame = textRect
+            placeholderLabel.frame = newRect
         } else {
-            placeholderLabel = UILabel(frame: textRect)
+            placeholderLabel = UILabel(frame: newRect)
             placeholderLabel?.font = self.font
             placeholderLabel?.backgroundColor = UIColor.clear
             placeholderLabel?.lineBreakMode = .byClipping
-            
+
             if let placeholderColor = self.attributedPlaceholder?.attribute(NSForegroundColorAttributeName, at: 0, effectiveRange: nil) as? UIColor {
                 placeholderLabel?.textColor = placeholderColor
             } else {
                 placeholderLabel?.textColor = UIColor ( red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0 )
             }
 
-            
             self.addSubview(placeholderLabel!)
         }
     }
@@ -298,6 +303,8 @@ open class SearchTextField: UITextField {
             filter(false)
             prepareDrawTableResult()
         }
+        
+        buildPlaceholderLabel()
     }
     
     open func textFieldDidBeginEditing() {
@@ -351,8 +358,8 @@ open class SearchTextField: UITextField {
                 }
             } else {
                 if item.title.lowercased().hasPrefix(text!.lowercased()) {
-                    item.attributedTitle = NSMutableAttributedString(string: item.title)
-                    item.attributedTitle?.addAttribute(NSForegroundColorAttributeName, value: UIColor.clear, range: NSRange(location:0, length:text!.characters.count))
+                    let suffix = item.title.substring(from: text!.index(text!.startIndex, offsetBy: text!.characters.count))
+                    item.attributedTitle = NSMutableAttributedString(string: suffix)
                     filteredResults.append(item)
                 }
             }
