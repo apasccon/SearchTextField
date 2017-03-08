@@ -29,6 +29,14 @@ open class SearchTextField: UITextField {
     open var theme = SearchTextFieldTheme.lightTheme() {
         didSet {
             tableView?.reloadData()
+            
+            if let placeholderColor = theme.placeholderColor {
+                if let placeholderString = placeholder {
+                    self.attributedPlaceholder = NSAttributedString(string: placeholderString, attributes: [NSForegroundColorAttributeName: placeholderColor])
+                }
+                
+                self.placeholderLabel?.textColor = placeholderColor
+            }
         }
     }
     
@@ -257,7 +265,7 @@ open class SearchTextField: UITextField {
     
     // Handle keyboard events
     open func keyboardWillShow(_ notification: Notification) {
-        if !keyboardIsShowing {
+        if !keyboardIsShowing && isEditing {
             keyboardIsShowing = true
             keyboardFrame = ((notification as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             interactedWith = true
@@ -495,6 +503,7 @@ public struct SearchTextFieldTheme {
     public var separatorColor: UIColor
     public var font: UIFont
     public var fontColor: UIColor
+    public var placeholderColor: UIColor?
     
     init(cellHeight: CGFloat, bgColor:UIColor, borderColor: UIColor, separatorColor: UIColor, font: UIFont, fontColor: UIColor) {
         self.cellHeight = cellHeight

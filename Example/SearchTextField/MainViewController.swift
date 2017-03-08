@@ -52,6 +52,7 @@ class MainViewController: UITableViewController {
         acronymTextField.theme.borderColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
         acronymTextField.theme.separatorColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.5)
         acronymTextField.theme.cellHeight = 50
+        acronymTextField.theme.placeholderColor = UIColor.brown.withAlphaComponent(0.5)
         
         // Max number of results - Default: No limit
         acronymTextField.maxNumberOfResults = 5
