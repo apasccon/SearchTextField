@@ -87,6 +87,8 @@ open class SearchTextField: UITextField {
         }
     }
     
+    open var startFilteringAfter: String?
+    
     open var comparisonOptions: NSString.CompareOptions = [.caseInsensitive]
 
     ////////////////////////////////////////////////////////////////////////
@@ -335,7 +337,13 @@ open class SearchTextField: UITextField {
                 itemSelectionHandler(firstElement, 0)
             }
             else {
-                self.text = firstElement.title
+                if inlineMode, let filterAfter = startFilteringAfter {
+                    let stringElements = self.text?.components(separatedBy: filterAfter)
+                    
+                    self.text = stringElements!.first! + filterAfter + firstElement.title
+                } else {
+                    self.text = firstElement.title
+                }
             }
         }
     }
@@ -365,13 +373,23 @@ open class SearchTextField: UITextField {
                     filteredResults.append(item)
                 }
             } else {
-                if item.title.lowercased().hasPrefix(text!.lowercased()) {
-                    let suffix = item.title.substring(from: text!.index(text!.startIndex, offsetBy: text!.characters.count))
-                    item.attributedTitle = NSMutableAttributedString(string: suffix)
+                var textToFilter = text!.lowercased()
+                
+                if inlineMode, let filterAfter = startFilteringAfter {
+                    if let suffixToFilter = textToFilter.components(separatedBy: filterAfter).last, suffixToFilter != "", textToFilter != suffixToFilter {
+                        textToFilter = suffixToFilter
+                    } else {
+                        placeholderLabel?.text = ""
+                        return
+                    }
+                }
+                
+                if item.title.lowercased().hasPrefix(textToFilter) {
+                    let itemSuffix = item.title.substring(from: textToFilter.index(textToFilter.startIndex, offsetBy: textToFilter.characters.count))
+                    item.attributedTitle = NSMutableAttributedString(string: itemSuffix)
                     filteredResults.append(item)
                 }
             }
-            
         }
     
         tableView?.reloadData()
