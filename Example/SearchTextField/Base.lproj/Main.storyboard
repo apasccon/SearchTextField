@@ -24,7 +24,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TkA-Yn-zzy" id="8Xs-Us-0mE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWc-6M-gDK">
@@ -55,7 +55,7 @@
                                         <rect key="frame" x="0.0" y="60" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eeb-Wb-JBk" id="Um7-EY-elp">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Achronym" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5sY-h7-q1T">
@@ -86,7 +86,7 @@
                                         <rect key="frame" x="0.0" y="120" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L1D-PG-cUt" id="SwM-3f-YAa">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inline Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ek-sc-XAV">
@@ -113,6 +113,37 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchTextFieldCell" id="4WE-Ab-Ecg">
+                                        <rect key="frame" x="0.0" y="180" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4WE-Ab-Ecg" id="ie1-b4-tDi">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTb-gY-vhb">
+                                                    <rect key="frame" x="8" y="19.5" width="41" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="upj-uJ-A0z" customClass="SearchTextField" customModule="SearchTextField">
+                                                    <rect key="frame" x="145.5" y="21.5" width="221" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" priority="750" constant="221" id="z3U-eo-drz"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="yTb-gY-vhb" firstAttribute="leading" secondItem="ie1-b4-tDi" secondAttribute="leadingMargin" id="Etl-B2-Lwr"/>
+                                                <constraint firstItem="yTb-gY-vhb" firstAttribute="centerY" secondItem="ie1-b4-tDi" secondAttribute="centerY" id="F9U-Cb-b6w"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="upj-uJ-A0z" secondAttribute="trailing" id="KTI-vx-83M"/>
+                                                <constraint firstItem="upj-uJ-A0z" firstAttribute="centerY" secondItem="ie1-b4-tDi" secondAttribute="centerY" id="Kn8-fg-axU"/>
+                                                <constraint firstItem="upj-uJ-A0z" firstAttribute="leading" secondItem="yTb-gY-vhb" secondAttribute="trailing" priority="250" constant="50" id="lnm-Vw-GKe"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -126,6 +157,7 @@
                         <outlet property="acronymTextField" destination="l1N-ud-tul" id="A12-dX-U0u"/>
                         <outlet property="countryInLineTextField" destination="FNs-6t-pNV" id="TMk-pF-SNz"/>
                         <outlet property="countryTextField" destination="PIy-ap-WHN" id="Dtl-Yw-elQ"/>
+                        <outlet property="emailInlineTextField" destination="upj-uJ-A0z" id="aIH-6Q-Xb6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w1G-HK-Gal" userLabel="First Responder" sceneMemberID="firstResponder"/>

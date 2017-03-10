@@ -14,6 +14,7 @@ class MainViewController: UITableViewController {
     @IBOutlet weak var countryTextField: SearchTextField!
     @IBOutlet weak var acronymTextField: SearchTextField!
     @IBOutlet weak var countryInLineTextField: SearchTextField!
+    @IBOutlet weak var emailInlineTextField: SearchTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,9 @@ class MainViewController: UITableViewController {
 
         // 3 - Configure an "inline" suggestions search text field
         configureSimpleInLineSearchTextField()
+
+        // 4 - Configure a custom "inline" suggestions search text field
+        configureCustomInLineSearchTextField()
     }
     
     // 1 - Configure a simple search text view
@@ -104,7 +108,18 @@ class MainViewController: UITableViewController {
         let countries = localCountries()
         countryInLineTextField.filterStrings(countries)
     }
-    
+
+    // 4 - Configure a custom inline search text view
+    fileprivate func configureCustomInLineSearchTextField() {
+        // Define the inline mode
+        emailInlineTextField.inlineMode = true
+        
+        emailInlineTextField.startFilteringAfter = "@"
+        
+        // Set data source
+        emailInlineTextField.filterStrings(["gmail.com", "yahoo.com", "yahoo.com.ar"])
+    }
+
     // Hide keyboard when touching the screen
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
