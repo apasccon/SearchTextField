@@ -69,6 +69,7 @@ mySearchTextField.theme = SearchTextFieldTheme.darkTheme()
 mySearchTextField.theme.font = UIFont.systemFontOfSize(12)
 mySearchTextField.theme.bgColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.3)
 mySearchTextField.theme.borderColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+mySearchTextField.theme.placeholderColor = UIColor.gray
 mySearchTextField.theme.separatorColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.5)
 mySearchTextField.theme.cellHeight = 50
 
