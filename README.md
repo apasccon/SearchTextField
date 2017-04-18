@@ -32,7 +32,7 @@ use_frameworks!
 pod "SearchTextField"
 ```
 
-###Manual installation
+### Manual installation
 
 Just import SearchTextField.swift into your project
 
