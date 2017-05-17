@@ -117,10 +117,17 @@ mySearchTextField.userStoppedTypingHandler = {
 
 ```swift
 // Set the array of strings you want to suggest
-mySearchTextField.filterStrings(["Red", "Blue", "Yellow"])
+mySearchTextField.filterStrings(["gmail.com", "yahoo.com", "yahoo.com.ar"])
 
 // Then set the inline mode in true
 mySearchTextField.inlineMode = true
+
+// Start suggesting only after some string is detected
+mySearchTextField.startFilteringAfter = "@"
+
+// Start suggesting inmediately just after the string is detected 
+mySearchTextField.startSuggestingInmediately = true
+
 ```
 
 
