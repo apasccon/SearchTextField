@@ -67,17 +67,20 @@ open class SearchTextField: UITextField {
     
     /// Set your custom set of attributes in order to highlight the string found in each item
     open var highlightAttributes: [String: AnyObject] = [NSFontAttributeName:UIFont.boldSystemFont(ofSize: 10)]
-    
+
+    /// Start showing the default loading indicator, useful for searches that take some time.
     open func showLoadingIndicator() {
         self.rightViewMode = .always
         indicator.startAnimating()
     }
 
+    /// Hide the default loading indicator
     open func stopLoadingIndicator() {
         self.rightViewMode = .never
         indicator.stopAnimating()
     }
-    
+
+    /// When InlineMode is true, the suggestions appear in the same line than the entered string. It's useful for email domains suggestion for example.
     open var inlineMode: Bool = false {
         didSet {
             if inlineMode == true {
@@ -87,7 +90,12 @@ open class SearchTextField: UITextField {
         }
     }
     
+    /// Only valid when InlineMode is true. The suggestions appear after typing the provided string (or even better a character like '@')
     open var startFilteringAfter: String?
+    
+    
+    /// If startFilteringAfter is set, and startSuggestingInmediately is true, the list of suggestions appear inmediately
+    open var startSuggestingInmediately = false
     
     open var comparisonOptions: NSString.CompareOptions = [.caseInsensitive]
 
@@ -376,7 +384,7 @@ open class SearchTextField: UITextField {
                 var textToFilter = text!.lowercased()
                 
                 if inlineMode, let filterAfter = startFilteringAfter {
-                    if let suffixToFilter = textToFilter.components(separatedBy: filterAfter).last, suffixToFilter != "", textToFilter != suffixToFilter {
+                    if let suffixToFilter = textToFilter.components(separatedBy: filterAfter).last, (suffixToFilter != "" || startSuggestingInmediately == true), textToFilter != suffixToFilter {
                         textToFilter = suffixToFilter
                     } else {
                         placeholderLabel?.text = ""

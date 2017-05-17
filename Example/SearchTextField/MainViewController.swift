@@ -38,6 +38,7 @@ class MainViewController: UITableViewController {
     fileprivate func configureSimpleSearchTextField() {
         // Start visible - Default: false
         countryTextField.startVisible = true
+
         
         // Set data source
         let countries = localCountries()
@@ -115,6 +116,7 @@ class MainViewController: UITableViewController {
         emailInlineTextField.inlineMode = true
         
         emailInlineTextField.startFilteringAfter = "@"
+        emailInlineTextField.startSuggestingInmediately = true
         
         // Set data source
         emailInlineTextField.filterStrings(["gmail.com", "yahoo.com", "yahoo.com.ar"])
