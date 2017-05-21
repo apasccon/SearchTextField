@@ -342,7 +342,7 @@ open class SearchTextField: UITextField {
     open func textFieldDidEndEditingOnExit() {
         if let firstElement = filteredResults.first {
             if let itemSelectionHandler = self.itemSelectionHandler {
-                itemSelectionHandler(firstElement, 0)
+                itemSelectionHandler(filteredResults, 0)
             }
             else {
                 if inlineMode, let filterAfter = startFilteringAfter {
@@ -512,7 +512,7 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
             self.text = filteredResults[(indexPath as NSIndexPath).row].title
         } else {
             let index = indexPath.row
-            itemSelectionHandler!(filteredResults[index], index)
+            itemSelectionHandler!(filteredResults, index)
         }
         
         clearResults()
@@ -578,7 +578,7 @@ public struct SearchTextFieldItem {
     }
 }
 
-public typealias SearchTextFieldItemHandler = (_ item: SearchTextFieldItem, _ index: Int) -> Void
+public typealias SearchTextFieldItemHandler = (_ filteredResults: [SearchTextFieldItem], _ index: Int) -> Void
 
 ////////////////////////////////////////////////////////////////////////
 // Suggestions List Direction

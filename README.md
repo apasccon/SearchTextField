@@ -86,9 +86,17 @@ mySearchTextField.maxResultsListHeight = 200
 mySearchTextField.highlightAttributes = [NSBackgroundColorAttributeName: UIColor.yellowColor(), NSFontAttributeName:UIFont.boldSystemFontOfSize(12)]
 
 // Handle what happens when the user picks an item. By default the title is set to the text field
-mySearchTextField.itemSelectionHandler = {item, itemPosition in
+mySearchTextField.itemSelectionHandler = { filteredResults, itemPosition in
+    // Just in case you need the item position
+    let item = filteredResults[itemPosition]
+    
     mySearchTextField.text = item.title
 }
+
+
+// Start visible, showing the list of results without typing. By default it's disabled
+countryTextField.startVisible = true
+
 
 /** 
 * Update data source when the user stops typing. 
