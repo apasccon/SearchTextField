@@ -139,6 +139,13 @@ mySearchTextField.startSuggestingInmediately = true
 
 ```
 
+### New feature: pass custom object to SearchTextFieldItem
+
+```swift
+public init(title: String, subtitle: String?, image: UIImage?, userInfo:[String:Any]?)
+
+```
+
 
 ## Swift Versions
 

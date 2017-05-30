@@ -561,6 +561,14 @@ public struct SearchTextFieldItem {
     public var title: String
     public var subtitle: String?
     public var image: UIImage?
+    public var userInfo : [String:Any]?
+    
+    public init(title: String, subtitle: String?, image: UIImage?, userInfo:[String:Any]?) {
+        self.title = title
+        self.subtitle = subtitle
+        self.image = image
+        self.userInfo = userInfo
+    }
     
     public init(title: String, subtitle: String?, image: UIImage?) {
         self.title = title
