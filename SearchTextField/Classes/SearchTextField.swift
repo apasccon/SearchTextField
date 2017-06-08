@@ -68,6 +68,9 @@ open class SearchTextField: UITextField {
     /// Set your custom set of attributes in order to highlight the string found in each item
     open var highlightAttributes: [String: AnyObject] = [NSFontAttributeName:UIFont.boldSystemFont(ofSize: 10)]
 
+    /// Automatically resize the text
+    open var resizableText: Bool = false
+    
     /// Start showing the default loading indicator, useful for searches that take some time.
     open func showLoadingIndicator() {
         self.rightViewMode = .always
@@ -462,6 +465,22 @@ open class SearchTextField: UITextField {
             redrawSearchTableView()
         }
     }
+    
+    //Resizes the text until fits
+    internal func resizeText() {
+        if let text = self.text{
+            let textString = text as NSString
+            var widthOfText = textString.size(attributes: [NSFontAttributeName : self.font!]).width
+            var widthOfFrame = self.frame.size.width
+            // decrease font size until it fits
+            while widthOfFrame - 5 < widthOfText {
+                let fontSize = self.font!.pointSize
+                self.font = self.font?.withSize(fontSize - 0.5)
+                widthOfText = textString.size(attributes: [NSFontAttributeName : self.font!]).width
+                widthOfFrame = self.frame.size.width
+            }
+        }
+    }
 }
 
 extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
@@ -510,6 +529,11 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if itemSelectionHandler == nil {
             self.text = filteredResults[(indexPath as NSIndexPath).row].title
+            
+            if resizableText{
+                self.resizeText()
+            }
+            
         } else {
             let index = indexPath.row
             itemSelectionHandler!(filteredResults, index)
