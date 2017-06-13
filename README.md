@@ -12,7 +12,9 @@ You can decide wether to show the list as soon as the field is focused or when t
 You can also detects when the user stops typing, very useful when you can get a suggestion list from a remote server.   
 
 **New Feature!**
-Now you can make suggestions "inline", showing the first matched result as the placeholder (instead of the results list) and selecting it when the user touches the enter key.
+Now you can:
+- make suggestions "inline", showing the first matched result as the placeholder (instead of the results list) and selecting it when the user touches the enter key:
+- activate the automatic text resize via _resizableText_ boolean.
    
 ------   
 ![alt_tag](https://raw.githubusercontent.com/apasccon/SearchTextField/master/Example/SearchTextField/SearchTextField_Demo.gif)
