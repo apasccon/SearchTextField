@@ -9,13 +9,13 @@
 import UIKit
 
 open class SearchTextField: UITextField {
-
+    
     ////////////////////////////////////////////////////////////////////////
     // Public interface
     
     /// Maximum number of results to be shown in the suggestions list
     open var maxNumberOfResults = 0
-
+    
     /// Maximum height of the results list
     open var maxResultsListHeight = 0
     
@@ -24,7 +24,7 @@ open class SearchTextField: UITextField {
     
     /// Indicate if keyboard is showing or not
     open var keyboardIsShowing = false
-
+    
     /// Set your custom visual theme, or just choose between pre-defined SearchTextFieldTheme.lightTheme() and SearchTextFieldTheme.darkTheme() themes
     open var theme = SearchTextFieldTheme.lightTheme() {
         didSet {
@@ -32,7 +32,7 @@ open class SearchTextField: UITextField {
             
             if let placeholderColor = theme.placeholderColor {
                 if let placeholderString = placeholder {
-                    self.attributedPlaceholder = NSAttributedString(string: placeholderString, attributes: [NSAttributedStringKey.foregroundColor: placeholderColor])
+                    self.attributedPlaceholder = NSAttributedString(string: placeholderString, attributes: [NSForegroundColorAttributeName: placeholderColor])
                 }
                 
                 self.placeholderLabel?.textColor = placeholderColor
@@ -47,7 +47,7 @@ open class SearchTextField: UITextField {
     open func filterItems(_ items: [SearchTextFieldItem]) {
         filterDataSource = items
     }
-
+    
     /// Set an array of strings to be used for suggestions
     open func filterStrings(_ strings: [String]) {
         var items = [SearchTextFieldItem]()
@@ -63,23 +63,23 @@ open class SearchTextField: UITextField {
     open var itemSelectionHandler: SearchTextFieldItemHandler?
     
     /// Closure to handle when the user stops typing
-    open var userStoppedTypingHandler: (() -> Void)?
+    open var userStoppedTypingHandler: ((Void) -> Void)?
     
     /// Set your custom set of attributes in order to highlight the string found in each item
-    open var highlightAttributes: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 10)]
-
+    open var highlightAttributes: [String: AnyObject] = [NSFontAttributeName:UIFont.boldSystemFont(ofSize: 10)]
+    
     /// Start showing the default loading indicator, useful for searches that take some time.
     open func showLoadingIndicator() {
         self.rightViewMode = .always
         indicator.startAnimating()
     }
-
+    
     /// Hide the default loading indicator
     open func stopLoadingIndicator() {
         self.rightViewMode = .never
         indicator.stopAnimating()
     }
-
+    
     /// When InlineMode is true, the suggestions appear in the same line than the entered string. It's useful for email domains suggestion for example.
     open var inlineMode: Bool = false {
         didSet {
@@ -98,7 +98,7 @@ open class SearchTextField: UITextField {
     open var startSuggestingInmediately = false
     
     open var comparisonOptions: NSString.CompareOptions = [.caseInsensitive]
-
+    
     ////////////////////////////////////////////////////////////////////////
     // Private implementation
     
@@ -125,7 +125,7 @@ open class SearchTextField: UITextField {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
+    
     override open func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         
@@ -186,14 +186,14 @@ open class SearchTextField: UITextField {
         var newRect = self.placeholderRect(forBounds: self.bounds)
         var caretRect = self.caretRect(for: self.beginningOfDocument)
         let textRect = self.textRect(forBounds: self.bounds)
-
+        
         if let range = textRange(from: beginningOfDocument, to: endOfDocument) {
             caretRect = self.firstRect(for: range)
         }
         
         newRect.origin.x = caretRect.origin.x + caretRect.size.width + textRect.origin.x
         newRect.size.width = newRect.size.width - newRect.origin.x
-
+        
         if let placeholderLabel = placeholderLabel {
             placeholderLabel.font = self.font
             placeholderLabel.frame = newRect
@@ -202,13 +202,13 @@ open class SearchTextField: UITextField {
             placeholderLabel?.font = self.font
             placeholderLabel?.backgroundColor = UIColor.clear
             placeholderLabel?.lineBreakMode = .byClipping
-
-            if let placeholderColor = self.attributedPlaceholder?.attribute(NSAttributedStringKey.foregroundColor, at: 0, effectiveRange: nil) as? UIColor {
+            
+            if let placeholderColor = self.attributedPlaceholder?.attribute(NSForegroundColorAttributeName, at: 0, effectiveRange: nil) as? UIColor {
                 placeholderLabel?.textColor = placeholderColor
             } else {
                 placeholderLabel?.textColor = UIColor ( red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0 )
             }
-
+            
             self.addSubview(placeholderLabel!)
         }
     }
@@ -263,7 +263,7 @@ open class SearchTextField: UITextField {
             if self.isFirstResponder {
                 superview?.bringSubview(toFront: self)
             }
-
+            
             tableView.layer.borderColor = theme.borderColor.cgColor
             tableView.layer.cornerRadius = 2
             tableView.separatorColor = theme.separatorColor
@@ -274,7 +274,7 @@ open class SearchTextField: UITextField {
     }
     
     // Handle keyboard events
-    @objc open func keyboardWillShow(_ notification: Notification) {
+    open func keyboardWillShow(_ notification: Notification) {
         if !keyboardIsShowing && isEditing {
             keyboardIsShowing = true
             keyboardFrame = ((notification as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
@@ -283,7 +283,7 @@ open class SearchTextField: UITextField {
         }
     }
     
-    @objc open func keyboardWillHide(_ notification: Notification) {
+    open func keyboardWillHide(_ notification: Notification) {
         if keyboardIsShowing {
             keyboardIsShowing = false
             direction = .down
@@ -291,21 +291,21 @@ open class SearchTextField: UITextField {
         }
     }
     
-    @objc open func keyboardDidChangeFrame(_ notification: Notification) {
+    open func keyboardDidChangeFrame(_ notification: Notification) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
             self?.keyboardFrame = ((notification as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             self?.prepareDrawTableResult()
         }
     }
     
-    @objc open func typingDidStop() {
+    open func typingDidStop() {
         if userStoppedTypingHandler != nil {
             self.userStoppedTypingHandler!()
         }
     }
     
     // Handle text field changes
-    @objc open func textFieldDidChange() {
+    open func textFieldDidChange() {
         if !inlineMode && tableView == nil {
             buildSearchTableView()
         }
@@ -325,7 +325,7 @@ open class SearchTextField: UITextField {
         buildPlaceholderLabel()
     }
     
-    @objc open func textFieldDidBeginEditing() {
+    open func textFieldDidBeginEditing() {
         if startVisible && text!.isEmpty {
             clearResults()
             filter(true)
@@ -333,13 +333,13 @@ open class SearchTextField: UITextField {
         placeholderLabel?.attributedText = nil
     }
     
-    @objc open func textFieldDidEndEditing() {
+    open func textFieldDidEndEditing() {
         clearResults()
         tableView?.reloadData()
         placeholderLabel?.attributedText = nil
     }
-
-    @objc open func textFieldDidEndEditingOnExit() {
+    
+    open func textFieldDidEndEditingOnExit() {
         if let firstElement = filteredResults.first {
             if let itemSelectionHandler = self.itemSelectionHandler {
                 itemSelectionHandler(filteredResults, 0)
@@ -355,7 +355,7 @@ open class SearchTextField: UITextField {
             }
         }
     }
-
+    
     fileprivate func filter(_ addAll: Bool) {
         clearResults()
         
@@ -399,7 +399,7 @@ open class SearchTextField: UITextField {
                 }
             }
         }
-    
+        
         tableView?.reloadData()
         
         if inlineMode {
@@ -414,11 +414,11 @@ open class SearchTextField: UITextField {
     }
     
     // Look for Font attribute, and if it exists, adapt to the subtitle font size
-    fileprivate func highlightAttributesForSubtitle() -> [NSAttributedStringKey: AnyObject] {
-        var highlightAttributesForSubtitle = [NSAttributedStringKey: AnyObject]()
+    fileprivate func highlightAttributesForSubtitle() -> [String: AnyObject] {
+        var highlightAttributesForSubtitle = [String: AnyObject]()
         
         for attr in highlightAttributes {
-            if attr.0 == NSAttributedStringKey.font {
+            if attr.0 == NSFontAttributeName {
                 let fontName = (attr.1 as! UIFont).fontName
                 let pointSize = (attr.1 as! UIFont).pointSize * fontConversionRate
                 highlightAttributesForSubtitle[attr.0] = UIFont(name: fontName, size: pointSize)
@@ -495,7 +495,7 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
         cell!.detailTextLabel?.text = filteredResults[(indexPath as NSIndexPath).row].subtitle
         cell!.textLabel?.attributedText = filteredResults[(indexPath as NSIndexPath).row].attributedTitle
         cell!.detailTextLabel?.attributedText = filteredResults[(indexPath as NSIndexPath).row].attributedSubtitle
-
+        
         cell!.imageView?.image = filteredResults[(indexPath as NSIndexPath).row].image
         
         cell!.selectionStyle = .none
@@ -556,7 +556,7 @@ public struct SearchTextFieldItem {
     // Private vars
     fileprivate var attributedTitle: NSMutableAttributedString?
     fileprivate var attributedSubtitle: NSMutableAttributedString?
-
+    
     // Public interface
     public var title: String
     public var subtitle: String?
@@ -567,12 +567,12 @@ public struct SearchTextFieldItem {
         self.subtitle = subtitle
         self.image = image
     }
-
+    
     public init(title: String, subtitle: String?) {
         self.title = title
         self.subtitle = subtitle
     }
-
+    
     public init(title: String) {
         self.title = title
     }
