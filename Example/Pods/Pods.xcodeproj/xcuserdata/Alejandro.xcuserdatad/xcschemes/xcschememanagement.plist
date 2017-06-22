@@ -7,26 +7,15 @@
 		<key>Pods-SearchTextField_Example.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<true/>
+			<false/>
 		</dict>
 		<key>SearchTextField.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<true/>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>940DEB8A330B442C8CDDB6B1CC001414</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BFAF6D30694C1DB8654DFF52BF9F5268</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>
