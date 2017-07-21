@@ -308,6 +308,9 @@ open class SearchTextField: UITextField {
         if text!.isEmpty {
             clearResults()
             tableView?.reloadData()
+            if startVisible {
+                filter(true)
+            }
             self.placeholderLabel?.text = ""
         } else {
             filter(false)
