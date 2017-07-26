@@ -4,9 +4,10 @@
 [![License](https://img.shields.io/cocoapods/l/SearchTextField.svg?style=flat)](http://cocoapods.org/pods/SearchTextField)
 [![Platform](https://img.shields.io/cocoapods/p/SearchTextField.svg?style=flat)](http://cocoapods.org/pods/SearchTextField)
 
+![alt_tag](https://raw.githubusercontent.com/apasccon/SearchTextField/master/Example/SearchTextField/SearchTextField.png)
+
 ## Overview
 
-![alt_tag](https://raw.githubusercontent.com/apasccon/SearchTextField/master/Example/SearchTextField/SearchTextField.png)
 **SearchTextField** is a subclass of UITextField, written in Swift that makes really easy the ability to show an autocomplete suggestions list.   
 You can decide wether to show the list as soon as the field is focused or when the user starts typing.   
 You can also detects when the user stops typing, very useful when you can get a suggestion list from a remote server.   
