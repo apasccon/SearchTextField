@@ -1,4 +1,6 @@
-![alt_tag](https://raw.githubusercontent.com/apasccon/SearchTextField/master/Example/SearchTextField/SearchTextField.png) # SearchTextField
+![alt_tag](https://raw.githubusercontent.com/apasccon/SearchTextField/master/Example/SearchTextField/SearchTextField.png) 
+
+# SearchTextField
 
 [![Version](https://img.shields.io/cocoapods/v/SearchTextField.svg?style=flat)](http://cocoapods.org/pods/SearchTextField)
 [![License](https://img.shields.io/cocoapods/l/SearchTextField.svg?style=flat)](http://cocoapods.org/pods/SearchTextField)
