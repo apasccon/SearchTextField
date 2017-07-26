@@ -1,6 +1,6 @@
 # SearchTextField
 
-[![CI Status](http://img.shields.io/travis/apasccon/SearchTextField.svg?style=flat)](https://travis-ci.org/apasccon/SearchTextField)
+[![CI Status](http://img.shields.io/travis/Alejandro Pasccon/SearchTextField.svg?style=flat)](https://travis-ci.org/Alejandro Pasccon/SearchTextField)
 [![Version](https://img.shields.io/cocoapods/v/SearchTextField.svg?style=flat)](http://cocoapods.org/pods/SearchTextField)
 [![License](https://img.shields.io/cocoapods/l/SearchTextField.svg?style=flat)](http://cocoapods.org/pods/SearchTextField)
 [![Platform](https://img.shields.io/cocoapods/p/SearchTextField.svg?style=flat)](http://cocoapods.org/pods/SearchTextField)
@@ -13,7 +13,7 @@ You can also detects when the user stops typing, very useful when you can get a 
 
 **New Feature!**
 Now you can make suggestions "inline", showing the first matched result as the placeholder (instead of the results list) and selecting it when the user touches the enter key.
-   
+
 ------   
 ![alt_tag](https://raw.githubusercontent.com/apasccon/SearchTextField/master/Example/SearchTextField/SearchTextField_Demo.gif)
 
@@ -32,7 +32,7 @@ use_frameworks!
 pod "SearchTextField"
 ```
 
-### Manual installation
+###Manual installation
 
 Just import SearchTextField.swift into your project
 
@@ -69,7 +69,6 @@ mySearchTextField.theme = SearchTextFieldTheme.darkTheme()
 mySearchTextField.theme.font = UIFont.systemFontOfSize(12)
 mySearchTextField.theme.bgColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.3)
 mySearchTextField.theme.borderColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
-mySearchTextField.theme.placeholderColor = UIColor.gray
 mySearchTextField.theme.separatorColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.5)
 mySearchTextField.theme.cellHeight = 50
 
@@ -86,17 +85,9 @@ mySearchTextField.maxResultsListHeight = 200
 mySearchTextField.highlightAttributes = [NSBackgroundColorAttributeName: UIColor.yellowColor(), NSFontAttributeName:UIFont.boldSystemFontOfSize(12)]
 
 // Handle what happens when the user picks an item. By default the title is set to the text field
-mySearchTextField.itemSelectionHandler = { filteredResults, itemPosition in
-    // Just in case you need the item position
-    let item = filteredResults[itemPosition]
-    
-    mySearchTextField.text = item.title
+mySearchTextField.itemSelectionHandler = {item, itemPosition in
+mySearchTextField.text = item.title
 }
-
-
-// Start visible, showing the list of results without typing. By default it's disabled
-countryTextField.startVisible = true
-
 
 /** 
 * Update data source when the user stops typing. 
@@ -104,20 +95,20 @@ countryTextField.startVisible = true
 * (but only when the user stops doing it)
 **/
 mySearchTextField.userStoppedTypingHandler = {
-    if let criteria = self.mySearchTextField.text {
-        if criteria.characters.count > 1 {
+if let criteria = self.mySearchTextField.text {
+if criteria.characters.count > 1 {
 
-        // Show the loading indicator
-        self.mySearchTextField.showLoadingIndicator()
+// Show the loading indicator
+self.mySearchTextField.showLoadingIndicator()
 
-        self.searchMoreItemsInBackground(criteria) { results in
-            // Set new items to filter
-            self.acronymTextField.filterItems(results)
+self.searchMoreItemsInBackground(criteria) { results in
+// Set new items to filter
+self.acronymTextField.filterItems(results)
 
-            // Hide loading indicator
-            self.mySearchTextField.stopLoadingIndicator()
-        }
-    }
+// Hide loading indicator
+self.mySearchTextField.stopLoadingIndicator()
+}
+}
 }
 
 ```
@@ -126,17 +117,10 @@ mySearchTextField.userStoppedTypingHandler = {
 
 ```swift
 // Set the array of strings you want to suggest
-mySearchTextField.filterStrings(["gmail.com", "yahoo.com", "yahoo.com.ar"])
+mySearchTextField.filterStrings(["Red", "Blue", "Yellow"])
 
 // Then set the inline mode in true
 mySearchTextField.inlineMode = true
-
-// Start suggesting only after some string is detected
-mySearchTextField.startFilteringAfter = "@"
-
-// Start suggesting inmediately just after the string is detected 
-mySearchTextField.startSuggestingInmediately = true
-
 ```
 
 
