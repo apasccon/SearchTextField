@@ -38,6 +38,7 @@ class MainViewController: UITableViewController {
     fileprivate func configureSimpleSearchTextField() {
         // Start visible - Default: false
         countryTextField.startVisible = true
+
         
         // Set data source
         let countries = localCountries()
@@ -71,9 +72,10 @@ class MainViewController: UITableViewController {
         acronymTextField.highlightAttributes = [NSBackgroundColorAttributeName: UIColor.yellow, NSFontAttributeName:UIFont.boldSystemFont(ofSize: 12)]
         
         // Handle item selection - Default behaviour: item title set to the text field
-        acronymTextField.itemSelectionHandler = { item, itemPosition in
-            // Just in case you need the item position (thanks to @hernangonzalez)
-            print("Item position \(itemPosition)")
+        acronymTextField.itemSelectionHandler = { filteredResults, itemPosition in
+            // Just in case you need the item position
+            let item = filteredResults[itemPosition]
+            print("Item at position \(itemPosition): \(item.title)")
             
             // Do whatever you want with the picked item
             self.acronymTextField.text = item.title
@@ -115,6 +117,7 @@ class MainViewController: UITableViewController {
         emailInlineTextField.inlineMode = true
         
         emailInlineTextField.startFilteringAfter = "@"
+        emailInlineTextField.startSuggestingInmediately = true
         
         // Set data source
         emailInlineTextField.filterStrings(["gmail.com", "yahoo.com", "yahoo.com.ar"])

@@ -9,13 +9,13 @@
 import UIKit
 
 open class SearchTextField: UITextField {
-
+    
     ////////////////////////////////////////////////////////////////////////
     // Public interface
     
     /// Maximum number of results to be shown in the suggestions list
     open var maxNumberOfResults = 0
-
+    
     /// Maximum height of the results list
     open var maxResultsListHeight = 0
     
@@ -24,7 +24,7 @@ open class SearchTextField: UITextField {
     
     /// Indicate if keyboard is showing or not
     open var keyboardIsShowing = false
-
+    
     /// Set your custom visual theme, or just choose between pre-defined SearchTextFieldTheme.lightTheme() and SearchTextFieldTheme.darkTheme() themes
     open var theme = SearchTextFieldTheme.lightTheme() {
         didSet {
@@ -47,7 +47,7 @@ open class SearchTextField: UITextField {
     open func filterItems(_ items: [SearchTextFieldItem]) {
         filterDataSource = items
     }
-
+    
     /// Set an array of strings to be used for suggestions
     open func filterStrings(_ strings: [String]) {
         var items = [SearchTextFieldItem]()
@@ -68,16 +68,19 @@ open class SearchTextField: UITextField {
     /// Set your custom set of attributes in order to highlight the string found in each item
     open var highlightAttributes: [String: AnyObject] = [NSFontAttributeName:UIFont.boldSystemFont(ofSize: 10)]
     
+    /// Start showing the default loading indicator, useful for searches that take some time.
     open func showLoadingIndicator() {
         self.rightViewMode = .always
         indicator.startAnimating()
     }
-
+    
+    /// Hide the default loading indicator
     open func stopLoadingIndicator() {
         self.rightViewMode = .never
         indicator.stopAnimating()
     }
     
+    /// When InlineMode is true, the suggestions appear in the same line than the entered string. It's useful for email domains suggestion for example.
     open var inlineMode: Bool = false {
         didSet {
             if inlineMode == true {
@@ -87,10 +90,15 @@ open class SearchTextField: UITextField {
         }
     }
     
+    /// Only valid when InlineMode is true. The suggestions appear after typing the provided string (or even better a character like '@')
     open var startFilteringAfter: String?
     
+    
+    /// If startFilteringAfter is set, and startSuggestingInmediately is true, the list of suggestions appear inmediately
+    open var startSuggestingInmediately = false
+    
     open var comparisonOptions: NSString.CompareOptions = [.caseInsensitive]
-
+    
     ////////////////////////////////////////////////////////////////////////
     // Private implementation
     
@@ -117,7 +125,7 @@ open class SearchTextField: UITextField {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
+    
     override open func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         
@@ -178,14 +186,14 @@ open class SearchTextField: UITextField {
         var newRect = self.placeholderRect(forBounds: self.bounds)
         var caretRect = self.caretRect(for: self.beginningOfDocument)
         let textRect = self.textRect(forBounds: self.bounds)
-
+        
         if let range = textRange(from: beginningOfDocument, to: endOfDocument) {
             caretRect = self.firstRect(for: range)
         }
         
         newRect.origin.x = caretRect.origin.x + caretRect.size.width + textRect.origin.x
         newRect.size.width = newRect.size.width - newRect.origin.x
-
+        
         if let placeholderLabel = placeholderLabel {
             placeholderLabel.font = self.font
             placeholderLabel.frame = newRect
@@ -194,13 +202,13 @@ open class SearchTextField: UITextField {
             placeholderLabel?.font = self.font
             placeholderLabel?.backgroundColor = UIColor.clear
             placeholderLabel?.lineBreakMode = .byClipping
-
+            
             if let placeholderColor = self.attributedPlaceholder?.attribute(NSForegroundColorAttributeName, at: 0, effectiveRange: nil) as? UIColor {
                 placeholderLabel?.textColor = placeholderColor
             } else {
                 placeholderLabel?.textColor = UIColor ( red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0 )
             }
-
+            
             self.addSubview(placeholderLabel!)
         }
     }
@@ -255,7 +263,7 @@ open class SearchTextField: UITextField {
             if self.isFirstResponder {
                 superview?.bringSubview(toFront: self)
             }
-
+            
             tableView.layer.borderColor = theme.borderColor.cgColor
             tableView.layer.cornerRadius = 2
             tableView.separatorColor = theme.separatorColor
@@ -333,11 +341,11 @@ open class SearchTextField: UITextField {
         tableView?.reloadData()
         placeholderLabel?.attributedText = nil
     }
-
+    
     open func textFieldDidEndEditingOnExit() {
         if let firstElement = filteredResults.first {
             if let itemSelectionHandler = self.itemSelectionHandler {
-                itemSelectionHandler(firstElement, 0)
+                itemSelectionHandler(filteredResults, 0)
             }
             else {
                 if inlineMode, let filterAfter = startFilteringAfter {
@@ -350,7 +358,7 @@ open class SearchTextField: UITextField {
             }
         }
     }
-
+    
     fileprivate func filter(_ addAll: Bool) {
         clearResults()
         
@@ -379,7 +387,7 @@ open class SearchTextField: UITextField {
                 var textToFilter = text!.lowercased()
                 
                 if inlineMode, let filterAfter = startFilteringAfter {
-                    if let suffixToFilter = textToFilter.components(separatedBy: filterAfter).last, suffixToFilter != "", textToFilter != suffixToFilter {
+                    if let suffixToFilter = textToFilter.components(separatedBy: filterAfter).last, (suffixToFilter != "" || startSuggestingInmediately == true), textToFilter != suffixToFilter {
                         textToFilter = suffixToFilter
                     } else {
                         placeholderLabel?.text = ""
@@ -394,7 +402,7 @@ open class SearchTextField: UITextField {
                 }
             }
         }
-    
+        
         tableView?.reloadData()
         
         if inlineMode {
@@ -490,7 +498,7 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
         cell!.detailTextLabel?.text = filteredResults[(indexPath as NSIndexPath).row].subtitle
         cell!.textLabel?.attributedText = filteredResults[(indexPath as NSIndexPath).row].attributedTitle
         cell!.detailTextLabel?.attributedText = filteredResults[(indexPath as NSIndexPath).row].attributedSubtitle
-
+        
         cell!.imageView?.image = filteredResults[(indexPath as NSIndexPath).row].image
         
         cell!.selectionStyle = .none
@@ -507,7 +515,7 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
             self.text = filteredResults[(indexPath as NSIndexPath).row].title
         } else {
             let index = indexPath.row
-            itemSelectionHandler!(filteredResults[index], index)
+            itemSelectionHandler!(filteredResults, index)
         }
         
         clearResults()
@@ -551,7 +559,7 @@ public struct SearchTextFieldItem {
     // Private vars
     fileprivate var attributedTitle: NSMutableAttributedString?
     fileprivate var attributedSubtitle: NSMutableAttributedString?
-
+    
     // Public interface
     public var title: String
     public var subtitle: String?
@@ -562,18 +570,18 @@ public struct SearchTextFieldItem {
         self.subtitle = subtitle
         self.image = image
     }
-
+    
     public init(title: String, subtitle: String?) {
         self.title = title
         self.subtitle = subtitle
     }
-
+    
     public init(title: String) {
         self.title = title
     }
 }
 
-public typealias SearchTextFieldItemHandler = (_ item: SearchTextFieldItem, _ index: Int) -> Void
+public typealias SearchTextFieldItemHandler = (_ filteredResults: [SearchTextFieldItem], _ index: Int) -> Void
 
 ////////////////////////////////////////////////////////////////////////
 // Suggestions List Direction
