@@ -1,6 +1,6 @@
 # SearchTextField
 
-[![CI Status](http://img.shields.io/travis/Alejandro Pasccon/SearchTextField.svg?style=flat)](https://travis-ci.org/Alejandro Pasccon/SearchTextField)
+[![CI Status](http://img.shields.io/travis/apasccon/SearchTextField.svg?style=flat)](https://travis-ci.org/apasccon/SearchTextField)
 [![Version](https://img.shields.io/cocoapods/v/SearchTextField.svg?style=flat)](http://cocoapods.org/pods/SearchTextField)
 [![License](https://img.shields.io/cocoapods/l/SearchTextField.svg?style=flat)](http://cocoapods.org/pods/SearchTextField)
 [![Platform](https://img.shields.io/cocoapods/p/SearchTextField.svg?style=flat)](http://cocoapods.org/pods/SearchTextField)
