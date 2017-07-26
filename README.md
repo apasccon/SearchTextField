@@ -1,4 +1,4 @@
-![alt_tag](https://raw.githubusercontent.com/apasccon/SearchTextField/master/Example/SearchTextField/SearchTextField.png) 
+![alt_tag](https://raw.githubusercontent.com/apasccon/SearchTextField/master/Example/SearchTextField/SearchTextField.png)
 
 # SearchTextField
 
@@ -90,9 +90,9 @@ mySearchTextField.itemSelectionHandler = {item, itemPosition in
     mySearchTextField.text = item.title
 }
 
-/** 
-* Update data source when the user stops typing. 
-* It's useful when you want to retrieve results from a remote server while typing 
+/**
+* Update data source when the user stops typing.
+* It's useful when you want to retrieve results from a remote server while typing
 * (but only when the user stops doing it)
 **/
 mySearchTextField.userStoppedTypingHandler = {
@@ -125,6 +125,14 @@ mySearchTextField.filterStrings(["Red", "Blue", "Yellow"])
 mySearchTextField.inlineMode = true
 ```
 
+### New feature: autocomplete from, for example, a list of email domains
+
+```swift
+emailInlineTextField.inlineMode = true
+emailInlineTextField.startFilteringAfter = "@"
+emailInlineTextField.startSuggestingInmediately = true
+emailInlineTextField.filterStrings(["gmail.com", "yahoo.com", "yahoo.com.ar"])
+```
 
 ## Swift Versions
 
