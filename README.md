@@ -86,7 +86,7 @@ mySearchTextField.highlightAttributes = [NSBackgroundColorAttributeName: UIColor
 
 // Handle what happens when the user picks an item. By default the title is set to the text field
 mySearchTextField.itemSelectionHandler = {item, itemPosition in
-mySearchTextField.text = item.title
+    mySearchTextField.text = item.title
 }
 
 /** 
@@ -95,20 +95,21 @@ mySearchTextField.text = item.title
 * (but only when the user stops doing it)
 **/
 mySearchTextField.userStoppedTypingHandler = {
-if let criteria = self.mySearchTextField.text {
-if criteria.characters.count > 1 {
+    if let criteria = self.mySearchTextField.text {
+        if criteria.characters.count > 1 {
 
-// Show the loading indicator
-self.mySearchTextField.showLoadingIndicator()
+            // Show the loading indicator
+            self.mySearchTextField.showLoadingIndicator()
 
-self.searchMoreItemsInBackground(criteria) { results in
-// Set new items to filter
-self.acronymTextField.filterItems(results)
+            self.searchMoreItemsInBackground(criteria) { results in
+                // Set new items to filter
+                self.acronymTextField.filterItems(results)
 
-// Hide loading indicator
-self.mySearchTextField.stopLoadingIndicator()
-}
-}
+                // Hide loading indicator
+                self.mySearchTextField.stopLoadingIndicator()
+            }
+        }
+    }
 }
 
 ```
