@@ -116,7 +116,7 @@ open class SearchTextField: UITextField {
     fileprivate var filterDataSource = [SearchTextFieldItem]() {
         didSet {
             filter(false)
-            redrawSearchTableView()
+            buildSearchTableView()
         }
     }
     
