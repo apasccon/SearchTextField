@@ -74,6 +74,9 @@ open class SearchTextField: UITextField {
         indicator.startAnimating()
     }
     
+    /// Force the results list to adapt to RTL languages
+    open var forceRightToLeft = false
+    
     /// Hide the default loading indicator
     open func stopLoadingIndicator() {
         self.rightViewMode = .never
@@ -167,6 +170,9 @@ open class SearchTextField: UITextField {
             tableView.dataSource = self
             tableView.delegate = self
             tableView.separatorInset = UIEdgeInsets.zero
+            if forceRightToLeft {
+                tableView.semanticContentAttribute = .forceRightToLeft
+            }
             
             shadowView.backgroundColor = UIColor.lightText
             shadowView.layer.shadowColor = UIColor.black.cgColor

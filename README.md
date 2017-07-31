@@ -20,7 +20,7 @@ Now you can make suggestions "inline", showing the first matched result as the p
 
 ## Requirements
 
-* iOS 8
+* iOS 9
 
 ## Installation
 
@@ -89,6 +89,10 @@ mySearchTextField.highlightAttributes = [NSBackgroundColorAttributeName: UIColor
 mySearchTextField.itemSelectionHandler = {item, itemPosition in
     mySearchTextField.text = item.title
 }
+
+// You can force the results list to support RTL languages - Default: false
+mySearchTextField.forceRightToLeft = true
+
 
 /**
 * Update data source when the user stops typing.
