@@ -69,7 +69,7 @@ class MainViewController: UITableViewController {
         acronymTextField.comparisonOptions = [.caseInsensitive]
 
         // You can force the results list to support RTL languages - Default: false
-        acronymTextField.forceRightToLeft = true
+        acronymTextField.forceRightToLeft = false
 
         // Customize highlight attributes - Default: Bold
         acronymTextField.highlightAttributes = [NSBackgroundColorAttributeName: UIColor.yellow, NSFontAttributeName:UIFont.boldSystemFont(ofSize: 12)]

@@ -90,6 +90,10 @@ mySearchTextField.itemSelectionHandler = {item, itemPosition in
     mySearchTextField.text = item.title
 }
 
+// You can force the results list to support RTL languages - Default: false
+mySearchTextField.forceRightToLeft = true
+
+
 /**
 * Update data source when the user stops typing.
 * It's useful when you want to retrieve results from a remote server while typing
