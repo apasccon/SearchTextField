@@ -20,7 +20,7 @@ Now you can make suggestions "inline", showing the first matched result as the p
 
 ## Requirements
 
-* iOS 8
+* iOS 9
 
 ## Installation
 
