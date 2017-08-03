@@ -119,6 +119,7 @@ class MainViewController: UITableViewController {
         // Define the inline mode
         countryInLineTextField.inlineMode = true
         
+        
         // Set data source
         let countries = localCountries()
         countryInLineTextField.filterStrings(countries)
