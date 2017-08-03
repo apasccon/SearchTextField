@@ -52,13 +52,22 @@ class MainViewController: UITableViewController {
         // Set theme - Default: light
         acronymTextField.theme = SearchTextFieldTheme.lightTheme()
         
+        // Define a header - Default: nothing
+        let header = UILabel(frame: CGRect(x: 0, y: 0, width: acronymTextField.frame.width, height: 30))
+        header.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+        header.textAlignment = .center
+        header.font = UIFont.systemFont(ofSize: 14)
+        header.text = "Pick your option"
+        acronymTextField.resultsListHeader = header
+
+        
         // Modify current theme properties
         acronymTextField.theme.font = UIFont.systemFont(ofSize: 12)
-        acronymTextField.theme.bgColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.3)
-        acronymTextField.theme.borderColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
-        acronymTextField.theme.separatorColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.5)
+        acronymTextField.theme.bgColor = UIColor.lightGray.withAlphaComponent(0.2)
+        acronymTextField.theme.borderColor = UIColor.lightGray.withAlphaComponent(0.5)
+        acronymTextField.theme.separatorColor = UIColor.lightGray.withAlphaComponent(0.5)
         acronymTextField.theme.cellHeight = 50
-        acronymTextField.theme.placeholderColor = UIColor.brown.withAlphaComponent(0.5)
+        acronymTextField.theme.placeholderColor = UIColor.lightGray
         
         // Max number of results - Default: No limit
         acronymTextField.maxNumberOfResults = 5

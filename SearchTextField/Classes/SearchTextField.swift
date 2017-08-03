@@ -111,7 +111,11 @@ open class SearchTextField: UITextField {
     /// If startFilteringAfter is set, and startSuggestingInmediately is true, the list of suggestions appear inmediately
     open var startSuggestingInmediately = false
     
+    /// Allow to decide the comparision options
     open var comparisonOptions: NSString.CompareOptions = [.caseInsensitive]
+    
+    /// Set the results list's header
+    open var resultsListHeader: UIView?
     
     ////////////////////////////////////////////////////////////////////////
     // Private implementation
@@ -186,6 +190,7 @@ open class SearchTextField: UITextField {
             tableView.dataSource = self
             tableView.delegate = self
             tableView.separatorInset = UIEdgeInsets.zero
+            tableView.tableHeaderView = resultsListHeader
             if forceRightToLeft {
                 tableView.semanticContentAttribute = .forceRightToLeft
             }

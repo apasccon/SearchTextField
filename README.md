@@ -139,6 +139,15 @@ mySearchTextField.itemSelectionHandler = { filteredResults, itemPosition in
     self.mySearchTextField.text = item.title
 }
 
+// Define a results list header - Default: nothing
+let header = UILabel(frame: CGRect(x: 0, y: 0, width: acronymTextField.frame.width, height: 30))
+header.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+header.textAlignment = .center
+header.font = UIFont.systemFont(ofSize: 14)
+header.text = "Pick your option"
+mySearchTextField.resultsListHeader = header
+
+
 
 ```
 
