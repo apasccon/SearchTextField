@@ -93,6 +93,18 @@ mySearchTextField.itemSelectionHandler = {item, itemPosition in
 // You can force the results list to support RTL languages - Default: false
 mySearchTextField.forceRightToLeft = true
 
+// Show the list of results as soon as the user makes focus - Default: false
+mySearchTextField.startVisible = true
+
+// ...or show the list of results even without user's interaction as soon as created - Default: false
+mySearchTextField.startVisibleWithoutInteraction = true
+
+// Start filtering after an specific number of characters - Default: 0
+mySearchTextField.minCharactersNumberToStartFiltering = 3
+
+// You can force the results list to support RTL languages - Default: false
+mySearchTextField.forceRightToLeft = false
+
 
 /**
 * Update data source when the user stops typing.
@@ -116,6 +128,17 @@ mySearchTextField.userStoppedTypingHandler = {
         }
     }
 }
+
+// Handle item selection - Default behaviour: item title set to the text field
+mySearchTextField.itemSelectionHandler = { filteredResults, itemPosition in
+    // Just in case you need the item position
+    let item = filteredResults[itemPosition]
+    print("Item at position \(itemPosition): \(item.title)")
+
+    // Do whatever you want with the picked item
+    self.mySearchTextField.text = item.title
+}
+
 
 ```
 

@@ -19,6 +19,8 @@ class MainViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        
         tableView.tableFooterView = UIView()
         
         // 1 - Configure a simple search text field
@@ -36,9 +38,8 @@ class MainViewController: UITableViewController {
     
     // 1 - Configure a simple search text view
     fileprivate func configureSimpleSearchTextField() {
-        // Start visible - Default: false
-        countryTextField.startVisible = true
-
+        // Start visible even without user's interaction as soon as created - Default: false
+        countryTextField.startVisibleWithoutInteraction = true
         
         // Set data source
         let countries = localCountries()

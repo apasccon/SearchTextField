@@ -43,6 +43,15 @@ open class SearchTextField: UITextField {
     /// Show the suggestions list without filter when the text field is focused
     open var startVisible = false
     
+    /// Show the suggestions list without filter even if the text field is not focused
+    open var startVisibleWithoutInteraction = false {
+        didSet {
+            if startVisibleWithoutInteraction {
+                textFieldDidChange()
+            }
+        }
+    }
+
     /// Set an array of SearchTextFieldItem's to be used for suggestions
     open func filterItems(_ items: [SearchTextFieldItem]) {
         filterDataSource = items
@@ -56,7 +65,7 @@ open class SearchTextField: UITextField {
             items.append(SearchTextFieldItem(title: value))
         }
         
-        filterDataSource = items
+        filterItems(items)
     }
     
     /// Closure to handle when the user pick an item
@@ -95,7 +104,9 @@ open class SearchTextField: UITextField {
     
     /// Only valid when InlineMode is true. The suggestions appear after typing the provided string (or even better a character like '@')
     open var startFilteringAfter: String?
-    
+
+    /// Min number of characters to start filtering
+    open var minCharactersNumberToStartFiltering: Int = 0
     
     /// If startFilteringAfter is set, and startSuggestingInmediately is true, the list of suggestions appear inmediately
     open var startSuggestingInmediately = false
@@ -114,12 +125,17 @@ open class SearchTextField: UITextField {
     fileprivate var placeholderLabel: UILabel?
     fileprivate static let cellIdentifier = "APSearchTextFieldCell"
     fileprivate let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    fileprivate var maxTableViewSize: CGFloat = 0
     
     fileprivate var filteredResults = [SearchTextFieldItem]()
     fileprivate var filterDataSource = [SearchTextFieldItem]() {
         didSet {
-            filter(false)
+            filter(forceShowAll: false)
             buildSearchTableView()
+            
+            if startVisibleWithoutInteraction {
+                textFieldDidChange()
+            }
         }
     }
     
@@ -239,8 +255,14 @@ open class SearchTextField: UITextField {
                 }
                 
                 if maxResultsListHeight > 0 {
-                    tableHeight = min(tableHeight, CGFloat(self.maxResultsListHeight))
+                    tableHeight = min(tableHeight, CGFloat(maxResultsListHeight))
                 }
+                
+                let fixedTableHeight = tableHeight - theme.cellHeight / 2
+                if fixedTableHeight > theme.cellHeight {
+                    tableHeight = fixedTableHeight
+                }
+                
                 
                 var tableViewFrame = CGRect(x: 0, y: 0, width: frame.size.width - 4, height: tableHeight)
                 tableViewFrame.origin = self.convert(tableViewFrame.origin, to: nil)
@@ -256,7 +278,7 @@ open class SearchTextField: UITextField {
                 shadowFrame.origin.y = tableView.frame.origin.y
                 shadowView!.frame = shadowFrame
             } else {
-                let tableHeight = min((tableView.contentSize.height + positionGap), (UIScreen.main.bounds.size.height - frame.origin.y - theme.cellHeight * 2))
+                let tableHeight = min((tableView.contentSize.height + positionGap), (UIScreen.main.bounds.size.height - frame.origin.y - theme.cellHeight))
                 UIView.animate(withDuration: 0.2, animations: { [weak self] in
                     self?.tableView?.frame = CGRect(x: frame.origin.x + 2, y: (frame.origin.y - tableHeight + positionGap), width: frame.size.width - 4, height: tableHeight)
                     self?.shadowView?.frame = CGRect(x: frame.origin.x + 3, y: (frame.origin.y + 3), width: frame.size.width - 6, height: 1)
@@ -315,6 +337,9 @@ open class SearchTextField: UITextField {
         if !inlineMode && tableView == nil {
             buildSearchTableView()
         }
+        
+        interactedWith = true
+        
         // Detect pauses while typing
         timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(SearchTextField.typingDidStop), userInfo: self, repeats: false)
@@ -322,12 +347,12 @@ open class SearchTextField: UITextField {
         if text!.isEmpty {
             clearResults()
             tableView?.reloadData()
-            if startVisible {
-                filter(true)
+            if startVisible || startVisibleWithoutInteraction {
+                filter(forceShowAll: true)
             }
             self.placeholderLabel?.text = ""
         } else {
-            filter(false)
+            filter(forceShowAll: false)
             prepareDrawTableResult()
         }
         
@@ -335,9 +360,9 @@ open class SearchTextField: UITextField {
     }
     
     open func textFieldDidBeginEditing() {
-        if startVisible && text!.isEmpty {
+        if (startVisible || startVisibleWithoutInteraction) && text!.isEmpty {
             clearResults()
-            filter(true)
+            filter(forceShowAll: true)
         }
         placeholderLabel?.attributedText = nil
     }
@@ -365,7 +390,11 @@ open class SearchTextField: UITextField {
         }
     }
     
-    fileprivate func filter(_ addAll: Bool) {
+    fileprivate func filter(forceShowAll addAll: Bool) {
+        if text!.characters.count < minCharactersNumberToStartFiltering {
+            return
+        }
+        
         clearResults()
         
         for i in 0 ..< filterDataSource.count {
@@ -469,6 +498,12 @@ open class SearchTextField: UITextField {
             }
             
             redrawSearchTableView()
+        } else {
+            if self.center.y + theme.cellHeight > UIApplication.shared.keyWindow!.frame.size.height {
+                direction = .up
+            } else {
+                direction = .down
+            }
         }
     }
 }
