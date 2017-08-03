@@ -102,9 +102,6 @@ mySearchTextField.startVisibleWithoutInteraction = true
 // Start filtering after an specific number of characters - Default: 0
 mySearchTextField.minCharactersNumberToStartFiltering = 3
 
-// You can force the results list to support RTL languages - Default: false
-mySearchTextField.forceRightToLeft = false
-
 
 /**
 * Update data source when the user stops typing.
@@ -120,7 +117,7 @@ mySearchTextField.userStoppedTypingHandler = {
 
             self.searchMoreItemsInBackground(criteria) { results in
                 // Set new items to filter
-                self.acronymTextField.filterItems(results)
+                self.mySearchTextField.filterItems(results)
 
                 // Hide loading indicator
                 self.mySearchTextField.stopLoadingIndicator()
