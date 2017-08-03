@@ -51,7 +51,7 @@ open class SearchTextField: UITextField {
             }
         }
     }
-
+    
     /// Set an array of SearchTextFieldItem's to be used for suggestions
     open func filterItems(_ items: [SearchTextFieldItem]) {
         filterDataSource = items
@@ -104,7 +104,7 @@ open class SearchTextField: UITextField {
     
     /// Only valid when InlineMode is true. The suggestions appear after typing the provided string (or even better a character like '@')
     open var startFilteringAfter: String?
-
+    
     /// Min number of characters to start filtering
     open var minCharactersNumberToStartFiltering: Int = 0
     
@@ -147,6 +147,11 @@ open class SearchTextField: UITextField {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    open override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        tableView?.removeFromSuperview()
     }
     
     override open func willMove(toSuperview newSuperview: UIView?) {
@@ -248,26 +253,25 @@ open class SearchTextField: UITextField {
         }
         
         if let tableView = tableView {
-            let positionGap: CGFloat = 0
             guard let frame = self.superview?.convert(self.frame, to: nil) else { return }
             
             if self.direction == .down {
+                
                 var tableHeight: CGFloat = 0
                 if keyboardIsShowing, let keyboardHeight = keyboardFrame?.size.height {
-                    tableHeight = min((tableView.contentSize.height + positionGap), (UIScreen.main.bounds.size.height - frame.origin.y - frame.height - keyboardHeight))
+                    tableHeight = min((tableView.contentSize.height), (UIScreen.main.bounds.size.height - frame.origin.y - frame.height - keyboardHeight))
                 } else {
-                    tableHeight = min((tableView.contentSize.height + positionGap), (UIScreen.main.bounds.size.height - frame.origin.y - frame.height))
+                    tableHeight = min((tableView.contentSize.height), (UIScreen.main.bounds.size.height - frame.origin.y - frame.height))
                 }
                 
                 if maxResultsListHeight > 0 {
                     tableHeight = min(tableHeight, CGFloat(maxResultsListHeight))
                 }
                 
-                let fixedTableHeight = tableHeight - theme.cellHeight / 2
-                if fixedTableHeight > theme.cellHeight {
-                    tableHeight = fixedTableHeight
+                // Set a bottom margin of 10p
+                if tableHeight < tableView.contentSize.height {
+                    tableHeight -= 10
                 }
-                
                 
                 var tableViewFrame = CGRect(x: 0, y: 0, width: frame.size.width - 4, height: tableHeight)
                 tableViewFrame.origin = self.convert(tableViewFrame.origin, to: nil)
@@ -283,9 +287,9 @@ open class SearchTextField: UITextField {
                 shadowFrame.origin.y = tableView.frame.origin.y
                 shadowView!.frame = shadowFrame
             } else {
-                let tableHeight = min((tableView.contentSize.height + positionGap), (UIScreen.main.bounds.size.height - frame.origin.y - theme.cellHeight))
+                let tableHeight = min((tableView.contentSize.height), (UIScreen.main.bounds.size.height - frame.origin.y - theme.cellHeight))
                 UIView.animate(withDuration: 0.2, animations: { [weak self] in
-                    self?.tableView?.frame = CGRect(x: frame.origin.x + 2, y: (frame.origin.y - tableHeight + positionGap), width: frame.size.width - 4, height: tableHeight)
+                    self?.tableView?.frame = CGRect(x: frame.origin.x + 2, y: (frame.origin.y - tableHeight), width: frame.size.width - 4, height: tableHeight)
                     self?.shadowView?.frame = CGRect(x: frame.origin.x + 3, y: (frame.origin.y + 3), width: frame.size.width - 6, height: 1)
                 })
             }
@@ -395,12 +399,22 @@ open class SearchTextField: UITextField {
         }
     }
     
+    open func hideResultsList() {
+        if let tableFrame:CGRect = tableView?.frame {
+            let newFrame = CGRect(x: tableFrame.origin.x, y: tableFrame.origin.y, width: tableFrame.size.width, height: 0.0)
+            UIView.animate(withDuration: 0.2, animations: { [weak self] in
+                self?.tableView?.frame = newFrame
+            })
+            
+        }
+    }
+    
     fileprivate func filter(forceShowAll addAll: Bool) {
+        clearResults()
+        
         if text!.characters.count < minCharactersNumberToStartFiltering {
             return
         }
-        
-        clearResults()
         
         for i in 0 ..< filterDataSource.count {
             

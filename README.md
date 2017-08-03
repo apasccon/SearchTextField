@@ -102,6 +102,8 @@ mySearchTextField.startVisibleWithoutInteraction = true
 // Start filtering after an specific number of characters - Default: 0
 mySearchTextField.minCharactersNumberToStartFiltering = 3
 
+// Explicitly hide the results list
+mySearchTextField.hideResultsList()
 
 /**
 * Update data source when the user stops typing.
