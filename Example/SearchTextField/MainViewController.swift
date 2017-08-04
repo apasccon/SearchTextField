@@ -59,8 +59,7 @@ class MainViewController: UITableViewController {
         header.font = UIFont.systemFont(ofSize: 14)
         header.text = "Pick your option"
         acronymTextField.resultsListHeader = header
-        
-        
+
         // Modify current theme properties
         acronymTextField.theme.font = UIFont.systemFont(ofSize: 12)
         acronymTextField.theme.bgColor = UIColor.lightGray.withAlphaComponent(0.2)
