@@ -10,7 +10,7 @@ import UIKit
 import SearchTextField
 
 class MainViewController: UITableViewController {
-
+    
     @IBOutlet weak var countryTextField: SearchTextField!
     @IBOutlet weak var acronymTextField: SearchTextField!
     @IBOutlet weak var countryInLineTextField: SearchTextField!
@@ -28,10 +28,10 @@ class MainViewController: UITableViewController {
         
         // 2 - Configure a custom search text field
         configureCustomSearchTextField()
-
+        
         // 3 - Configure an "inline" suggestions search text field
         configureSimpleInLineSearchTextField()
-
+        
         // 4 - Configure a custom "inline" suggestions search text field
         configureCustomInLineSearchTextField()
     }
@@ -60,7 +60,6 @@ class MainViewController: UITableViewController {
         header.text = "Pick your option"
         acronymTextField.resultsListHeader = header
 
-        
         // Modify current theme properties
         acronymTextField.theme.font = UIFont.systemFont(ofSize: 12)
         acronymTextField.theme.bgColor = UIColor.lightGray.withAlphaComponent(0.2)
@@ -77,10 +76,10 @@ class MainViewController: UITableViewController {
         
         // Set specific comparision options - Default: .caseInsensitive
         acronymTextField.comparisonOptions = [.caseInsensitive]
-
+        
         // You can force the results list to support RTL languages - Default: false
         acronymTextField.forceRightToLeft = false
-
+        
         // Customize highlight attributes - Default: Bold
         acronymTextField.highlightAttributes = [NSBackgroundColorAttributeName: UIColor.yellow, NSFontAttributeName:UIFont.boldSystemFont(ofSize: 12)]
         
@@ -127,7 +126,7 @@ class MainViewController: UITableViewController {
         let countries = localCountries()
         countryInLineTextField.filterStrings(countries)
     }
-
+    
     // 4 - Configure a custom inline search text view
     fileprivate func configureCustomInLineSearchTextField() {
         // Define the inline mode
@@ -139,7 +138,7 @@ class MainViewController: UITableViewController {
         // Set data source
         emailInlineTextField.filterStrings(["gmail.com", "yahoo.com", "yahoo.com.ar"])
     }
-
+    
     // Hide keyboard when touching the screen
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
@@ -211,6 +210,6 @@ class MainViewController: UITableViewController {
             task.resume()
         }
     }
-
-
+    
+    
 }
