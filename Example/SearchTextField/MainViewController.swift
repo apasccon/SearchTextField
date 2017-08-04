@@ -19,6 +19,8 @@ class MainViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        
         tableView.tableFooterView = UIView()
         
         // 1 - Configure a simple search text field
@@ -36,9 +38,8 @@ class MainViewController: UITableViewController {
     
     // 1 - Configure a simple search text view
     fileprivate func configureSimpleSearchTextField() {
-        // Start visible - Default: false
-        countryTextField.startVisible = true
-
+        // Start visible even without user's interaction as soon as created - Default: false
+        countryTextField.startVisibleWithoutInteraction = true
         
         // Set data source
         let countries = localCountries()
@@ -51,13 +52,22 @@ class MainViewController: UITableViewController {
         // Set theme - Default: light
         acronymTextField.theme = SearchTextFieldTheme.lightTheme()
         
+        // Define a header - Default: nothing
+        let header = UILabel(frame: CGRect(x: 0, y: 0, width: acronymTextField.frame.width, height: 30))
+        header.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+        header.textAlignment = .center
+        header.font = UIFont.systemFont(ofSize: 14)
+        header.text = "Pick your option"
+        acronymTextField.resultsListHeader = header
+
+        
         // Modify current theme properties
         acronymTextField.theme.font = UIFont.systemFont(ofSize: 12)
-        acronymTextField.theme.bgColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.3)
-        acronymTextField.theme.borderColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
-        acronymTextField.theme.separatorColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.5)
+        acronymTextField.theme.bgColor = UIColor.lightGray.withAlphaComponent(0.2)
+        acronymTextField.theme.borderColor = UIColor.lightGray.withAlphaComponent(0.5)
+        acronymTextField.theme.separatorColor = UIColor.lightGray.withAlphaComponent(0.5)
         acronymTextField.theme.cellHeight = 50
-        acronymTextField.theme.placeholderColor = UIColor.brown.withAlphaComponent(0.5)
+        acronymTextField.theme.placeholderColor = UIColor.lightGray
         
         // Max number of results - Default: No limit
         acronymTextField.maxNumberOfResults = 5
@@ -84,6 +94,9 @@ class MainViewController: UITableViewController {
             self.acronymTextField.text = item.title
         }
         
+        // You can force the results table appear always top
+        acronymTextField.direction = .up
+        
         // Update data source when the user stops typing
         acronymTextField.userStoppedTypingHandler = {
             if let criteria = self.acronymTextField.text {
@@ -108,6 +121,7 @@ class MainViewController: UITableViewController {
     fileprivate func configureSimpleInLineSearchTextField() {
         // Define the inline mode
         countryInLineTextField.inlineMode = true
+        
         
         // Set data source
         let countries = localCountries()
