@@ -10,7 +10,7 @@ import UIKit
 import SearchTextField
 
 class MainViewController: UITableViewController {
-
+    
     @IBOutlet weak var countryTextField: SearchTextField!
     @IBOutlet weak var acronymTextField: SearchTextField!
     @IBOutlet weak var countryInLineTextField: SearchTextField!
@@ -19,6 +19,8 @@ class MainViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        
         tableView.tableFooterView = UIView()
         
         // 1 - Configure a simple search text field
@@ -26,19 +28,18 @@ class MainViewController: UITableViewController {
         
         // 2 - Configure a custom search text field
         configureCustomSearchTextField()
-
+        
         // 3 - Configure an "inline" suggestions search text field
         configureSimpleInLineSearchTextField()
-
+        
         // 4 - Configure a custom "inline" suggestions search text field
         configureCustomInLineSearchTextField()
     }
     
     // 1 - Configure a simple search text view
     fileprivate func configureSimpleSearchTextField() {
-        // Start visible - Default: false
-        countryTextField.startVisible = true
-
+        // Start visible even without user's interaction as soon as created - Default: false
+        countryTextField.startVisibleWithoutInteraction = true
         
         // Set data source
         let countries = localCountries()
@@ -51,13 +52,22 @@ class MainViewController: UITableViewController {
         // Set theme - Default: light
         acronymTextField.theme = SearchTextFieldTheme.lightTheme()
         
+        // Define a header - Default: nothing
+        let header = UILabel(frame: CGRect(x: 0, y: 0, width: acronymTextField.frame.width, height: 30))
+        header.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+        header.textAlignment = .center
+        header.font = UIFont.systemFont(ofSize: 14)
+        header.text = "Pick your option"
+        acronymTextField.resultsListHeader = header
+        
+        
         // Modify current theme properties
         acronymTextField.theme.font = UIFont.systemFont(ofSize: 12)
-        acronymTextField.theme.bgColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.3)
-        acronymTextField.theme.borderColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
-        acronymTextField.theme.separatorColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.5)
+        acronymTextField.theme.bgColor = UIColor.lightGray.withAlphaComponent(0.2)
+        acronymTextField.theme.borderColor = UIColor.lightGray.withAlphaComponent(0.5)
+        acronymTextField.theme.separatorColor = UIColor.lightGray.withAlphaComponent(0.5)
         acronymTextField.theme.cellHeight = 50
-        acronymTextField.theme.placeholderColor = UIColor.brown.withAlphaComponent(0.5)
+        acronymTextField.theme.placeholderColor = UIColor.lightGray
         
         // Max number of results - Default: No limit
         acronymTextField.maxNumberOfResults = 5
@@ -67,10 +77,10 @@ class MainViewController: UITableViewController {
         
         // Set specific comparision options - Default: .caseInsensitive
         acronymTextField.comparisonOptions = [.caseInsensitive]
-
+        
         // You can force the results list to support RTL languages - Default: false
         acronymTextField.forceRightToLeft = false
-
+        
         // Customize highlight attributes - Default: Bold
         acronymTextField.highlightAttributes = [NSBackgroundColorAttributeName: UIColor.yellow, NSFontAttributeName:UIFont.boldSystemFont(ofSize: 12)]
         
@@ -83,6 +93,9 @@ class MainViewController: UITableViewController {
             // Do whatever you want with the picked item
             self.acronymTextField.text = item.title
         }
+        
+        // You can force the results table appear always top
+        acronymTextField.direction = .up
         
         // Update data source when the user stops typing
         acronymTextField.userStoppedTypingHandler = {
@@ -109,11 +122,12 @@ class MainViewController: UITableViewController {
         // Define the inline mode
         countryInLineTextField.inlineMode = true
         
+        
         // Set data source
         let countries = localCountries()
         countryInLineTextField.filterStrings(countries)
     }
-
+    
     // 4 - Configure a custom inline search text view
     fileprivate func configureCustomInLineSearchTextField() {
         // Define the inline mode
@@ -125,7 +139,7 @@ class MainViewController: UITableViewController {
         // Set data source
         emailInlineTextField.filterStrings(["gmail.com", "yahoo.com", "yahoo.com.ar"])
     }
-
+    
     // Hide keyboard when touching the screen
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
@@ -197,6 +211,6 @@ class MainViewController: UITableViewController {
             task.resume()
         }
     }
-
-
+    
+    
 }

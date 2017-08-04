@@ -43,6 +43,15 @@ open class SearchTextField: UITextField {
     /// Show the suggestions list without filter when the text field is focused
     open var startVisible = false
     
+    /// Show the suggestions list without filter even if the text field is not focused
+    open var startVisibleWithoutInteraction = false {
+        didSet {
+            if startVisibleWithoutInteraction {
+                textFieldDidChange()
+            }
+        }
+    }
+    
     /// Set an array of SearchTextFieldItem's to be used for suggestions
     open func filterItems(_ items: [SearchTextFieldItem]) {
         filterDataSource = items
@@ -56,7 +65,7 @@ open class SearchTextField: UITextField {
             items.append(SearchTextFieldItem(title: value))
         }
         
-        filterDataSource = items
+        filterItems(items)
     }
     
     /// Closure to handle when the user pick an item
@@ -96,30 +105,43 @@ open class SearchTextField: UITextField {
     /// Only valid when InlineMode is true. The suggestions appear after typing the provided string (or even better a character like '@')
     open var startFilteringAfter: String?
     
+    /// Min number of characters to start filtering
+    open var minCharactersNumberToStartFiltering: Int = 0
     
     /// If startFilteringAfter is set, and startSuggestingInmediately is true, the list of suggestions appear inmediately
     open var startSuggestingInmediately = false
     
+    /// Allow to decide the comparision options
     open var comparisonOptions: NSString.CompareOptions = [.caseInsensitive]
+    
+    /// Set the results list's header
+    open var resultsListHeader: UIView?
+    
+    /// Set the direction of the results table. If nothing sets default is automatic
+    open var direction: Direction = .auto
     
     ////////////////////////////////////////////////////////////////////////
     // Private implementation
     
     fileprivate var tableView: UITableView?
     fileprivate var shadowView: UIView?
-    fileprivate var direction: Direction = .down
     fileprivate var fontConversionRate: CGFloat = 0.7
     fileprivate var keyboardFrame: CGRect?
     fileprivate var timer: Timer? = nil
     fileprivate var placeholderLabel: UILabel?
     fileprivate static let cellIdentifier = "APSearchTextFieldCell"
     fileprivate let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    fileprivate var maxTableViewSize: CGFloat = 0
     
     fileprivate var filteredResults = [SearchTextFieldItem]()
     fileprivate var filterDataSource = [SearchTextFieldItem]() {
         didSet {
-            filter(false)
+            filter(forceShowAll: false)
             buildSearchTableView()
+            
+            if startVisibleWithoutInteraction {
+                textFieldDidChange()
+            }
         }
     }
     
@@ -127,6 +149,11 @@ open class SearchTextField: UITextField {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    open override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        tableView?.removeFromSuperview()
     }
     
     override open func willMove(toSuperview newSuperview: UIView?) {
@@ -170,6 +197,7 @@ open class SearchTextField: UITextField {
             tableView.dataSource = self
             tableView.delegate = self
             tableView.separatorInset = UIEdgeInsets.zero
+            tableView.tableHeaderView = resultsListHeader
             if forceRightToLeft {
                 tableView.semanticContentAttribute = .forceRightToLeft
             }
@@ -227,19 +255,24 @@ open class SearchTextField: UITextField {
         }
         
         if let tableView = tableView {
-            let positionGap: CGFloat = 0
             guard let frame = self.superview?.convert(self.frame, to: nil) else { return }
             
-            if self.direction == .down {
+            if self.direction == .down || self.direction == .auto {
+                
                 var tableHeight: CGFloat = 0
                 if keyboardIsShowing, let keyboardHeight = keyboardFrame?.size.height {
-                    tableHeight = min((tableView.contentSize.height + positionGap), (UIScreen.main.bounds.size.height - frame.origin.y - frame.height - keyboardHeight))
+                    tableHeight = min((tableView.contentSize.height), (UIScreen.main.bounds.size.height - frame.origin.y - frame.height - keyboardHeight))
                 } else {
-                    tableHeight = min((tableView.contentSize.height + positionGap), (UIScreen.main.bounds.size.height - frame.origin.y - frame.height))
+                    tableHeight = min((tableView.contentSize.height), (UIScreen.main.bounds.size.height - frame.origin.y - frame.height))
                 }
                 
                 if maxResultsListHeight > 0 {
-                    tableHeight = min(tableHeight, CGFloat(self.maxResultsListHeight))
+                    tableHeight = min(tableHeight, CGFloat(maxResultsListHeight))
+                }
+                
+                // Set a bottom margin of 10p
+                if tableHeight < tableView.contentSize.height {
+                    tableHeight -= 10
                 }
                 
                 var tableViewFrame = CGRect(x: 0, y: 0, width: frame.size.width - 4, height: tableHeight)
@@ -256,9 +289,9 @@ open class SearchTextField: UITextField {
                 shadowFrame.origin.y = tableView.frame.origin.y
                 shadowView!.frame = shadowFrame
             } else {
-                let tableHeight = min((tableView.contentSize.height + positionGap), (UIScreen.main.bounds.size.height - frame.origin.y - theme.cellHeight * 2))
+                let tableHeight = min((tableView.contentSize.height), (UIScreen.main.bounds.size.height - frame.origin.y - theme.cellHeight))
                 UIView.animate(withDuration: 0.2, animations: { [weak self] in
-                    self?.tableView?.frame = CGRect(x: frame.origin.x + 2, y: (frame.origin.y - tableHeight + positionGap), width: frame.size.width - 4, height: tableHeight)
+                    self?.tableView?.frame = CGRect(x: frame.origin.x + 2, y: (frame.origin.y - tableHeight), width: frame.size.width - 4, height: tableHeight)
                     self?.shadowView?.frame = CGRect(x: frame.origin.x + 3, y: (frame.origin.y + 3), width: frame.size.width - 6, height: 1)
                 })
             }
@@ -292,7 +325,9 @@ open class SearchTextField: UITextField {
     open func keyboardWillHide(_ notification: Notification) {
         if keyboardIsShowing {
             keyboardIsShowing = false
-            direction = .down
+            if direction == .auto {
+                direction = .down
+            }
             redrawSearchTableView()
         }
     }
@@ -315,6 +350,9 @@ open class SearchTextField: UITextField {
         if !inlineMode && tableView == nil {
             buildSearchTableView()
         }
+        
+        interactedWith = true
+        
         // Detect pauses while typing
         timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(SearchTextField.typingDidStop), userInfo: self, repeats: false)
@@ -322,12 +360,12 @@ open class SearchTextField: UITextField {
         if text!.isEmpty {
             clearResults()
             tableView?.reloadData()
-            if startVisible {
-                filter(true)
+            if startVisible || startVisibleWithoutInteraction {
+                filter(forceShowAll: true)
             }
             self.placeholderLabel?.text = ""
         } else {
-            filter(false)
+            filter(forceShowAll: false)
             prepareDrawTableResult()
         }
         
@@ -335,9 +373,9 @@ open class SearchTextField: UITextField {
     }
     
     open func textFieldDidBeginEditing() {
-        if startVisible && text!.isEmpty {
+        if (startVisible || startVisibleWithoutInteraction) && text!.isEmpty {
             clearResults()
-            filter(true)
+            filter(forceShowAll: true)
         }
         placeholderLabel?.attributedText = nil
     }
@@ -365,8 +403,22 @@ open class SearchTextField: UITextField {
         }
     }
     
-    fileprivate func filter(_ addAll: Bool) {
+    open func hideResultsList() {
+        if let tableFrame:CGRect = tableView?.frame {
+            let newFrame = CGRect(x: tableFrame.origin.x, y: tableFrame.origin.y, width: tableFrame.size.width, height: 0.0)
+            UIView.animate(withDuration: 0.2, animations: { [weak self] in
+                self?.tableView?.frame = newFrame
+            })
+            
+        }
+    }
+    
+    fileprivate func filter(forceShowAll addAll: Bool) {
         clearResults()
+        
+        if text!.characters.count < minCharactersNumberToStartFiltering {
+            return
+        }
         
         for i in 0 ..< filterDataSource.count {
             
@@ -457,18 +509,26 @@ open class SearchTextField: UITextField {
     // MARK: - Prepare for draw table result
     
     fileprivate func prepareDrawTableResult() {
-        guard let frame = self.superview?.convert(self.frame, to: UIApplication.shared.keyWindow) else { return }
-        if let keyboardFrame = keyboardFrame {
-            var newFrame = frame
-            newFrame.size.height += theme.cellHeight
-            
-            if keyboardFrame.intersects(newFrame) {
-                direction = .up
+        if direction == .auto {//if direction is not auto ignore and force the layout to draw AS IS required.
+            guard let frame = self.superview?.convert(self.frame, to: UIApplication.shared.keyWindow) else { return }
+            if let keyboardFrame = keyboardFrame {
+                var newFrame = frame
+                newFrame.size.height += theme.cellHeight
+                
+                if keyboardFrame.intersects(newFrame) {
+                    direction = .up
+                } else {
+                    direction = .down
+                }
+                
+                redrawSearchTableView()
             } else {
-                direction = .down
+                if self.center.y + theme.cellHeight > UIApplication.shared.keyWindow!.frame.size.height {
+                    direction = .up
+                } else {
+                    direction = .down
+                }
             }
-            
-            redrawSearchTableView()
         }
     }
 }
@@ -592,7 +652,8 @@ public typealias SearchTextFieldItemHandler = (_ filteredResults: [SearchTextFie
 ////////////////////////////////////////////////////////////////////////
 // Suggestions List Direction
 
-enum Direction {
+public enum Direction {
     case down
     case up
+    case auto//Default
 }
