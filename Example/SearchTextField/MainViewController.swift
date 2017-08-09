@@ -69,6 +69,8 @@ class MainViewController: UITableViewController {
         acronymTextField.theme.placeholderColor = UIColor.lightGray
         //Adds padding to the table view. This leaves a visible gap between the text field and search field.
         acronymTextField.theme.padding = 10
+        //Add corner radius to search results table view
+        acronymTextField.theme.cornerRadius = 5
         
         // Max number of results - Default: No limit
         acronymTextField.maxNumberOfResults = 5

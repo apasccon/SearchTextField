@@ -275,7 +275,7 @@ open class SearchTextField: UITextField {
                 var tableViewFrame = CGRect(x: 0, y: 0, width: frame.size.width - 4, height: tableHeight)
                 tableViewFrame.origin = self.convert(tableViewFrame.origin, to: nil)
                 tableViewFrame.origin.x += 2
-                tableViewFrame.origin.y += frame.size.height + 2 + theme.padding!
+                tableViewFrame.origin.y += frame.size.height + 2 + theme.padding
                 UIView.animate(withDuration: 0.2, animations: { [weak self] in
                     self?.tableView?.frame = tableViewFrame
                 })
@@ -288,7 +288,7 @@ open class SearchTextField: UITextField {
             } else {
                 let tableHeight = min((tableView.contentSize.height), (UIScreen.main.bounds.size.height - frame.origin.y - theme.cellHeight))
                 UIView.animate(withDuration: 0.2, animations: { [weak self] in
-                    self?.tableView?.frame = CGRect(x: frame.origin.x + 2, y: (frame.origin.y - tableHeight), width: frame.size.width - 4, height: tableHeight - (self?.theme.padding!)!)
+                    self?.tableView?.frame = CGRect(x: frame.origin.x + 2, y: (frame.origin.y - tableHeight), width: frame.size.width - 4, height: tableHeight - (self?.theme.padding)!)
                     self?.shadowView?.frame = CGRect(x: frame.origin.x + 3, y: (frame.origin.y + 3), width: frame.size.width - 6, height: 1)
                 })
             }
@@ -301,7 +301,7 @@ open class SearchTextField: UITextField {
             }
             
             tableView.layer.borderColor = theme.borderColor.cgColor
-            tableView.layer.cornerRadius = 2
+            tableView.layer.cornerRadius = theme.cornerRadius
             tableView.separatorColor = theme.separatorColor
             tableView.backgroundColor = theme.bgColor
             
@@ -603,9 +603,10 @@ public struct SearchTextFieldTheme {
     public var font: UIFont
     public var fontColor: UIColor
     public var placeholderColor: UIColor?
-    public var padding: CGFloat?
+    public var padding: CGFloat
+    public var cornerRadius: CGFloat
     
-    init(cellHeight: CGFloat, bgColor:UIColor, borderColor: UIColor, separatorColor: UIColor, font: UIFont, fontColor: UIColor, padding: CGFloat) {
+    init(cellHeight: CGFloat, bgColor:UIColor, borderColor: UIColor, separatorColor: UIColor, font: UIFont, fontColor: UIColor, padding: CGFloat, cornerRadius: CGFloat) {
         self.cellHeight = cellHeight
         self.borderColor = borderColor
         self.separatorColor = separatorColor
@@ -613,14 +614,15 @@ public struct SearchTextFieldTheme {
         self.font = font
         self.fontColor = fontColor
         self.padding = padding
+        self.cornerRadius = cornerRadius
     }
     
     public static func lightTheme() -> SearchTextFieldTheme {
-        return SearchTextFieldTheme(cellHeight: 30, bgColor: UIColor (red: 1, green: 1, blue: 1, alpha: 0.6), borderColor: UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0), separatorColor: UIColor.clear, font: UIFont.systemFont(ofSize: 10), fontColor: UIColor.black, padding: 0.0)
+        return SearchTextFieldTheme(cellHeight: 30, bgColor: UIColor (red: 1, green: 1, blue: 1, alpha: 0.6), borderColor: UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0), separatorColor: UIColor.clear, font: UIFont.systemFont(ofSize: 10), fontColor: UIColor.black, padding: 0.0, cornerRadius: 2)
     }
     
     public static func darkTheme() -> SearchTextFieldTheme {
-        return SearchTextFieldTheme(cellHeight: 30, bgColor: UIColor (red: 0.8, green: 0.8, blue: 0.8, alpha: 0.6), borderColor: UIColor (red: 0.7, green: 0.7, blue: 0.7, alpha: 1.0), separatorColor: UIColor.clear, font: UIFont.systemFont(ofSize: 10), fontColor: UIColor.white, padding: 0.0)
+        return SearchTextFieldTheme(cellHeight: 30, bgColor: UIColor (red: 0.8, green: 0.8, blue: 0.8, alpha: 0.6), borderColor: UIColor (red: 0.7, green: 0.7, blue: 0.7, alpha: 1.0), separatorColor: UIColor.clear, font: UIFont.systemFont(ofSize: 10), fontColor: UIColor.white, padding: 0.0, cornerRadius: 2)
     }
 }
 
