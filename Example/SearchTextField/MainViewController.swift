@@ -67,6 +67,8 @@ class MainViewController: UITableViewController {
         acronymTextField.theme.separatorColor = UIColor.lightGray.withAlphaComponent(0.5)
         acronymTextField.theme.cellHeight = 50
         acronymTextField.theme.placeholderColor = UIColor.lightGray
+        //Adds padding to the table view. This leaves a visible gap between the text field and search field.
+        acronymTextField.theme.padding = 10
         
         // Max number of results - Default: No limit
         acronymTextField.maxNumberOfResults = 5
