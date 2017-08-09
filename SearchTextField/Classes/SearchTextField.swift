@@ -116,10 +116,9 @@ open class SearchTextField: UITextField {
     
     /// Set the results list's header
     open var resultsListHeader: UIView?
-    
+  
     /// Set the direction of the results table. If nothing sets default is automatic
     open var direction: Direction = .auto
-    
     ////////////////////////////////////////////////////////////////////////
     // Private implementation
     
@@ -256,9 +255,7 @@ open class SearchTextField: UITextField {
         
         if let tableView = tableView {
             guard let frame = self.superview?.convert(self.frame, to: nil) else { return }
-            
             if self.direction == .down || self.direction == .auto {
-                
                 var tableHeight: CGFloat = 0
                 if keyboardIsShowing, let keyboardHeight = keyboardFrame?.size.height {
                     tableHeight = min((tableView.contentSize.height), (UIScreen.main.bounds.size.height - frame.origin.y - frame.height - keyboardHeight))
@@ -528,6 +525,13 @@ open class SearchTextField: UITextField {
                 } else {
                     direction = .down
                 }
+            }
+            redrawSearchTableView()
+        } else {
+            if self.center.y + theme.cellHeight > UIApplication.shared.keyWindow!.frame.size.height {
+                direction = .up
+            } else {
+                direction = .down
             }
         }
     }

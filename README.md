@@ -93,6 +93,17 @@ mySearchTextField.itemSelectionHandler = {item, itemPosition in
 // You can force the results list to support RTL languages - Default: false
 mySearchTextField.forceRightToLeft = true
 
+// Show the list of results as soon as the user makes focus - Default: false
+mySearchTextField.startVisible = true
+
+// ...or show the list of results even without user's interaction as soon as created - Default: false
+mySearchTextField.startVisibleWithoutInteraction = true
+
+// Start filtering after an specific number of characters - Default: 0
+mySearchTextField.minCharactersNumberToStartFiltering = 3
+
+// Explicitly hide the results list
+mySearchTextField.hideResultsList()
 
 /**
 * Update data source when the user stops typing.
@@ -108,7 +119,7 @@ mySearchTextField.userStoppedTypingHandler = {
 
             self.searchMoreItemsInBackground(criteria) { results in
                 // Set new items to filter
-                self.acronymTextField.filterItems(results)
+                self.mySearchTextField.filterItems(results)
 
                 // Hide loading indicator
                 self.mySearchTextField.stopLoadingIndicator()
@@ -116,6 +127,26 @@ mySearchTextField.userStoppedTypingHandler = {
         }
     }
 }
+
+// Handle item selection - Default behaviour: item title set to the text field
+mySearchTextField.itemSelectionHandler = { filteredResults, itemPosition in
+    // Just in case you need the item position
+    let item = filteredResults[itemPosition]
+    print("Item at position \(itemPosition): \(item.title)")
+
+    // Do whatever you want with the picked item
+    self.mySearchTextField.text = item.title
+}
+
+// Define a results list header - Default: nothing
+let header = UILabel(frame: CGRect(x: 0, y: 0, width: acronymTextField.frame.width, height: 30))
+header.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+header.textAlignment = .center
+header.font = UIFont.systemFont(ofSize: 14)
+header.text = "Pick your option"
+mySearchTextField.resultsListHeader = header
+
+
 
 ```
 
