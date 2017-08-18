@@ -626,20 +626,20 @@ public struct SearchTextFieldItem {
     public var image: UIImage?
     public var id: Int?
     
-    public init(title: String, subtitle: String?, image: UIImage?, id: Int?) {
+    public init(title: String, subtitle: String?, image: UIImage?, id: Int? = nil) {
         self.title = title
         self.subtitle = subtitle
         self.image = image
         self.id = id
     }
     
-    public init(title: String, subtitle: String?, id: Int?) {
+    public init(title: String, subtitle: String?, id: Int? = nil) {
         self.title = title
         self.subtitle = subtitle
         self.id = id
     }
     
-    public init(title: String, id: Int?) {
+    public init(title: String, id: Int? = nil) {
         self.title = title
         self.id = id
     }
