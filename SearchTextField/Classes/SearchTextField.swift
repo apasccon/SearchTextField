@@ -615,7 +615,7 @@ public struct SearchTextFieldTheme {
 ////////////////////////////////////////////////////////////////////////
 // Filter Item
 
-public struct SearchTextFieldItem {
+public class SearchTextFieldItem {
     // Private vars
     fileprivate var attributedTitle: NSMutableAttributedString?
     fileprivate var attributedSubtitle: NSMutableAttributedString?
