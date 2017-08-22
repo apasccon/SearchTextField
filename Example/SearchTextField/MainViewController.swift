@@ -208,6 +208,4 @@ class MainViewController: UITableViewController {
             task.resume()
         }
     }
-
-
 }

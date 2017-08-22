@@ -418,7 +418,7 @@ open class SearchTextField: UITextField {
         
         for i in 0 ..< filterDataSource.count {
             
-            var item = filterDataSource[i]
+            let item = filterDataSource[i]
             
             if !inlineMode {
                 // Find text in title and subtitle
@@ -615,7 +615,7 @@ public struct SearchTextFieldTheme {
 ////////////////////////////////////////////////////////////////////////
 // Filter Item
 
-public class SearchTextFieldItem {
+open class SearchTextFieldItem {
     // Private vars
     fileprivate var attributedTitle: NSMutableAttributedString?
     fileprivate var attributedSubtitle: NSMutableAttributedString?
