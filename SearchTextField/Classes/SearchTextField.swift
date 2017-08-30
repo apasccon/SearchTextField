@@ -24,6 +24,9 @@ open class SearchTextField: UITextField {
     
     /// Indicate if keyboard is showing or not
     open var keyboardIsShowing = false
+
+    /// Always show the entire suggestions list but continue to highlight the matching text
+    open var alwaysShowAllSuggestions = false
     
     /// Set your custom visual theme, or just choose between pre-defined SearchTextFieldTheme.lightTheme() and SearchTextFieldTheme.darkTheme() themes
     open var theme = SearchTextFieldTheme.lightTheme() {
@@ -134,7 +137,7 @@ open class SearchTextField: UITextField {
     fileprivate var filteredResults = [SearchTextFieldItem]()
     fileprivate var filterDataSource = [SearchTextFieldItem]() {
         didSet {
-            filter(forceShowAll: false)
+            filter(forceShowAll: alwaysShowAllSuggestions ? true : false)
             buildSearchTableView()
             
             if startVisibleWithoutInteraction {
@@ -361,7 +364,7 @@ open class SearchTextField: UITextField {
             }
             self.placeholderLabel?.text = ""
         } else {
-            filter(forceShowAll: false)
+            filter(forceShowAll: alwaysShowAllSuggestions ? true : false)
             prepareDrawTableResult()
         }
         
