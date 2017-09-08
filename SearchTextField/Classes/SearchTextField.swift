@@ -117,6 +117,14 @@ open class SearchTextField: UITextField {
     /// Set the results list's header
     open var resultsListHeader: UIView?
     
+    /// If set to true, when editing ends with tab the top result will be used as the final field text. Otherwise autocomplete happens on return
+    open var autocompleteOnTab: Bool = false
+
+    /// Get the current filter items that are displayed to the user
+    open func currentFilterItems() -> [SearchTextFieldItem] {
+        return self.filteredResults
+    }
+    
     ////////////////////////////////////////////////////////////////////////
     // Private implementation
     
@@ -130,6 +138,7 @@ open class SearchTextField: UITextField {
     fileprivate static let cellIdentifier = "APSearchTextFieldCell"
     fileprivate let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     fileprivate var maxTableViewSize: CGFloat = 0
+    fileprivate var returnKeyPressed: Bool = false
     
     fileprivate var filteredResults = [SearchTextFieldItem]()
     fileprivate var filterDataSource = [SearchTextFieldItem]() {
@@ -377,12 +386,23 @@ open class SearchTextField: UITextField {
     }
     
     open func textFieldDidEndEditing() {
+        if autocompleteOnTab && !returnKeyPressed {
+            performAutocomplete()
+        }
         clearResults()
         tableView?.reloadData()
         placeholderLabel?.attributedText = nil
+        returnKeyPressed = false
     }
     
     open func textFieldDidEndEditingOnExit() {
+        returnKeyPressed = true
+        if !autocompleteOnTab {
+            performAutocomplete()
+        }
+    }
+    
+    func performAutocomplete() {
         if let firstElement = filteredResults.first {
             if let itemSelectionHandler = self.itemSelectionHandler {
                 itemSelectionHandler(filteredResults, 0)
