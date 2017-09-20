@@ -72,7 +72,7 @@ open class SearchTextField: UITextField {
     open var itemSelectionHandler: SearchTextFieldItemHandler?
     
     /// Closure to handle when the user stops typing
-    open var userStoppedTypingHandler: ((Void) -> Void)?
+    open var userStoppedTypingHandler: (() -> ())?
     
     /// Set your custom set of attributes in order to highlight the string found in each item
     open var highlightAttributes: [String: AnyObject] = [NSFontAttributeName:UIFont.boldSystemFont(ofSize: 10)]
@@ -120,6 +120,8 @@ open class SearchTextField: UITextField {
     /// If set to true, when editing ends with tab the top result will be used as the final field text. Otherwise autocomplete happens on return
     open var autocompleteOnTab: Bool = false
 
+    open var filterListDisplayAnimationDuration: TimeInterval = 0.2
+    
     /// Get the current filter items that are displayed to the user
     open func currentFilterItems() -> [SearchTextFieldItem] {
         return self.filteredResults
@@ -286,7 +288,7 @@ open class SearchTextField: UITextField {
                 tableViewFrame.origin = self.convert(tableViewFrame.origin, to: nil)
                 tableViewFrame.origin.x += 2
                 tableViewFrame.origin.y += frame.size.height + 2
-                UIView.animate(withDuration: 0.2, animations: { [weak self] in
+                UIView.animate(withDuration: filterListDisplayAnimationDuration, animations: { [weak self] in
                     self?.tableView?.frame = tableViewFrame
                 })
                 
@@ -297,7 +299,7 @@ open class SearchTextField: UITextField {
                 shadowView!.frame = shadowFrame
             } else {
                 let tableHeight = min((tableView.contentSize.height), (UIScreen.main.bounds.size.height - frame.origin.y - theme.cellHeight))
-                UIView.animate(withDuration: 0.2, animations: { [weak self] in
+                UIView.animate(withDuration: filterListDisplayAnimationDuration, animations: { [weak self] in
                     self?.tableView?.frame = CGRect(x: frame.origin.x + 2, y: (frame.origin.y - tableHeight), width: frame.size.width - 4, height: tableHeight)
                     self?.shadowView?.frame = CGRect(x: frame.origin.x + 3, y: (frame.origin.y + 3), width: frame.size.width - 6, height: 1)
                 })
@@ -422,7 +424,7 @@ open class SearchTextField: UITextField {
     open func hideResultsList() {
         if let tableFrame:CGRect = tableView?.frame {
             let newFrame = CGRect(x: tableFrame.origin.x, y: tableFrame.origin.y, width: tableFrame.size.width, height: 0.0)
-            UIView.animate(withDuration: 0.2, animations: { [weak self] in
+            UIView.animate(withDuration: filterListDisplayAnimationDuration, animations: { [weak self] in
                 self?.tableView?.frame = newFrame
             })
             
