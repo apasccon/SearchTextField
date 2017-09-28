@@ -1,5 +1,5 @@
 PODS:
-  - SearchTextField (1.1.8)
+  - SearchTextField (1.2.0)
 
 DEPENDENCIES:
   - SearchTextField (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SearchTextField: 84985ff591fbb86407c9c8ad927e35a3a1d28222
+  SearchTextField: d03bf00fa898814a6ef1474250aa8166dc85d0c4
 
 PODFILE CHECKSUM: 479530ad58865b7087404979b3c82b4f43e856cc
 
