@@ -171,6 +171,8 @@ emailInlineTextField.filterStrings(["gmail.com", "yahoo.com", "yahoo.com.ar"])
 
 ## Swift Versions
 
+Swift 4 supported from 1.2.0 version.
+
 Install v1.0.0 if you need to support Swift 2.3.
 
 Install v1.0.2 and above if you want to support Swift 3.
