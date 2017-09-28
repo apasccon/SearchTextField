@@ -477,7 +477,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 75559CC26BFD994BCACECF2E /* Pods-SearchTextField_Example.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEVELOPMENT_TEAM = W2SE4VNM7C;
@@ -501,7 +500,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A80E7558BF29C211AEA16738 /* Pods-SearchTextField_Example.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEVELOPMENT_TEAM = W2SE4VNM7C;
