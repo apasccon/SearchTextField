@@ -1,6 +1,7 @@
+![alt_tag](https://raw.githubusercontent.com/apasccon/SearchTextField/master/Example/SearchTextField/SearchTextField.png)
+
 # SearchTextField
 
-[![CI Status](http://img.shields.io/travis/apasccon/SearchTextField.svg?style=flat)](https://travis-ci.org/apasccon/SearchTextField)
 [![Version](https://img.shields.io/cocoapods/v/SearchTextField.svg?style=flat)](http://cocoapods.org/pods/SearchTextField)
 [![License](https://img.shields.io/cocoapods/l/SearchTextField.svg?style=flat)](http://cocoapods.org/pods/SearchTextField)
 [![Platform](https://img.shields.io/cocoapods/p/SearchTextField.svg?style=flat)](http://cocoapods.org/pods/SearchTextField)
@@ -13,13 +14,13 @@ You can also detects when the user stops typing, very useful when you can get a 
 
 **New Feature!**
 Now you can make suggestions "inline", showing the first matched result as the placeholder (instead of the results list) and selecting it when the user touches the enter key.
-   
+
 ------   
 ![alt_tag](https://raw.githubusercontent.com/apasccon/SearchTextField/master/Example/SearchTextField/SearchTextField_Demo.gif)
 
 ## Requirements
 
-* iOS 8
+* iOS 9
 
 ## Installation
 
@@ -69,7 +70,6 @@ mySearchTextField.theme = SearchTextFieldTheme.darkTheme()
 mySearchTextField.theme.font = UIFont.systemFontOfSize(12)
 mySearchTextField.theme.bgColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.3)
 mySearchTextField.theme.borderColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
-mySearchTextField.theme.placeholderColor = UIColor.gray
 mySearchTextField.theme.separatorColor = UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 0.5)
 mySearchTextField.theme.cellHeight = 50
 
@@ -86,39 +86,67 @@ mySearchTextField.maxResultsListHeight = 200
 mySearchTextField.highlightAttributes = [NSBackgroundColorAttributeName: UIColor.yellowColor(), NSFontAttributeName:UIFont.boldSystemFontOfSize(12)]
 
 // Handle what happens when the user picks an item. By default the title is set to the text field
-mySearchTextField.itemSelectionHandler = { filteredResults, itemPosition in
-    // Just in case you need the item position
-    let item = filteredResults[itemPosition]
-    
+mySearchTextField.itemSelectionHandler = {item, itemPosition in
     mySearchTextField.text = item.title
 }
 
+// You can force the results list to support RTL languages - Default: false
+mySearchTextField.forceRightToLeft = true
 
-// Start visible, showing the list of results without typing. By default it's disabled
-countryTextField.startVisible = true
+// Show the list of results as soon as the user makes focus - Default: false
+mySearchTextField.startVisible = true
 
+// ...or show the list of results even without user's interaction as soon as created - Default: false
+mySearchTextField.startVisibleWithoutInteraction = true
 
-/** 
-* Update data source when the user stops typing. 
-* It's useful when you want to retrieve results from a remote server while typing 
+// Start filtering after an specific number of characters - Default: 0
+mySearchTextField.minCharactersNumberToStartFiltering = 3
+
+// Explicitly hide the results list
+mySearchTextField.hideResultsList()
+
+/**
+* Update data source when the user stops typing.
+* It's useful when you want to retrieve results from a remote server while typing
 * (but only when the user stops doing it)
 **/
 mySearchTextField.userStoppedTypingHandler = {
     if let criteria = self.mySearchTextField.text {
         if criteria.characters.count > 1 {
 
-        // Show the loading indicator
-        self.mySearchTextField.showLoadingIndicator()
+            // Show the loading indicator
+            self.mySearchTextField.showLoadingIndicator()
 
-        self.searchMoreItemsInBackground(criteria) { results in
-            // Set new items to filter
-            self.acronymTextField.filterItems(results)
+            self.searchMoreItemsInBackground(criteria) { results in
+                // Set new items to filter
+                self.mySearchTextField.filterItems(results)
 
-            // Hide loading indicator
-            self.mySearchTextField.stopLoadingIndicator()
+                // Hide loading indicator
+                self.mySearchTextField.stopLoadingIndicator()
+            }
         }
     }
 }
+
+// Handle item selection - Default behaviour: item title set to the text field
+mySearchTextField.itemSelectionHandler = { filteredResults, itemPosition in
+    // Just in case you need the item position
+    let item = filteredResults[itemPosition]
+    print("Item at position \(itemPosition): \(item.title)")
+
+    // Do whatever you want with the picked item
+    self.mySearchTextField.text = item.title
+}
+
+// Define a results list header - Default: nothing
+let header = UILabel(frame: CGRect(x: 0, y: 0, width: acronymTextField.frame.width, height: 30))
+header.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+header.textAlignment = .center
+header.font = UIFont.systemFont(ofSize: 14)
+header.text = "Pick your option"
+mySearchTextField.resultsListHeader = header
+
+
 
 ```
 
@@ -126,19 +154,20 @@ mySearchTextField.userStoppedTypingHandler = {
 
 ```swift
 // Set the array of strings you want to suggest
-mySearchTextField.filterStrings(["gmail.com", "yahoo.com", "yahoo.com.ar"])
+mySearchTextField.filterStrings(["Red", "Blue", "Yellow"])
 
 // Then set the inline mode in true
 mySearchTextField.inlineMode = true
-
-// Start suggesting only after some string is detected
-mySearchTextField.startFilteringAfter = "@"
-
-// Start suggesting inmediately just after the string is detected 
-mySearchTextField.startSuggestingInmediately = true
-
 ```
 
+### New feature: autocomplete from, for example, a list of email domains
+
+```swift
+emailInlineTextField.inlineMode = true
+emailInlineTextField.startFilteringAfter = "@"
+emailInlineTextField.startSuggestingInmediately = true
+emailInlineTextField.filterStrings(["gmail.com", "yahoo.com", "yahoo.com.ar"])
+```
 
 ## Swift Versions
 
