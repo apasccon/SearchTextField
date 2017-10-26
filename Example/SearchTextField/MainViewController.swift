@@ -82,7 +82,7 @@ class MainViewController: UITableViewController {
         acronymTextField.forceRightToLeft = false
 
         // Customize highlight attributes - Default: Bold
-        acronymTextField.highlightAttributes = [NSBackgroundColorAttributeName: UIColor.yellow, NSFontAttributeName:UIFont.boldSystemFont(ofSize: 12)]
+        acronymTextField.highlightAttributes = [NSAttributedStringKey.backgroundColor: UIColor.yellow, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 12)]
         
         // Handle item selection - Default behaviour: item title set to the text field
         acronymTextField.itemSelectionHandler = { filteredResults, itemPosition in
@@ -111,7 +111,7 @@ class MainViewController: UITableViewController {
                     }
                 }
             }
-        }
+        } as (() -> Void)
     }
     
     // 3 - Configure a simple inline search text view
