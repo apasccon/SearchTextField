@@ -412,7 +412,7 @@ open class SearchTextField: UITextField {
     fileprivate func filter(forceShowAll addAll: Bool) {
         clearResults()
         
-        if text!.characters.count < minCharactersNumberToStartFiltering {
+        if text!.count < minCharactersNumberToStartFiltering {
             return
         }
         
@@ -450,7 +450,7 @@ open class SearchTextField: UITextField {
                 }
                 
                 if item.title.lowercased().hasPrefix(textToFilter) {
-                    let indexFrom = textToFilter.index(textToFilter.startIndex, offsetBy: textToFilter.characters.count)
+                    let indexFrom = textToFilter.index(textToFilter.startIndex, offsetBy: textToFilter.count)
                     let itemSuffix = item.title[indexFrom...]
                     
                     item.attributedTitle = NSMutableAttributedString(string: String(itemSuffix))
