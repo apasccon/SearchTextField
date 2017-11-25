@@ -165,7 +165,7 @@ mySearchTextField.inlineMode = true
 ```swift
 emailInlineTextField.inlineMode = true
 emailInlineTextField.startFilteringAfter = "@"
-emailInlineTextField.startSuggestingInmediately = true
+emailInlineTextField.startSuggestingImmediately = true
 emailInlineTextField.filterStrings(["gmail.com", "yahoo.com", "yahoo.com.ar"])
 ```
 
