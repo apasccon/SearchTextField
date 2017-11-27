@@ -9,7 +9,7 @@
 import UIKit
 
 open class SearchTextField: UITextField {
-    
+
     ////////////////////////////////////////////////////////////////////////
     // Public interface
     
@@ -116,6 +116,24 @@ open class SearchTextField: UITextField {
     
     /// Set the results list's header
     open var resultsListHeader: UIView?
+
+    /// Set border without tableView
+    override open func awakeFromNib() {
+        super.awakeFromNib()
+
+        layer.borderColor = UIColor(red: 120.0 / 255.0, green: 120.0 / 255.0, blue: 120.0 / 255.0, alpha: 0.2).cgColor
+        layer.borderWidth = 1.0
+        layer.cornerRadius = 2.0
+
+    }
+
+    override open func textRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.insetBy(dx: 10, dy: 5)
+    }
+
+    override open func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.insetBy(dx: 10, dy: 5)
+    }
     
     ////////////////////////////////////////////////////////////////////////
     // Private implementation
