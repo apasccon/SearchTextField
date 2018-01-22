@@ -75,7 +75,7 @@ open class SearchTextField: UITextField {
     open var userStoppedTypingHandler: (() -> Void)?
     
     /// Set your custom set of attributes in order to highlight the string found in each item
-    open var highlightAttributes: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey(rawValue: NSAttributedStringKey.font.rawValue):UIFont.boldSystemFont(ofSize: 10)]
+    open var highlightAttributes: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 10)]
     
     /// Start showing the default loading indicator, useful for searches that take some time.
     open func showLoadingIndicator() {
@@ -107,6 +107,9 @@ open class SearchTextField: UITextField {
     
     /// Min number of characters to start filtering
     open var minCharactersNumberToStartFiltering: Int = 0
+
+    /// Force no filtering (display the entire filtered data source)
+    open var forceNoFiltering: Bool = false
     
     /// If startFilteringAfter is set, and startSuggestingInmediately is true, the list of suggestions appear inmediately
     open var startSuggestingInmediately = false
@@ -134,7 +137,7 @@ open class SearchTextField: UITextField {
     fileprivate var filteredResults = [SearchTextFieldItem]()
     fileprivate var filterDataSource = [SearchTextFieldItem]() {
         didSet {
-            filter(forceShowAll: false)
+            filter(forceShowAll: forceNoFiltering)
             buildSearchTableView()
             
             if startVisibleWithoutInteraction {
@@ -191,7 +194,7 @@ open class SearchTextField: UITextField {
     fileprivate func buildSearchTableView() {
         if let tableView = tableView, let shadowView = shadowView {
             tableView.layer.masksToBounds = true
-            tableView.layer.borderWidth = 0.5
+            tableView.layer.borderWidth = theme.borderWidth > 0 ? theme.borderWidth : 0.5
             tableView.dataSource = self
             tableView.delegate = self
             tableView.separatorInset = UIEdgeInsets.zero
@@ -302,6 +305,7 @@ open class SearchTextField: UITextField {
             }
             
             tableView.layer.borderColor = theme.borderColor.cgColor
+            tableView.layer.borderWidth = 1
             tableView.layer.cornerRadius = 2
             tableView.separatorColor = theme.separatorColor
             tableView.backgroundColor = theme.bgColor
@@ -361,7 +365,7 @@ open class SearchTextField: UITextField {
             }
             self.placeholderLabel?.text = ""
         } else {
-            filter(forceShowAll: false)
+            filter(forceShowAll: forceNoFiltering)
             prepareDrawTableResult()
         }
         
@@ -412,7 +416,7 @@ open class SearchTextField: UITextField {
     fileprivate func filter(forceShowAll addAll: Bool) {
         clearResults()
         
-        if text!.characters.count < minCharactersNumberToStartFiltering {
+        if text!.count < minCharactersNumberToStartFiltering {
             return
         }
         
@@ -450,7 +454,7 @@ open class SearchTextField: UITextField {
                 }
                 
                 if item.title.lowercased().hasPrefix(textToFilter) {
-                    let indexFrom = textToFilter.index(textToFilter.startIndex, offsetBy: textToFilter.characters.count)
+                    let indexFrom = textToFilter.index(textToFilter.startIndex, offsetBy: textToFilter.count)
                     let itemSuffix = item.title[indexFrom...]
                     
                     item.attributedTitle = NSMutableAttributedString(string: String(itemSuffix))
@@ -554,7 +558,7 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
         cell!.textLabel?.font = theme.font
         cell!.detailTextLabel?.font = UIFont(name: theme.font.fontName, size: theme.font.pointSize * fontConversionRate)
         cell!.textLabel?.textColor = theme.fontColor
-        cell!.detailTextLabel?.textColor = theme.fontColor
+        cell!.detailTextLabel?.textColor = theme.subtitleFontColor
         
         cell!.textLabel?.text = filteredResults[(indexPath as NSIndexPath).row].title
         cell!.detailTextLabel?.text = filteredResults[(indexPath as NSIndexPath).row].subtitle
@@ -591,18 +595,21 @@ public struct SearchTextFieldTheme {
     public var cellHeight: CGFloat
     public var bgColor: UIColor
     public var borderColor: UIColor
+    public var borderWidth : CGFloat = 0
     public var separatorColor: UIColor
     public var font: UIFont
     public var fontColor: UIColor
+    public var subtitleFontColor: UIColor
     public var placeholderColor: UIColor?
     
-    init(cellHeight: CGFloat, bgColor:UIColor, borderColor: UIColor, separatorColor: UIColor, font: UIFont, fontColor: UIColor) {
+    init(cellHeight: CGFloat, bgColor:UIColor, borderColor: UIColor, separatorColor: UIColor, font: UIFont, fontColor: UIColor, subtitleFontColor: UIColor? = nil) {
         self.cellHeight = cellHeight
         self.borderColor = borderColor
         self.separatorColor = separatorColor
         self.bgColor = bgColor
         self.font = font
         self.fontColor = fontColor
+        self.subtitleFontColor = subtitleFontColor ?? fontColor
     }
     
     public static func lightTheme() -> SearchTextFieldTheme {
