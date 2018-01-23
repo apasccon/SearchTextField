@@ -24,6 +24,9 @@ open class SearchTextField: UITextField {
     
     /// Indicate if keyboard is showing or not
     open var keyboardIsShowing = false
+
+    /// How long to wait before deciding typing has stopped
+    open var typingStoppedDelay = 0.8
     
     /// Set your custom visual theme, or just choose between pre-defined SearchTextFieldTheme.lightTheme() and SearchTextFieldTheme.darkTheme() themes
     open var theme = SearchTextFieldTheme.lightTheme() {
@@ -75,7 +78,7 @@ open class SearchTextField: UITextField {
     open var userStoppedTypingHandler: (() -> Void)?
     
     /// Set your custom set of attributes in order to highlight the string found in each item
-    open var highlightAttributes: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 10)]
+    open var highlightAttributes: [NSAttributedStringKey: AnyObject] = [.font: UIFont.boldSystemFont(ofSize: 10)]
     
     /// Start showing the default loading indicator, useful for searches that take some time.
     open func showLoadingIndicator() {
@@ -119,6 +122,12 @@ open class SearchTextField: UITextField {
     
     /// Set the results list's header
     open var resultsListHeader: UIView?
+
+    // Move the table around to customize for your layout
+    open var tableXOffset: CGFloat = 0.0
+    open var tableYOffset: CGFloat = 0.0
+    open var tableCornerRadius: CGFloat = 2.0
+    open var tableBottomMargin: CGFloat = 10.0
     
     ////////////////////////////////////////////////////////////////////////
     // Private implementation
@@ -273,13 +282,13 @@ open class SearchTextField: UITextField {
                 
                 // Set a bottom margin of 10p
                 if tableHeight < tableView.contentSize.height {
-                    tableHeight -= 10
+                    tableHeight -= tableBottomMargin
                 }
                 
                 var tableViewFrame = CGRect(x: 0, y: 0, width: frame.size.width - 4, height: tableHeight)
                 tableViewFrame.origin = self.convert(tableViewFrame.origin, to: nil)
-                tableViewFrame.origin.x += 2
-                tableViewFrame.origin.y += frame.size.height + 2
+                tableViewFrame.origin.x += 2 + tableXOffset
+                tableViewFrame.origin.y += frame.size.height + 2 + tableYOffset
                 UIView.animate(withDuration: 0.2, animations: { [weak self] in
                     self?.tableView?.frame = tableViewFrame
                 })
@@ -305,8 +314,7 @@ open class SearchTextField: UITextField {
             }
             
             tableView.layer.borderColor = theme.borderColor.cgColor
-            tableView.layer.borderWidth = 1
-            tableView.layer.cornerRadius = 2
+            tableView.layer.cornerRadius = tableCornerRadius
             tableView.separatorColor = theme.separatorColor
             tableView.backgroundColor = theme.bgColor
             
@@ -340,9 +348,7 @@ open class SearchTextField: UITextField {
     }
     
     @objc open func typingDidStop() {
-        if userStoppedTypingHandler != nil {
-            self.userStoppedTypingHandler!()
-        }
+        self.userStoppedTypingHandler?()
     }
     
     // Handle text field changes
@@ -355,7 +361,7 @@ open class SearchTextField: UITextField {
         
         // Detect pauses while typing
         timer?.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(SearchTextField.typingDidStop), userInfo: self, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: typingStoppedDelay, target: self, selector: #selector(SearchTextField.typingDidStop), userInfo: self, repeats: false)
         
         if text!.isEmpty {
             clearResults()
@@ -454,7 +460,7 @@ open class SearchTextField: UITextField {
                 }
                 
                 if item.title.lowercased().hasPrefix(textToFilter) {
-                    let indexFrom = textToFilter.index(textToFilter.startIndex, offsetBy: textToFilter.count)
+                    let indexFrom = textToFilter.index(textToFilter.startIndex, offsetBy: textToFilter.characters.count)
                     let itemSuffix = item.title[indexFrom...]
                     
                     item.attributedTitle = NSMutableAttributedString(string: String(itemSuffix))
