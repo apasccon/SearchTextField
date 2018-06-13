@@ -267,6 +267,12 @@ open class SearchTextField: UITextField {
         if let tableView = tableView {
             guard let frame = self.superview?.convert(self.frame, to: nil) else { return }
             
+            //TableViews use estimated cell heights to calculate content size until they
+            //  are on-screen. We must set this to the theme cell height to avoid getting an
+            //  incorrect contentSize when we have specified non-standard fonts and/or
+            //  cellHeights in the theme. We do it here to ensure updates to these settings
+            //  are recognized if changed after the tableView is created
+            tableView.estimatedRowHeight = theme.cellHeight
             if self.direction == .down {
                 
                 var tableHeight: CGFloat = 0
