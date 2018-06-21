@@ -102,6 +102,9 @@ mySearchTextField.startVisibleWithoutInteraction = true
 // Start filtering after an specific number of characters - Default: 0
 mySearchTextField.minCharactersNumberToStartFiltering = 3
 
+// Force to show the results list without filtering (but highlighting)
+mySearchTextField.forceNoFiltering = true
+
 // Explicitly hide the results list
 mySearchTextField.hideResultsList()
 
