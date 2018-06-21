@@ -40,6 +40,10 @@ open class SearchTextField: UITextField {
                 
                 self.placeholderLabel?.textColor = placeholderColor
             }
+           
+            if let hightlightedFont = self.highlightAttributes[.font] as? UIFont {
+                self.highlightAttributes[.font] = hightlightedFont.withSize(self.theme.font.pointSize)
+            }
         }
     }
     
