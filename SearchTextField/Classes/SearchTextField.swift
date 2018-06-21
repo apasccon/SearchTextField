@@ -31,6 +31,7 @@ open class SearchTextField: UITextField {
     /// Set your custom visual theme, or just choose between pre-defined SearchTextFieldTheme.lightTheme() and SearchTextFieldTheme.darkTheme() themes
     open var theme = SearchTextFieldTheme.lightTheme() {
         didSet {
+            highlightAttributes = [.font: UIFont.boldSystemFont(ofSize: theme.font.pointSize)]
             tableView?.reloadData()
             
             if let placeholderColor = theme.placeholderColor {
@@ -82,6 +83,7 @@ open class SearchTextField: UITextField {
     open var userStoppedTypingHandler: (() -> Void)?
     
     /// Set your custom set of attributes in order to highlight the string found in each item
+    /// Set it after setting the theme
     open var highlightAttributes: [NSAttributedStringKey: AnyObject] = [.font: UIFont.boldSystemFont(ofSize: 10)]
     
     /// Start showing the default loading indicator, useful for searches that take some time.
