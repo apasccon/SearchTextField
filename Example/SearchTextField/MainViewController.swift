@@ -97,7 +97,7 @@ class MainViewController: UITableViewController {
         // Update data source when the user stops typing
         acronymTextField.userStoppedTypingHandler = {
             if let criteria = self.acronymTextField.text {
-                if criteria.characters.count > 1 {
+                if criteria.count > 1 {
                     
                     // Show loading indicator
                     self.acronymTextField.showLoadingIndicator()
