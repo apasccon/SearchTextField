@@ -19,7 +19,7 @@ class MainViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
         
         tableView.tableFooterView = UIView()
         
@@ -82,7 +82,7 @@ class MainViewController: UITableViewController {
         acronymTextField.forceRightToLeft = false
 
         // Customize highlight attributes - Default: Bold
-        acronymTextField.highlightAttributes = [NSAttributedStringKey.backgroundColor: UIColor.yellow, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 12)]
+        acronymTextField.highlightAttributes = [NSAttributedString.Key.backgroundColor: UIColor.yellow, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12)]
         
         // Handle item selection - Default behaviour: item title set to the text field
         acronymTextField.itemSelectionHandler = { filteredResults, itemPosition in
