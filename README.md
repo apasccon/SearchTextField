@@ -86,8 +86,9 @@ mySearchTextField.maxResultsListHeight = 200
 mySearchTextField.highlightAttributes = [NSBackgroundColorAttributeName: UIColor.yellowColor(), NSFontAttributeName:UIFont.boldSystemFontOfSize(12)]
 
 // Handle what happens when the user picks an item. By default the title is set to the text field
-mySearchTextField.itemSelectionHandler = {item, itemPosition in
-    mySearchTextField.text = item.title
+mySearchTextField.itemSelectionHandler = {filteredResults, itemPosition in
+    mySearchTextField.text = filteredResults[itemPosition].title
+    mySearchTextField.resignFirstResponder()
 }
 
 // You can force the results list to support RTL languages - Default: false
@@ -139,6 +140,9 @@ mySearchTextField.itemSelectionHandler = { filteredResults, itemPosition in
 
     // Do whatever you want with the picked item
     self.mySearchTextField.text = item.title
+
+    // Hide the keyboard as user has finished their selection
+    self.resignFirstResponder()
 }
 
 // Define a results list header - Default: nothing
