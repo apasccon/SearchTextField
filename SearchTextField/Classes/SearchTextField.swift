@@ -205,27 +205,29 @@ open class SearchTextField: UITextField {
     
     // Create the filter table and shadow view
     fileprivate func buildSearchTableView() {
-        if let tableView = tableView, let shadowView = shadowView {
-            tableView.layer.masksToBounds = true
-            tableView.layer.borderWidth = theme.borderWidth > 0 ? theme.borderWidth : 0.5
-            tableView.dataSource = self
-            tableView.delegate = self
-            tableView.separatorInset = UIEdgeInsets.zero
-            tableView.tableHeaderView = resultsListHeader
-            if forceRightToLeft {
-                tableView.semanticContentAttribute = .forceRightToLeft
-            }
-            
-            shadowView.backgroundColor = UIColor.lightText
-            shadowView.layer.shadowColor = UIColor.black.cgColor
-            shadowView.layer.shadowOffset = CGSize.zero
-            shadowView.layer.shadowOpacity = 1
-            
-            self.window?.addSubview(tableView)
-        } else {
-            tableView = UITableView(frame: CGRect.zero)
-            shadowView = UIView(frame: CGRect.zero)
+        guard let tableView = tableView, let shadowView = shadowView else {
+            self.tableView = UITableView(frame: CGRect.zero)
+            self.shadowView = UIView(frame: CGRect.zero)
+            buildSearchTableView()
+            return
         }
+        
+        tableView.layer.masksToBounds = true
+        tableView.layer.borderWidth = theme.borderWidth > 0 ? theme.borderWidth : 0.5
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.separatorInset = UIEdgeInsets.zero
+        tableView.tableHeaderView = resultsListHeader
+        if forceRightToLeft {
+            tableView.semanticContentAttribute = .forceRightToLeft
+        }
+        
+        shadowView.backgroundColor = UIColor.lightText
+        shadowView.layer.shadowColor = UIColor.black.cgColor
+        shadowView.layer.shadowOffset = CGSize.zero
+        shadowView.layer.shadowOpacity = 1
+        
+        self.window?.addSubview(tableView)
         
         redrawSearchTableView()
     }
