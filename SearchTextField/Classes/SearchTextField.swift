@@ -118,8 +118,8 @@ open class SearchTextField: UITextField {
     /// Force no filtering (display the entire filtered data source)
     open var forceNoFiltering: Bool = false
     
-    /// If startFilteringAfter is set, and startSuggestingInmediately is true, the list of suggestions appear inmediately
-    open var startSuggestingInmediately = false
+    /// If startFilteringAfter is set, and startSuggestingImmediately is true, the list of suggestions appear immediately
+    open var startSuggestingImmediately = false
     
     /// Allow to decide the comparision options
     open var comparisonOptions: NSString.CompareOptions = [.caseInsensitive]
