@@ -110,7 +110,9 @@ mySearchTextField.hideResultsList()
 
 // Allow for multiple selections from the list.  Default: false
 mySearchTextField.allowMultipleSelections = true
-// When using the delegate function with allowMultipleSelections = true, remember to add the new selection to the text
+
+// When using the delegate function with allowMultipleSelections = true, 
+// remember to add the new selection to the text
 mySearchTextField.itemSelectionHandler = { filteredResults, itemPosition in
 // Just in case you need the item position
 let item = filteredResults[itemPosition]
