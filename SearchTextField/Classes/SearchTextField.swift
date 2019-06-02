@@ -464,7 +464,7 @@ open class SearchTextField: UITextField {
                 var textToFilter = text!.lowercased()
                 
                 if inlineMode, let filterAfter = startFilteringAfter {
-                    if let suffixToFilter = textToFilter.components(separatedBy: filterAfter).last, (suffixToFilter != "" || startSuggestingInmediately == true), textToFilter != suffixToFilter {
+                    if let suffixToFilter = textToFilter.components(separatedBy: filterAfter).last, (suffixToFilter != "" || startSuggestingImmediately == true), textToFilter != suffixToFilter {
                         textToFilter = suffixToFilter
                     } else {
                         placeholderLabel?.text = ""

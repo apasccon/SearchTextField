@@ -10,6 +10,7 @@ Pod::Spec.new do |s|
   s.name             = "SearchTextField"
   s.version          = "1.2.2"
   s.summary          = "SearchTextField extends UITextField allowing you to add the autocomplete feature in a really easy way"
+  s.swift_version = "4.2"
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
