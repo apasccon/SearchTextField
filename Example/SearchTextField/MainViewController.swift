@@ -131,7 +131,7 @@ class MainViewController: UITableViewController {
         emailInlineTextField.inlineMode = true
         
         emailInlineTextField.startFilteringAfter = "@"
-        emailInlineTextField.startSuggestingInmediately = true
+        emailInlineTextField.startSuggestingImmediately = true
         
         // Set data source
         emailInlineTextField.filterStrings(["gmail.com", "yahoo.com", "yahoo.com.ar"])
