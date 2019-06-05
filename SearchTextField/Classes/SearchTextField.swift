@@ -27,6 +27,9 @@ open class SearchTextField: UITextField {
 
     /// How long to wait before deciding typing has stopped
     open var typingStoppedDelay = 0.8
+
+    /// Always show the entire suggestions list but continue to highlight the matching text
+    open var alwaysShowAllSuggestions = false
     
     /// Set your custom visual theme, or just choose between pre-defined SearchTextFieldTheme.lightTheme() and SearchTextFieldTheme.darkTheme() themes
     open var theme = SearchTextFieldTheme.lightTheme() {
