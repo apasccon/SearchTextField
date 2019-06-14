@@ -59,6 +59,9 @@ open class SearchTextField: UITextField {
         }
     }
     
+    // Specify whether the keyboard should automatically dismiss when an item is selected
+    open var autoDismiss = true
+    
     /// Set an array of SearchTextFieldItem's to be used for suggestions
     open func filterItems(_ items: [SearchTextFieldItem]) {
         filterDataSource = items
@@ -598,6 +601,9 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if itemSelectionHandler == nil {
             self.text = filteredResults[(indexPath as NSIndexPath).row].title
+            if autoDismiss{
+                self.resignFirstResponder()
+            }
         } else {
             let index = indexPath.row
             itemSelectionHandler!(filteredResults, index)
