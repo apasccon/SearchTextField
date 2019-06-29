@@ -13,6 +13,9 @@ open class SearchTextField: UITextField {
     ////////////////////////////////////////////////////////////////////////
     // Public interface
     
+    /// Allow for multiple selections
+    open var allowMultipleSelections = false
+    
     /// Maximum number of results to be shown in the suggestions list
     open var maxNumberOfResults = 0
     
@@ -596,15 +599,34 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if itemSelectionHandler == nil {
-            self.text = filteredResults[(indexPath as NSIndexPath).row].title
+            
+            if allowMultipleSelections {
+                if let st = self.text {
+                    // this captures if there was another selection in the field
+                    self.text = st + " " + filteredResults[(indexPath as NSIndexPath).row].title
+                } else {
+                    // this is the first selection - there is nothing else in the field
+                    self.text = filteredResults[(indexPath as NSIndexPath).row].title
+                }
+            } else {
+                // we are not using the multiple selections option
+                self.text = filteredResults[(indexPath as NSIndexPath).row].title
+            }
+            
         } else {
             let index = indexPath.row
             itemSelectionHandler!(filteredResults, index)
         }
         
-        clearResults()
+        // this will only dismiss the table if allowMultipleSelections is not set
+        if !allowMultipleSelections {
+            clearResults()
+        }
+        
     }
+    
 }
 
 ////////////////////////////////////////////////////////////////////////
