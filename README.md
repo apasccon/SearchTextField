@@ -16,7 +16,7 @@ You can also detects when the user stops typing, very useful when you can get a 
 Now you can make suggestions "inline", showing the first matched result as the placeholder (instead of the results list) and selecting it when the user touches the enter key.
 
 ------   
-![alt_tag](https://raw.githubusercontent.com/apasccon/SearchTextField/master/Example/SearchTextField/SearchTextField_Demo.gif)
+<img src="https://raw.githubusercontent.com/apasccon/SearchTextField/master/Example/SearchTextField/SearchTextField_Demo.gif" width="280">
 
 ## Requirements
 
