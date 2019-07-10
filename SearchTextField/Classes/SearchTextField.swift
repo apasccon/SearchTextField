@@ -99,6 +99,11 @@ open class SearchTextField: UITextField {
         indicator.stopAnimating()
     }
     
+    /// Set default loading indicator view style
+    open func setLoadingIndicatorViewStyle(_ viewStyle: UIActivityIndicatorViewStyle) {
+        indicator.activityIndicatorViewStyle = viewStyle
+    }
+    
     /// When InlineMode is true, the suggestions appear in the same line than the entered string. It's useful for email domains suggestion for example.
     open var inlineMode: Bool = false {
         didSet {
