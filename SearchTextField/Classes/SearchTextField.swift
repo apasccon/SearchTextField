@@ -59,6 +59,9 @@ open class SearchTextField: UITextField {
         }
     }
     
+    /// Show the suggestions list with the filter when the text field is focused and is not empty
+    open var startVisibleWithText = true
+    
     /// Set an array of SearchTextFieldItem's to be used for suggestions
     open func filterItems(_ items: [SearchTextFieldItem]) {
         filterDataSource = items
@@ -392,9 +395,13 @@ open class SearchTextField: UITextField {
     }
     
     @objc open func textFieldDidBeginEditing() {
-        if (startVisible || startVisibleWithoutInteraction) && text!.isEmpty {
-            clearResults()
-            filter(forceShowAll: true)
+        if startVisible || startVisibleWithoutInteraction {
+            if text!.isEmpty {
+                clearResults()
+                filter(forceShowAll: true)
+            } else if startVisibleWithText {
+                self.textFieldDidChange()
+            }
         }
         placeholderLabel?.attributedText = nil
     }
