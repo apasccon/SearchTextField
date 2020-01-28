@@ -565,30 +565,32 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: SearchTextField.cellIdentifier)
+
+		guard indexPath.row < filteredResults.count else {
+			return UITableViewCell(style: .subtitle, reuseIdentifier: SearchTextField.cellIdentifier)
+		}
+
+		let cell = tableView.dequeueReusableCell(withIdentifier: SearchTextField.cellIdentifier)
+			?? UITableViewCell(style: .subtitle, reuseIdentifier: SearchTextField.cellIdentifier)
         
-        if cell == nil {
-            cell = UITableViewCell(style: .subtitle, reuseIdentifier: SearchTextField.cellIdentifier)
-        }
+        cell.backgroundColor = UIColor.clear
+        cell.layoutMargins = UIEdgeInsets.zero
+        cell.preservesSuperviewLayoutMargins = false
+        cell.textLabel?.font = theme.font
+        cell.detailTextLabel?.font = UIFont(name: theme.font.fontName, size: theme.font.pointSize * fontConversionRate)
+        cell.textLabel?.textColor = theme.fontColor
+        cell.detailTextLabel?.textColor = theme.subtitleFontColor
         
-        cell!.backgroundColor = UIColor.clear
-        cell!.layoutMargins = UIEdgeInsets.zero
-        cell!.preservesSuperviewLayoutMargins = false
-        cell!.textLabel?.font = theme.font
-        cell!.detailTextLabel?.font = UIFont(name: theme.font.fontName, size: theme.font.pointSize * fontConversionRate)
-        cell!.textLabel?.textColor = theme.fontColor
-        cell!.detailTextLabel?.textColor = theme.subtitleFontColor
+        cell.textLabel?.text = filteredResults[indexPath.row].title
+        cell.detailTextLabel?.text = filteredResults[indexPath.row].subtitle
+        cell.textLabel?.attributedText = filteredResults[indexPath.row].attributedTitle
+        cell.detailTextLabel?.attributedText = filteredResults[indexPath.row].attributedSubtitle
         
-        cell!.textLabel?.text = filteredResults[(indexPath as NSIndexPath).row].title
-        cell!.detailTextLabel?.text = filteredResults[(indexPath as NSIndexPath).row].subtitle
-        cell!.textLabel?.attributedText = filteredResults[(indexPath as NSIndexPath).row].attributedTitle
-        cell!.detailTextLabel?.attributedText = filteredResults[(indexPath as NSIndexPath).row].attributedSubtitle
+        cell.imageView?.image = filteredResults[indexPath.row].image
         
-        cell!.imageView?.image = filteredResults[(indexPath as NSIndexPath).row].image
+        cell.selectionStyle = .none
         
-        cell!.selectionStyle = .none
-        
-        return cell!
+        return cell
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -597,7 +599,7 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if itemSelectionHandler == nil {
-            self.text = filteredResults[(indexPath as NSIndexPath).row].title
+            self.text = filteredResults[indexPath.row].title
         } else {
             let index = indexPath.row
             itemSelectionHandler!(filteredResults, index)
