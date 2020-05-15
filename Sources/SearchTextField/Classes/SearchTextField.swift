@@ -6,6 +6,7 @@
 //  Copyright © 2016 Alejandro Pasccon. All rights reserved.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 open class SearchTextField: UITextField {
@@ -678,3 +679,4 @@ enum Direction {
     case down
     case up
 }
+#endif

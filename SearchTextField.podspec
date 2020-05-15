@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "SearchTextField"
-  s.version          = "1.2.4"
+  s.version          = "1.2.5"
   s.summary          = "SearchTextField extends UITextField allowing you to add the autocomplete feature in a really easy way"
   s.swift_version = "5.0"
 
@@ -37,7 +37,7 @@ SearchTextField supports two different modes: the classic dropdown list (by defa
 
   s.user_target_xcconfig = { 'ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES' => '$(inherited)' }
 
-  s.source_files = 'SearchTextField/Classes/**/*'
+  s.source_files = 'Sources/SearchTextField/Classes/**/*'
   #s.resource_bundles = {
   #  'SearchTextField' => ['SearchTextField/Assets/*.png']
   #}
