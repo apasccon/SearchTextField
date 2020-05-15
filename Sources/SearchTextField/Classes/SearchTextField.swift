@@ -628,30 +628,31 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
 	}
 
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		var cell = tableView.dequeueReusableCell(withIdentifier: SearchTextField.cellIdentifier)
-
-		if cell == nil {
-			cell = UITableViewCell(style: .subtitle, reuseIdentifier: SearchTextField.cellIdentifier)
+		guard indexPath.row < filteredResults.count else {
+			return UITableViewCell(style: .subtitle, reuseIdentifier: SearchTextField.cellIdentifier)
 		}
 
-		cell!.backgroundColor = UIColor.clear
-		cell!.layoutMargins = UIEdgeInsets.zero
-		cell!.preservesSuperviewLayoutMargins = false
-		cell!.textLabel?.font = theme.font
-		cell!.detailTextLabel?.font = UIFont(name: theme.font.fontName, size: theme.font.pointSize * fontConversionRate)
-		cell!.textLabel?.textColor = theme.fontColor
-		cell!.detailTextLabel?.textColor = theme.subtitleFontColor
+		let cell = tableView.dequeueReusableCell(withIdentifier: SearchTextField.cellIdentifier)
+			?? UITableViewCell(style: .subtitle, reuseIdentifier: SearchTextField.cellIdentifier)
 
-		cell!.textLabel?.text = filteredResults[(indexPath as NSIndexPath).row].title
-		cell!.detailTextLabel?.text = filteredResults[(indexPath as NSIndexPath).row].subtitle
-		cell!.textLabel?.attributedText = filteredResults[(indexPath as NSIndexPath).row].attributedTitle
-		cell!.detailTextLabel?.attributedText = filteredResults[(indexPath as NSIndexPath).row].attributedSubtitle
+		cell.backgroundColor = UIColor.clear
+		cell.layoutMargins = UIEdgeInsets.zero
+		cell.preservesSuperviewLayoutMargins = false
+		cell.textLabel?.font = theme.font
+		cell.detailTextLabel?.font = UIFont(name: theme.font.fontName, size: theme.font.pointSize * fontConversionRate)
+		cell.textLabel?.textColor = theme.fontColor
+		cell.detailTextLabel?.textColor = theme.subtitleFontColor
 
-		cell!.imageView?.image = filteredResults[(indexPath as NSIndexPath).row].image
+		cell.textLabel?.text = filteredResults[indexPath.row].title
+		cell.detailTextLabel?.text = filteredResults[indexPath.row].subtitle
+		cell.textLabel?.attributedText = filteredResults[indexPath.row].attributedTitle
+		cell.detailTextLabel?.attributedText = filteredResults[indexPath.row].attributedSubtitle
 
-		cell!.selectionStyle = .none
+		cell.imageView?.image = filteredResults[indexPath.row].image
 
-		return cell!
+		cell.selectionStyle = .none
+
+		return cell
 	}
 
 	public func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
