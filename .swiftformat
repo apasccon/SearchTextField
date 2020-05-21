@@ -1,0 +1,7 @@
+# format options
+--indent tab
+--tabwidth 4
+
+# file options
+--exclude .Build
+--exclude Example
