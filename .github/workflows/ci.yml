@@ -1,0 +1,23 @@
+name: ci
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: xcodebuild -project SearchTextfield.xcodeproj -target SearchTextField -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.5'
+    # - name: Run tests
+    #   run: swift test -v
+  swiftlint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: SwiftLint
+      uses: norio-nomura/action-swiftlint@3.1.0

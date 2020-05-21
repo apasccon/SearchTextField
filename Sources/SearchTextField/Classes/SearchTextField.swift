@@ -499,8 +499,8 @@ open class SearchTextField: UITextField {
 			return
 		}
 
-		for i in 0 ..< filterDataSource.count {
-			let item = filterDataSource[i]
+		for idx in 0 ..< filterDataSource.count {
+			let item = filterDataSource[idx]
 
 			if !inlineMode {
 				// Find text in title and subtitle
