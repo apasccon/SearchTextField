@@ -1,0 +1,6 @@
+disabled_rules:
+  - trailing_comma
+excluded:
+  - .build
+  - Example
+  - Tests

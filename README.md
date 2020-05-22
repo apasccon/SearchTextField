@@ -2,6 +2,7 @@
 
 # SearchTextField
 
+![Build](https://github.com/eatsleepride/SearchTextField/workflows/Build/badge.svg)
 [![Version](https://img.shields.io/cocoapods/v/SearchTextField.svg?style=flat)](http://cocoapods.org/pods/SearchTextField)
 [![License](https://img.shields.io/cocoapods/l/SearchTextField.svg?style=flat)](http://cocoapods.org/pods/SearchTextField)
 [![Platform](https://img.shields.io/cocoapods/p/SearchTextField.svg?style=flat)](http://cocoapods.org/pods/SearchTextField)
@@ -24,7 +25,14 @@ Now you can make suggestions "inline", showing the first matched result as the p
 
 ## Installation
 
-SearchTextField is available through [CocoaPods](http://cocoapods.org). To install
+SearchTextField is available through [SwiftPM](https://swift.org/package-manager/)
+
+To install via SPM:
+1. xcode -> file -> Swift Packages -> Add Package Dependency
+2. search for SearchTextField or use the git clone url.
+3. select the branch, version, or commit you want to use.
+
+SearchTextField is also available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```swift
