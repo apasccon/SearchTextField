@@ -27,6 +27,8 @@ open class SearchTextField: UITextField {
 
     /// How long to wait before deciding typing has stopped
     open var typingStoppedDelay = 0.8
+
+    open var autoFillOnExit = true
     
     /// Set your custom visual theme, or just choose between pre-defined SearchTextFieldTheme.lightTheme() and SearchTextFieldTheme.darkTheme() themes
     open var theme = SearchTextFieldTheme.lightTheme() {
@@ -406,6 +408,7 @@ open class SearchTextField: UITextField {
     }
     
     @objc open func textFieldDidEndEditingOnExit() {
+        guard autoFillOnExit == true else { return }
         if let firstElement = filteredResults.first {
             if let itemSelectionHandler = self.itemSelectionHandler {
                 itemSelectionHandler(filteredResults, 0)
