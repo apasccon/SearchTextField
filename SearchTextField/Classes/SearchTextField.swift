@@ -451,11 +451,28 @@ open class SearchTextField: UITextField {
                 if titleFilterRange.location != NSNotFound || subtitleFilterRange.location != NSNotFound || addAll {
                     item.attributedTitle = NSMutableAttributedString(string: item.title)
                     item.attributedSubtitle = NSMutableAttributedString(string: (item.subtitle != nil ? item.subtitle! : ""))
-                    
-                    item.attributedTitle!.setAttributes(highlightAttributes, range: titleFilterRange)
+
+                    var titleAttributes = highlightAttributes
+
+                    if let itemTitleAttributes = item.titleAttributes {
+                        itemTitleAttributes.forEach {
+                            titleAttributes[$0] = $1
+                        }
+                    }
+
+                    item.attributedTitle!.setAttributes(titleAttributes, range: titleFilterRange)
                     
                     if subtitleFilterRange.location != NSNotFound {
-                        item.attributedSubtitle!.setAttributes(highlightAttributesForSubtitle(), range: subtitleFilterRange)
+
+                        var subtitleAttributes = highlightAttributesForSubtitle()
+
+                        if let itemSubtitleAttributes = item.subtitleAttributes {
+                            itemSubtitleAttributes.forEach {
+                                subtitleAttributes[$0] = $1
+                            }
+                        }
+
+                        item.attributedSubtitle!.setAttributes(subtitleAttributes, range: subtitleFilterRange)
                     }
                     
                     filteredResults.append(item)
@@ -647,7 +664,11 @@ open class SearchTextFieldItem {
     // Private vars
     fileprivate var attributedTitle: NSMutableAttributedString?
     fileprivate var attributedSubtitle: NSMutableAttributedString?
-    
+    fileprivate var titleAttributes:[NSAttributedString.Key : AnyObject]?
+    fileprivate var subtitleAttributes:[NSAttributedString.Key : AnyObject]?
+    fileprivate var titleSearchRange: Range<String.Index>?
+    fileprivate var subtitleSearchRange: Range<String.Index>?
+
     // Public interface
     public var title: String
     public var subtitle: String?
@@ -666,6 +687,20 @@ open class SearchTextFieldItem {
     
     public init(title: String) {
         self.title = title
+    }
+
+    public convenience init(
+            title: String,
+            subtitle: String?,
+            titleAttributes:[NSAttributedString.Key : AnyObject],
+            subtitleAttributes:[NSAttributedString.Key : AnyObject],
+            titleSearchRange: Range<String.Index>? = nil,
+            subtitleSearchRange: Range<String.Index>? = nil) {
+        self.init(title: title, subtitle: subtitle)
+        self.titleAttributes = titleAttributes
+        self.subtitleAttributes = subtitleAttributes
+        self.titleSearchRange = titleSearchRange
+        self.subtitleSearchRange = subtitleSearchRange
     }
 }
 
