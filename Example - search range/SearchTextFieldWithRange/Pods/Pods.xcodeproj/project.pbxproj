@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		08C115638665B777FFBD88D96CC87DC0 /* Pods-SearchTextFieldWithRange-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 660C0828CD76DAAC36B0BA046400C8C9 /* Pods-SearchTextFieldWithRange-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		1BE189F5A119D9FD3984BD787C406AD6 /* SearchTextField-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365B6506C250B892FFF4082B9AA3EF1 /* SearchTextField-dummy.m */; };
+		1BE189F5A119D9FD3984BD787C406AD6 /* SearchTextField-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 89CA30D022F4B18FDF398E0E50692EB8 /* SearchTextField-dummy.m */; };
 		82ED71865861699150BAEB8855230502 /* Pods-SearchTextFieldWithRange-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FCB8AA857F5485C03F2B73B749AC99D /* Pods-SearchTextFieldWithRange-dummy.m */; };
-		96C111B59990CEB360EB178C35BA2149 /* SearchTextField-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A19383F597D09F7EE1EE9E89D5778AFB /* SearchTextField-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A0D4717FA665A92E588AE54EC4424AA7 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3307A981EDE54F3FE5D61DA244435BB2 /* SearchTextField.swift */; };
+		96C111B59990CEB360EB178C35BA2149 /* SearchTextField-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CEED653F4AC52D33A5B7EE2F99A109 /* SearchTextField-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A0D4717FA665A92E588AE54EC4424AA7 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A983D273E5FC3E0DE4050583F0542DD /* SearchTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F1926A86FA38F1DCD4F22E3C0054515A /* PBXContainerItemProxy */ = {
+		765F9FEA32BC26C66DCD0AF45274C6C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -26,21 +26,24 @@
 
 /* Begin PBXFileReference section */
 		11E992FEB65D89C320399BEF20B852E1 /* Pods-SearchTextFieldWithRange.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SearchTextFieldWithRange.modulemap"; sourceTree = "<group>"; };
-		1858CCE18734AAE9839822F9FEB9F5C8 /* SearchTextField.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SearchTextField.release.xcconfig; sourceTree = "<group>"; };
 		1B42976F07046CF9A487A9680B18022B /* libPods-SearchTextFieldWithRange.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-SearchTextFieldWithRange.a"; path = "libPods-SearchTextFieldWithRange.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C1CB3DEDD3E75D68F9DF7C3C8481AD7 /* SearchTextField.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SearchTextField.debug.xcconfig; sourceTree = "<group>"; };
 		27E38DF68C673A5EB8644FB6A9772F87 /* libSearchTextField.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libSearchTextField.a; path = libSearchTextField.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		2CEC3AA5A2B6CB92B5E21BFB15B00AD6 /* SearchTextField.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SearchTextField.modulemap; sourceTree = "<group>"; };
 		309FEF81FD747F6EE2E73DED000745EA /* Pods-SearchTextFieldWithRange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SearchTextFieldWithRange.release.xcconfig"; sourceTree = "<group>"; };
-		3307A981EDE54F3FE5D61DA244435BB2 /* SearchTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SearchTextField.swift; path = SearchTextField/Classes/SearchTextField.swift; sourceTree = "<group>"; };
-		4ED05F68D000C1F90BECDFBD967D03A2 /* SearchTextField.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SearchTextField.debug.xcconfig; sourceTree = "<group>"; };
-		6365B6506C250B892FFF4082B9AA3EF1 /* SearchTextField-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SearchTextField-dummy.m"; sourceTree = "<group>"; };
-		648CF543E57022F680676DE52AE54FF5 /* SearchTextField-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SearchTextField-prefix.pch"; sourceTree = "<group>"; };
+		4581C69430A05E433EA2B32E0E9B358F /* SearchTextField.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SearchTextField.release.xcconfig; sourceTree = "<group>"; };
+		4D538ACCE315C79C0E0195DC0CB2BE0E /* SearchTextField-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SearchTextField-prefix.pch"; sourceTree = "<group>"; };
+		55CEED653F4AC52D33A5B7EE2F99A109 /* SearchTextField-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SearchTextField-umbrella.h"; sourceTree = "<group>"; };
+		5A983D273E5FC3E0DE4050583F0542DD /* SearchTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SearchTextField.swift; path = SearchTextField/Classes/SearchTextField.swift; sourceTree = "<group>"; };
+		5EE861876CA49B510E0C5A55BECD607E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		660C0828CD76DAAC36B0BA046400C8C9 /* Pods-SearchTextFieldWithRange-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SearchTextFieldWithRange-umbrella.h"; sourceTree = "<group>"; };
 		68828DACA8AB90460584D18E0C90EE2F /* Pods-SearchTextFieldWithRange-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SearchTextFieldWithRange-acknowledgements.plist"; sourceTree = "<group>"; };
+		6EE3232C0043EF5511F2D9D660EC2C97 /* SearchTextField.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = SearchTextField.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		89CA30D022F4B18FDF398E0E50692EB8 /* SearchTextField-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SearchTextField-dummy.m"; sourceTree = "<group>"; };
 		8A81A09180B5BD685E0F37E8A6DC7FD8 /* Pods-SearchTextFieldWithRange-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SearchTextFieldWithRange-acknowledgements.markdown"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9FCB8AA857F5485C03F2B73B749AC99D /* Pods-SearchTextFieldWithRange-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SearchTextFieldWithRange-dummy.m"; sourceTree = "<group>"; };
-		A19383F597D09F7EE1EE9E89D5778AFB /* SearchTextField-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SearchTextField-umbrella.h"; sourceTree = "<group>"; };
+		BAB8B7541B1B4C5958CB343141E6A35D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		CC4082D0B3926D5D5D9E831D142C6B42 /* SearchTextField.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SearchTextField.modulemap; sourceTree = "<group>"; };
 		D498BD0EAEF270C28184E60655872894 /* Pods-SearchTextFieldWithRange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SearchTextFieldWithRange.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,12 +88,28 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		10EEF578E1233F8FB3698F7B0E483368 /* Pods */ = {
+		1C81B1DCCA4560F8126E962BB1EC4DEE /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				AE3E8F35D8EE449549A1DAB168CF5B3F /* SearchTextField */,
+				BAB8B7541B1B4C5958CB343141E6A35D /* LICENSE */,
+				5EE861876CA49B510E0C5A55BECD607E /* README.md */,
+				6EE3232C0043EF5511F2D9D660EC2C97 /* SearchTextField.podspec */,
 			);
-			name = Pods;
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		4E0217F400CA4A29F4073B0C4258683D /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				CC4082D0B3926D5D5D9E831D142C6B42 /* SearchTextField.modulemap */,
+				89CA30D022F4B18FDF398E0E50692EB8 /* SearchTextField-dummy.m */,
+				4D538ACCE315C79C0E0195DC0CB2BE0E /* SearchTextField-prefix.pch */,
+				55CEED653F4AC52D33A5B7EE2F99A109 /* SearchTextField-umbrella.h */,
+				1C1CB3DEDD3E75D68F9DF7C3C8481AD7 /* SearchTextField.debug.xcconfig */,
+				4581C69430A05E433EA2B32E0E9B358F /* SearchTextField.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Example - search range/SearchTextFieldWithRange/Pods/Target Support Files/SearchTextField";
 			sourceTree = "<group>";
 		};
 		5E8DD1339544D147930CDBB2AD602A72 /* Products */ = {
@@ -102,39 +121,34 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A1858D2F7B0E1CB600C233C05D5137AB /* Support Files */ = {
+		9AC2B02AE2D35DA9D18E7051A95DDA72 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2CEC3AA5A2B6CB92B5E21BFB15B00AD6 /* SearchTextField.modulemap */,
-				6365B6506C250B892FFF4082B9AA3EF1 /* SearchTextField-dummy.m */,
-				648CF543E57022F680676DE52AE54FF5 /* SearchTextField-prefix.pch */,
-				A19383F597D09F7EE1EE9E89D5778AFB /* SearchTextField-umbrella.h */,
-				4ED05F68D000C1F90BECDFBD967D03A2 /* SearchTextField.debug.xcconfig */,
-				1858CCE18734AAE9839822F9FEB9F5C8 /* SearchTextField.release.xcconfig */,
+				D80DBFC10198E763C5941F563EC62D92 /* SearchTextField */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/SearchTextField";
-			sourceTree = "<group>";
-		};
-		AE3E8F35D8EE449549A1DAB168CF5B3F /* SearchTextField */ = {
-			isa = PBXGroup;
-			children = (
-				3307A981EDE54F3FE5D61DA244435BB2 /* SearchTextField.swift */,
-				A1858D2F7B0E1CB600C233C05D5137AB /* Support Files */,
-			);
-			name = SearchTextField;
-			path = SearchTextField;
+			name = "Development Pods";
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				9AC2B02AE2D35DA9D18E7051A95DDA72 /* Development Pods */,
 				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
-				10EEF578E1233F8FB3698F7B0E483368 /* Pods */,
 				5E8DD1339544D147930CDBB2AD602A72 /* Products */,
 				0DE789ED66A04BA9E731BE71C1F7EB99 /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		D80DBFC10198E763C5941F563EC62D92 /* SearchTextField */ = {
+			isa = PBXGroup;
+			children = (
+				5A983D273E5FC3E0DE4050583F0542DD /* SearchTextField.swift */,
+				1C81B1DCCA4560F8126E962BB1EC4DEE /* Pod */,
+				4E0217F400CA4A29F4073B0C4258683D /* Support Files */,
+			);
+			name = SearchTextField;
+			path = ../../..;
 			sourceTree = "<group>";
 		};
 		D89477F20FB1DE18A04690586D7808C4 /* Frameworks */ = {
@@ -195,7 +209,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				FDAACBC8478A7892E7E944C28C941526 /* PBXTargetDependency */,
+				E436B85BA8B1F92FD505B01FE51BE45E /* PBXTargetDependency */,
 			);
 			name = "Pods-SearchTextFieldWithRange";
 			productName = "Pods-SearchTextFieldWithRange";
@@ -278,11 +292,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		FDAACBC8478A7892E7E944C28C941526 /* PBXTargetDependency */ = {
+		E436B85BA8B1F92FD505B01FE51BE45E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SearchTextField;
 			target = 8C3F94412D7198255213EB9BC85FFF6E /* SearchTextField */;
-			targetProxy = F1926A86FA38F1DCD4F22E3C0054515A /* PBXContainerItemProxy */;
+			targetProxy = 765F9FEA32BC26C66DCD0AF45274C6C4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -377,7 +391,7 @@
 		};
 		8E8CBA5D103C267523CC65EF74D57286 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1858CCE18734AAE9839822F9FEB9F5C8 /* SearchTextField.release.xcconfig */;
+			baseConfigurationReference = 4581C69430A05E433EA2B32E0E9B358F /* SearchTextField.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -402,7 +416,7 @@
 		};
 		9C6FC260EF62A01459722E49E8D42072 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4ED05F68D000C1F90BECDFBD967D03A2 /* SearchTextField.debug.xcconfig */;
+			baseConfigurationReference = 1C1CB3DEDD3E75D68F9DF7C3C8481AD7 /* SearchTextField.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
