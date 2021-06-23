@@ -1,0 +1,21 @@
+PODS:
+  - SearchTextField (1.2.4)
+
+DEPENDENCIES:
+  - SearchTextField (from `https://github.com/schmidt9/SearchTextField.git`)
+
+EXTERNAL SOURCES:
+  SearchTextField:
+    :git: https://github.com/schmidt9/SearchTextField.git
+
+CHECKOUT OPTIONS:
+  SearchTextField:
+    :commit: 6c3ecdd34c4c910af9e1f7c5ee05f3e0bae05623
+    :git: https://github.com/schmidt9/SearchTextField.git
+
+SPEC CHECKSUMS:
+  SearchTextField: 40dc3cc57def5a211f263cac263622c163bbc25a
+
+PODFILE CHECKSUM: 954033c2ce9a4e57b399b7e07aaeb4510b6960c5
+
+COCOAPODS: 1.10.1
