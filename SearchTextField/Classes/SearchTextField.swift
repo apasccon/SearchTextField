@@ -445,34 +445,31 @@ open class SearchTextField: UITextField {
             
             if !inlineMode {
                 // Find text in title and subtitle
-                let titleFilterRange = (item.title as NSString).range(of: text!, options: comparisonOptions)
-                let subtitleFilterRange = item.subtitle != nil ? (item.subtitle! as NSString).range(of: text!, options: comparisonOptions) : NSMakeRange(NSNotFound, 0)
+                var titleFilterRange = (item.title as NSString).range(of: text!, options: comparisonOptions)
+
+                if let titleSearchRange = item.titleSearchRange {
+                    if NSIntersectionRange(titleFilterRange, titleSearchRange).length == 0 {
+                        titleFilterRange.location = NSNotFound
+                    }
+                }
+
+                var subtitleFilterRange = item.subtitle != nil ? (item.subtitle! as NSString).range(of: text!, options: comparisonOptions) : NSMakeRange(NSNotFound, 0)
+
+                if let subtitleSearchRange = item.subtitleSearchRange {
+                    if NSIntersectionRange(subtitleFilterRange, subtitleSearchRange).length == 0 {
+                        subtitleFilterRange.location = NSNotFound
+                    }
+                }
                 
                 if titleFilterRange.location != NSNotFound || subtitleFilterRange.location != NSNotFound || addAll {
-                    item.attributedTitle = NSMutableAttributedString(string: item.title)
-                    item.attributedSubtitle = NSMutableAttributedString(string: (item.subtitle != nil ? item.subtitle! : ""))
+                    item.attributedTitle = item.originalAttributedTitle ?? NSMutableAttributedString(string: item.title)
 
-                    var titleAttributes = highlightAttributes
+                    item.attributedSubtitle = item.originalAttributedSubtitle ?? NSMutableAttributedString(string: (item.subtitle != nil ? item.subtitle! : ""))
 
-                    if let itemTitleAttributes = item.titleAttributes {
-                        itemTitleAttributes.forEach {
-                            titleAttributes[$0] = $1
-                        }
-                    }
-
-                    item.attributedTitle!.setAttributes(titleAttributes, range: titleFilterRange)
+                    item.attributedTitle!.addAttributes(highlightAttributes, range: titleFilterRange)
                     
                     if subtitleFilterRange.location != NSNotFound {
-
-                        var subtitleAttributes = highlightAttributesForSubtitle()
-
-                        if let itemSubtitleAttributes = item.subtitleAttributes {
-                            itemSubtitleAttributes.forEach {
-                                subtitleAttributes[$0] = $1
-                            }
-                        }
-
-                        item.attributedSubtitle!.setAttributes(subtitleAttributes, range: subtitleFilterRange)
+                        item.attributedSubtitle!.addAttributes(highlightAttributesForSubtitle(), range: subtitleFilterRange)
                     }
                     
                     filteredResults.append(item)
@@ -664,10 +661,11 @@ open class SearchTextFieldItem {
     // Private vars
     fileprivate var attributedTitle: NSMutableAttributedString?
     fileprivate var attributedSubtitle: NSMutableAttributedString?
-    fileprivate var titleAttributes:[NSAttributedString.Key : AnyObject]?
-    fileprivate var subtitleAttributes:[NSAttributedString.Key : AnyObject]?
-    fileprivate var titleSearchRange: Range<String.Index>?
-    fileprivate var subtitleSearchRange: Range<String.Index>?
+    // use original* versions to restore attributed strings after adding highlighting attributes
+    fileprivate var originalAttributedTitle: NSMutableAttributedString?
+    fileprivate var originalAttributedSubtitle: NSMutableAttributedString?
+    fileprivate var titleSearchRange: NSRange?
+    fileprivate var subtitleSearchRange: NSRange?
 
     // Public interface
     public var title: String
@@ -690,15 +688,13 @@ open class SearchTextFieldItem {
     }
 
     public convenience init(
-            title: String,
-            subtitle: String?,
-            titleAttributes:[NSAttributedString.Key : AnyObject],
-            subtitleAttributes:[NSAttributedString.Key : AnyObject],
-            titleSearchRange: Range<String.Index>? = nil,
-            subtitleSearchRange: Range<String.Index>? = nil) {
-        self.init(title: title, subtitle: subtitle)
-        self.titleAttributes = titleAttributes
-        self.subtitleAttributes = subtitleAttributes
+            attributedTitle: NSAttributedString,
+            attributedSubtitle: NSAttributedString?,
+            titleSearchRange: NSRange? = nil,
+            subtitleSearchRange: NSRange? = nil) {
+        self.init(title: attributedTitle.string, subtitle: attributedSubtitle?.string)
+        self.originalAttributedTitle = (attributedTitle.mutableCopy() as! NSMutableAttributedString)
+        self.originalAttributedSubtitle = (attributedSubtitle?.mutableCopy() as! NSMutableAttributedString)
         self.titleSearchRange = titleSearchRange
         self.subtitleSearchRange = subtitleSearchRange
     }
