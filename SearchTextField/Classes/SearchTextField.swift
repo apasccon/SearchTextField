@@ -462,9 +462,9 @@ open class SearchTextField: UITextField {
                 }
                 
                 if titleFilterRange.location != NSNotFound || subtitleFilterRange.location != NSNotFound || addAll {
-                    item.attributedTitle = (item.originalAttributedTitle?.copy() as? NSMutableAttributedString) ?? NSMutableAttributedString(string: item.title)
+                    item.attributedTitle = (item.originalAttributedTitle?.mutableCopy() as? NSMutableAttributedString) ?? NSMutableAttributedString(string: item.title)
 
-                    item.attributedSubtitle = (item.originalAttributedSubtitle?.copy() as? NSMutableAttributedString) ?? NSMutableAttributedString(string: (item.subtitle != nil ? item.subtitle! : ""))
+                    item.attributedSubtitle = (item.originalAttributedSubtitle?.mutableCopy() as? NSMutableAttributedString) ?? NSMutableAttributedString(string: (item.subtitle != nil ? item.subtitle! : ""))
 
                     item.attributedTitle!.addAttributes(highlightAttributes, range: titleFilterRange)
                     

@@ -21,13 +21,42 @@ class ViewController: UIViewController {
 
     func setup() {
         
-        var testArr = [SearchTextFieldItem]()
+        var items = [SearchTextFieldItem]()
 
         for i in 0..<10 {
-            testArr.append(SearchTextFieldItem(title: "title \(i)", subtitle: "subtitle \(i)"))
+
+            // prepare title
+
+            let attributedTitle = NSMutableAttributedString()
+            let searchableTitlePart = "\(i) Searchable title part"
+            let nonSearchableTitlePart = " Non-searchable"
+
+            attributedTitle.append(NSAttributedString(string: searchableTitlePart, attributes: [.font : UIFont.systemFont(ofSize: 15), .foregroundColor : UIColor.green]))
+            attributedTitle.append(NSAttributedString(string: nonSearchableTitlePart, attributes: [.font : UIFont.systemFont(ofSize: 12), .foregroundColor : UIColor.gray]))
+
+            let titleSearchRange = (attributedTitle.string as NSString).range(of: searchableTitlePart)
+
+            // prepare subtitle
+
+            let attributedSubtitle = NSMutableAttributedString()
+            let searchableSubtitlePart = "Searchable subtitle part"
+            let nonSearchableSubtitlePart = " Non-searchable"
+
+            attributedSubtitle.append(NSAttributedString(string: searchableSubtitlePart, attributes: [.font : UIFont.systemFont(ofSize: 11), .foregroundColor : UIColor.green]))
+            attributedSubtitle.append(NSAttributedString(string: nonSearchableSubtitlePart, attributes: [.font : UIFont.systemFont(ofSize: 9), .foregroundColor : UIColor.gray]))
+
+            let subtitleSearchRange = (attributedSubtitle.string as NSString).range(of: searchableSubtitlePart)
+
+            let item = SearchTextFieldItem(
+                    attributedTitle: attributedTitle,
+                    attributedSubtitle: attributedSubtitle,
+                    titleSearchRange: titleSearchRange,
+                    subtitleSearchRange: subtitleSearchRange)
+
+            items.append(item)
         }
 
-        searchTextField.filterItems(testArr)
+        searchTextField.filterItems(items)
 
         searchTextField.maxNumberOfResults = 10
         searchTextField.minCharactersNumberToStartFiltering = 2

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5D930663D5B62E31355CA52D /* libPods-SearchTextFieldWithRange.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D67D87013577DA89CF1AD3F /* libPods-SearchTextFieldWithRange.a */; };
 		CED0AA71268310EC002C5DAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED0AA70268310EC002C5DAF /* AppDelegate.swift */; };
-		CED0AA73268310EC002C5DAF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED0AA72268310EC002C5DAF /* SceneDelegate.swift */; };
 		CED0AA75268310EC002C5DAF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED0AA74268310EC002C5DAF /* ViewController.swift */; };
 		CED0AA78268310EC002C5DAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED0AA76268310EC002C5DAF /* Main.storyboard */; };
 		CED0AA7A268310EE002C5DAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED0AA79268310EE002C5DAF /* Assets.xcassets */; };
@@ -22,7 +21,6 @@
 		80874CE3913485F3B1C94921 /* Pods-SearchTextFieldWithRange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchTextFieldWithRange.release.xcconfig"; path = "Target Support Files/Pods-SearchTextFieldWithRange/Pods-SearchTextFieldWithRange.release.xcconfig"; sourceTree = "<group>"; };
 		CED0AA6D268310EC002C5DAF /* SearchTextFieldWithRange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchTextFieldWithRange.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED0AA70268310EC002C5DAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CED0AA72268310EC002C5DAF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CED0AA74268310EC002C5DAF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CED0AA77268310EC002C5DAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CED0AA79268310EE002C5DAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,7 +54,6 @@
 				4B1B0B55D5E89AD187ABE144 /* Pods-SearchTextFieldWithRange.debug.xcconfig */,
 				80874CE3913485F3B1C94921 /* Pods-SearchTextFieldWithRange.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -82,7 +79,6 @@
 			isa = PBXGroup;
 			children = (
 				CED0AA70268310EC002C5DAF /* AppDelegate.swift */,
-				CED0AA72268310EC002C5DAF /* SceneDelegate.swift */,
 				CED0AA74268310EC002C5DAF /* ViewController.swift */,
 				CED0AA76268310EC002C5DAF /* Main.storyboard */,
 				CED0AA79268310EE002C5DAF /* Assets.xcassets */,
@@ -190,7 +186,6 @@
 			files = (
 				CED0AA75268310EC002C5DAF /* ViewController.swift in Sources */,
 				CED0AA71268310EC002C5DAF /* AppDelegate.swift in Sources */,
-				CED0AA73268310EC002C5DAF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,7 +262,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -322,7 +317,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
