@@ -445,31 +445,17 @@ open class SearchTextField: UITextField {
             
             if !inlineMode {
                 // Find text in title and subtitle
-                var titleFilterRange = (item.title as NSString).range(of: text!, options: comparisonOptions)
-
-                if let titleSearchRange = item.titleSearchRange {
-                    if NSIntersectionRange(titleFilterRange, titleSearchRange).length == 0 {
-                        titleFilterRange.location = NSNotFound
-                    }
-                }
-
-                var subtitleFilterRange = item.subtitle != nil ? (item.subtitle! as NSString).range(of: text!, options: comparisonOptions) : NSMakeRange(NSNotFound, 0)
-
-                if let subtitleSearchRange = item.subtitleSearchRange {
-                    if NSIntersectionRange(subtitleFilterRange, subtitleSearchRange).length == 0 {
-                        subtitleFilterRange.location = NSNotFound
-                    }
-                }
+                let titleFilterRange = (item.title as NSString).range(of: text!, options: comparisonOptions)
+                let subtitleFilterRange = item.subtitle != nil ? (item.subtitle! as NSString).range(of: text!, options: comparisonOptions) : NSMakeRange(NSNotFound, 0)
                 
                 if titleFilterRange.location != NSNotFound || subtitleFilterRange.location != NSNotFound || addAll {
-                    item.attributedTitle = (item.originalAttributedTitle?.mutableCopy() as? NSMutableAttributedString) ?? NSMutableAttributedString(string: item.title)
-
-                    item.attributedSubtitle = (item.originalAttributedSubtitle?.mutableCopy() as? NSMutableAttributedString) ?? NSMutableAttributedString(string: (item.subtitle != nil ? item.subtitle! : ""))
-
-                    item.attributedTitle!.addAttributes(highlightAttributes, range: titleFilterRange)
+                    item.attributedTitle = NSMutableAttributedString(string: item.title)
+                    item.attributedSubtitle = NSMutableAttributedString(string: (item.subtitle != nil ? item.subtitle! : ""))
+                    
+                    item.attributedTitle!.setAttributes(highlightAttributes, range: titleFilterRange)
                     
                     if subtitleFilterRange.location != NSNotFound {
-                        item.attributedSubtitle!.addAttributes(highlightAttributesForSubtitle(), range: subtitleFilterRange)
+                        item.attributedSubtitle!.setAttributes(highlightAttributesForSubtitle(), range: subtitleFilterRange)
                     }
                     
                     filteredResults.append(item)
@@ -661,12 +647,7 @@ open class SearchTextFieldItem {
     // Private vars
     fileprivate var attributedTitle: NSMutableAttributedString?
     fileprivate var attributedSubtitle: NSMutableAttributedString?
-    // use original* versions to restore attributed strings after adding highlighting attributes
-    fileprivate var originalAttributedTitle: NSMutableAttributedString?
-    fileprivate var originalAttributedSubtitle: NSMutableAttributedString?
-    fileprivate var titleSearchRange: NSRange?
-    fileprivate var subtitleSearchRange: NSRange?
-
+    
     // Public interface
     public var title: String
     public var subtitle: String?
@@ -685,18 +666,6 @@ open class SearchTextFieldItem {
     
     public init(title: String) {
         self.title = title
-    }
-
-    public convenience init(
-            attributedTitle: NSAttributedString,
-            attributedSubtitle: NSAttributedString?,
-            titleSearchRange: NSRange? = nil,
-            subtitleSearchRange: NSRange? = nil) {
-        self.init(title: attributedTitle.string, subtitle: attributedSubtitle?.string)
-        self.originalAttributedTitle = (attributedTitle.mutableCopy() as! NSMutableAttributedString)
-        self.originalAttributedSubtitle = (attributedSubtitle?.mutableCopy() as! NSMutableAttributedString)
-        self.titleSearchRange = titleSearchRange
-        self.subtitleSearchRange = subtitleSearchRange
     }
 }
 

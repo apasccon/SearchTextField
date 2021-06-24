@@ -1,0 +1,16 @@
+PODS:
+  - SearchTextField (1.2.4)
+
+DEPENDENCIES:
+  - SearchTextField (from `../..`)
+
+EXTERNAL SOURCES:
+  SearchTextField:
+    :path: "../.."
+
+SPEC CHECKSUMS:
+  SearchTextField: 40dc3cc57def5a211f263cac263622c163bbc25a
+
+PODFILE CHECKSUM: 51feecd399dd662d5705f4d0573350b7d2135287
+
+COCOAPODS: 1.10.1

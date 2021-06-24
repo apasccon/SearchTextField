@@ -1,0 +1,557 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		08C115638665B777FFBD88D96CC87DC0 /* Pods-SearchTextFieldWithRange-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 660C0828CD76DAAC36B0BA046400C8C9 /* Pods-SearchTextFieldWithRange-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		1BE189F5A119D9FD3984BD787C406AD6 /* SearchTextField-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 89CA30D022F4B18FDF398E0E50692EB8 /* SearchTextField-dummy.m */; };
+		82ED71865861699150BAEB8855230502 /* Pods-SearchTextFieldWithRange-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FCB8AA857F5485C03F2B73B749AC99D /* Pods-SearchTextFieldWithRange-dummy.m */; };
+		96C111B59990CEB360EB178C35BA2149 /* SearchTextField-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CEED653F4AC52D33A5B7EE2F99A109 /* SearchTextField-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A0D4717FA665A92E588AE54EC4424AA7 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A983D273E5FC3E0DE4050583F0542DD /* SearchTextField.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		765F9FEA32BC26C66DCD0AF45274C6C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8C3F94412D7198255213EB9BC85FFF6E;
+			remoteInfo = SearchTextField;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		11E992FEB65D89C320399BEF20B852E1 /* Pods-SearchTextFieldWithRange.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SearchTextFieldWithRange.modulemap"; sourceTree = "<group>"; };
+		1B42976F07046CF9A487A9680B18022B /* libPods-SearchTextFieldWithRange.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-SearchTextFieldWithRange.a"; path = "libPods-SearchTextFieldWithRange.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C1CB3DEDD3E75D68F9DF7C3C8481AD7 /* SearchTextField.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SearchTextField.debug.xcconfig; sourceTree = "<group>"; };
+		27E38DF68C673A5EB8644FB6A9772F87 /* libSearchTextField.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libSearchTextField.a; path = libSearchTextField.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		309FEF81FD747F6EE2E73DED000745EA /* Pods-SearchTextFieldWithRange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SearchTextFieldWithRange.release.xcconfig"; sourceTree = "<group>"; };
+		4581C69430A05E433EA2B32E0E9B358F /* SearchTextField.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SearchTextField.release.xcconfig; sourceTree = "<group>"; };
+		4D538ACCE315C79C0E0195DC0CB2BE0E /* SearchTextField-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SearchTextField-prefix.pch"; sourceTree = "<group>"; };
+		55CEED653F4AC52D33A5B7EE2F99A109 /* SearchTextField-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SearchTextField-umbrella.h"; sourceTree = "<group>"; };
+		5A983D273E5FC3E0DE4050583F0542DD /* SearchTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SearchTextField.swift; path = SearchTextField/Classes/SearchTextField.swift; sourceTree = "<group>"; };
+		5EE861876CA49B510E0C5A55BECD607E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		660C0828CD76DAAC36B0BA046400C8C9 /* Pods-SearchTextFieldWithRange-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SearchTextFieldWithRange-umbrella.h"; sourceTree = "<group>"; };
+		68828DACA8AB90460584D18E0C90EE2F /* Pods-SearchTextFieldWithRange-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SearchTextFieldWithRange-acknowledgements.plist"; sourceTree = "<group>"; };
+		6EE3232C0043EF5511F2D9D660EC2C97 /* SearchTextField.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = SearchTextField.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		89CA30D022F4B18FDF398E0E50692EB8 /* SearchTextField-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SearchTextField-dummy.m"; sourceTree = "<group>"; };
+		8A81A09180B5BD685E0F37E8A6DC7FD8 /* Pods-SearchTextFieldWithRange-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SearchTextFieldWithRange-acknowledgements.markdown"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9FCB8AA857F5485C03F2B73B749AC99D /* Pods-SearchTextFieldWithRange-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SearchTextFieldWithRange-dummy.m"; sourceTree = "<group>"; };
+		BAB8B7541B1B4C5958CB343141E6A35D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		CC4082D0B3926D5D5D9E831D142C6B42 /* SearchTextField.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SearchTextField.modulemap; sourceTree = "<group>"; };
+		D498BD0EAEF270C28184E60655872894 /* Pods-SearchTextFieldWithRange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SearchTextFieldWithRange.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B0F992E63E2EE6BBA39FCF1B3BF3913A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB9DD383131E21DB2890A19CCA9FEABF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0C5B7D3FE8102E96D0A22056D46194CA /* Pods-SearchTextFieldWithRange */ = {
+			isa = PBXGroup;
+			children = (
+				11E992FEB65D89C320399BEF20B852E1 /* Pods-SearchTextFieldWithRange.modulemap */,
+				8A81A09180B5BD685E0F37E8A6DC7FD8 /* Pods-SearchTextFieldWithRange-acknowledgements.markdown */,
+				68828DACA8AB90460584D18E0C90EE2F /* Pods-SearchTextFieldWithRange-acknowledgements.plist */,
+				9FCB8AA857F5485C03F2B73B749AC99D /* Pods-SearchTextFieldWithRange-dummy.m */,
+				660C0828CD76DAAC36B0BA046400C8C9 /* Pods-SearchTextFieldWithRange-umbrella.h */,
+				D498BD0EAEF270C28184E60655872894 /* Pods-SearchTextFieldWithRange.debug.xcconfig */,
+				309FEF81FD747F6EE2E73DED000745EA /* Pods-SearchTextFieldWithRange.release.xcconfig */,
+			);
+			name = "Pods-SearchTextFieldWithRange";
+			path = "Target Support Files/Pods-SearchTextFieldWithRange";
+			sourceTree = "<group>";
+		};
+		0DE789ED66A04BA9E731BE71C1F7EB99 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0C5B7D3FE8102E96D0A22056D46194CA /* Pods-SearchTextFieldWithRange */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		1C81B1DCCA4560F8126E962BB1EC4DEE /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				BAB8B7541B1B4C5958CB343141E6A35D /* LICENSE */,
+				5EE861876CA49B510E0C5A55BECD607E /* README.md */,
+				6EE3232C0043EF5511F2D9D660EC2C97 /* SearchTextField.podspec */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		4E0217F400CA4A29F4073B0C4258683D /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				CC4082D0B3926D5D5D9E831D142C6B42 /* SearchTextField.modulemap */,
+				89CA30D022F4B18FDF398E0E50692EB8 /* SearchTextField-dummy.m */,
+				4D538ACCE315C79C0E0195DC0CB2BE0E /* SearchTextField-prefix.pch */,
+				55CEED653F4AC52D33A5B7EE2F99A109 /* SearchTextField-umbrella.h */,
+				1C1CB3DEDD3E75D68F9DF7C3C8481AD7 /* SearchTextField.debug.xcconfig */,
+				4581C69430A05E433EA2B32E0E9B358F /* SearchTextField.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Example - search range/SearchTextFieldWithRange/Pods/Target Support Files/SearchTextField";
+			sourceTree = "<group>";
+		};
+		5E8DD1339544D147930CDBB2AD602A72 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1B42976F07046CF9A487A9680B18022B /* libPods-SearchTextFieldWithRange.a */,
+				27E38DF68C673A5EB8644FB6A9772F87 /* libSearchTextField.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9AC2B02AE2D35DA9D18E7051A95DDA72 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D80DBFC10198E763C5941F563EC62D92 /* SearchTextField */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				9AC2B02AE2D35DA9D18E7051A95DDA72 /* Development Pods */,
+				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
+				5E8DD1339544D147930CDBB2AD602A72 /* Products */,
+				0DE789ED66A04BA9E731BE71C1F7EB99 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D80DBFC10198E763C5941F563EC62D92 /* SearchTextField */ = {
+			isa = PBXGroup;
+			children = (
+				5A983D273E5FC3E0DE4050583F0542DD /* SearchTextField.swift */,
+				1C81B1DCCA4560F8126E962BB1EC4DEE /* Pod */,
+				4E0217F400CA4A29F4073B0C4258683D /* Support Files */,
+			);
+			name = SearchTextField;
+			path = ../../..;
+			sourceTree = "<group>";
+		};
+		D89477F20FB1DE18A04690586D7808C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6CDE9ED12D19E2D5A1515C195DAD6F4C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08C115638665B777FFBD88D96CC87DC0 /* Pods-SearchTextFieldWithRange-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDF6679D18178B4290FAD28CFA765C82 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96C111B59990CEB360EB178C35BA2149 /* SearchTextField-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8C3F94412D7198255213EB9BC85FFF6E /* SearchTextField */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1704360E5C211FC35A945A314648B6FB /* Build configuration list for PBXNativeTarget "SearchTextField" */;
+			buildPhases = (
+				DDF6679D18178B4290FAD28CFA765C82 /* Headers */,
+				FA50F4A03EEC9507FCA0FFA9F7568125 /* Sources */,
+				B0F992E63E2EE6BBA39FCF1B3BF3913A /* Frameworks */,
+				79E3D7BAD8442FE65E46C9B07EDAFB58 /* Copy generated compatibility header */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SearchTextField;
+			productName = SearchTextField;
+			productReference = 27E38DF68C673A5EB8644FB6A9772F87 /* libSearchTextField.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		9E49E7F5EE544CFB8122B25541AC4192 /* Pods-SearchTextFieldWithRange */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 498FB8FAD075418042838AB89DF43A5C /* Build configuration list for PBXNativeTarget "Pods-SearchTextFieldWithRange" */;
+			buildPhases = (
+				6CDE9ED12D19E2D5A1515C195DAD6F4C /* Headers */,
+				CCDA852162BB1ECA7B1E524D629674C6 /* Sources */,
+				BB9DD383131E21DB2890A19CCA9FEABF /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E436B85BA8B1F92FD505B01FE51BE45E /* PBXTargetDependency */,
+			);
+			name = "Pods-SearchTextFieldWithRange";
+			productName = "Pods-SearchTextFieldWithRange";
+			productReference = 1B42976F07046CF9A487A9680B18022B /* libPods-SearchTextFieldWithRange.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = 5E8DD1339544D147930CDBB2AD602A72 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9E49E7F5EE544CFB8122B25541AC4192 /* Pods-SearchTextFieldWithRange */,
+				8C3F94412D7198255213EB9BC85FFF6E /* SearchTextField */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		79E3D7BAD8442FE65E46C9B07EDAFB58 /* Copy generated compatibility header */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DERIVED_SOURCES_DIR}/${PRODUCT_MODULE_NAME}-Swift.h",
+				"${PODS_ROOT}/Headers/Public/SearchTextField/SearchTextField.modulemap",
+				"${PODS_ROOT}/Headers/Public/SearchTextField/SearchTextField-umbrella.h",
+			);
+			name = "Copy generated compatibility header";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${BUILT_PRODUCTS_DIR}/${PRODUCT_MODULE_NAME}.modulemap",
+				"${BUILT_PRODUCTS_DIR}/SearchTextField-umbrella.h",
+				"${BUILT_PRODUCTS_DIR}/Swift Compatibility Header/${PRODUCT_MODULE_NAME}-Swift.h",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "COMPATIBILITY_HEADER_PATH=\"${BUILT_PRODUCTS_DIR}/Swift Compatibility Header/${PRODUCT_MODULE_NAME}-Swift.h\"\nMODULE_MAP_PATH=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_MODULE_NAME}.modulemap\"\n\nditto \"${DERIVED_SOURCES_DIR}/${PRODUCT_MODULE_NAME}-Swift.h\" \"${COMPATIBILITY_HEADER_PATH}\"\nditto \"${PODS_ROOT}/Headers/Public/SearchTextField/SearchTextField.modulemap\" \"${MODULE_MAP_PATH}\"\nditto \"${PODS_ROOT}/Headers/Public/SearchTextField/SearchTextField-umbrella.h\" \"${BUILT_PRODUCTS_DIR}\"\nprintf \"\\n\\nmodule ${PRODUCT_MODULE_NAME}.Swift {\\n  header \\\"${COMPATIBILITY_HEADER_PATH}\\\"\\n  requires objc\\n}\\n\" >> \"${MODULE_MAP_PATH}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CCDA852162BB1ECA7B1E524D629674C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				82ED71865861699150BAEB8855230502 /* Pods-SearchTextFieldWithRange-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA50F4A03EEC9507FCA0FFA9F7568125 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BE189F5A119D9FD3984BD787C406AD6 /* SearchTextField-dummy.m in Sources */,
+				A0D4717FA665A92E588AE54EC4424AA7 /* SearchTextField.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E436B85BA8B1F92FD505B01FE51BE45E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SearchTextField;
+			target = 8C3F94412D7198255213EB9BC85FFF6E /* SearchTextField */;
+			targetProxy = 765F9FEA32BC26C66DCD0AF45274C6C4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		25AD9454612BF454A1E3DC4CD4FA8C6D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		505B08562CFA7DFF5B4FF5B43BC2B11D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 309FEF81FD747F6EE2E73DED000745EA /* Pods-SearchTextFieldWithRange.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SearchTextFieldWithRange/Pods-SearchTextFieldWithRange.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8E8CBA5D103C267523CC65EF74D57286 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4581C69430A05E433EA2B32E0E9B358F /* SearchTextField.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/SearchTextField/SearchTextField-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MODULEMAP_FILE = Headers/Public/SearchTextField/SearchTextField.modulemap;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = SearchTextField;
+				PRODUCT_NAME = SearchTextField;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9C6FC260EF62A01459722E49E8D42072 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C1CB3DEDD3E75D68F9DF7C3C8481AD7 /* SearchTextField.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/SearchTextField/SearchTextField-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MODULEMAP_FILE = Headers/Public/SearchTextField/SearchTextField.modulemap;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = SearchTextField;
+				PRODUCT_NAME = SearchTextField;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CA547D2C7E9A8A153DC2B27FBE00B112 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		F3F76253CB2C7192D0F39F2ED603ABEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D498BD0EAEF270C28184E60655872894 /* Pods-SearchTextFieldWithRange.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SearchTextFieldWithRange/Pods-SearchTextFieldWithRange.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1704360E5C211FC35A945A314648B6FB /* Build configuration list for PBXNativeTarget "SearchTextField" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C6FC260EF62A01459722E49E8D42072 /* Debug */,
+				8E8CBA5D103C267523CC65EF74D57286 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25AD9454612BF454A1E3DC4CD4FA8C6D /* Debug */,
+				CA547D2C7E9A8A153DC2B27FBE00B112 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		498FB8FAD075418042838AB89DF43A5C /* Build configuration list for PBXNativeTarget "Pods-SearchTextFieldWithRange" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3F76253CB2C7192D0F39F2ED603ABEF /* Debug */,
+				505B08562CFA7DFF5B4FF5B43BC2B11D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}
