@@ -8,28 +8,29 @@
 
 import UIKit
 
+@objc(APSearchTextField)
 open class SearchTextField: UITextField {
     
     ////////////////////////////////////////////////////////////////////////
     // Public interface
     
     /// Maximum number of results to be shown in the suggestions list
-    open var maxNumberOfResults = 0
+    @objc open var maxNumberOfResults = 0
     
     /// Maximum height of the results list
-    open var maxResultsListHeight = 0
+    @objc open var maxResultsListHeight = 0
     
     /// Indicate if this field has been interacted with yet
-    open var interactedWith = false
+    @objc open var interactedWith = false
     
     /// Indicate if keyboard is showing or not
-    open var keyboardIsShowing = false
+    @objc open var keyboardIsShowing = false
 
     /// How long to wait before deciding typing has stopped
-    open var typingStoppedDelay = 0.8
+    @objc open var typingStoppedDelay = 0.8
     
     /// Set your custom visual theme, or just choose between pre-defined SearchTextFieldTheme.lightTheme() and SearchTextFieldTheme.darkTheme() themes
-    open var theme = SearchTextFieldTheme.lightTheme() {
+    @objc open var theme = SearchTextFieldTheme.lightTheme() {
         didSet {
             tableView?.reloadData()
             
@@ -48,10 +49,10 @@ open class SearchTextField: UITextField {
     }
     
     /// Show the suggestions list without filter when the text field is focused
-    open var startVisible = false
+    @objc open var startVisible = false
     
     /// Show the suggestions list without filter even if the text field is not focused
-    open var startVisibleWithoutInteraction = false {
+    @objc open var startVisibleWithoutInteraction = false {
         didSet {
             if startVisibleWithoutInteraction {
                 textFieldDidChange()
@@ -60,12 +61,12 @@ open class SearchTextField: UITextField {
     }
     
     /// Set an array of SearchTextFieldItem's to be used for suggestions
-    open func filterItems(_ items: [SearchTextFieldItem]) {
+    @objc open func filterItems(_ items: [SearchTextFieldItem]) {
         filterDataSource = items
     }
     
     /// Set an array of strings to be used for suggestions
-    open func filterStrings(_ strings: [String]) {
+    @objc open func filterStrings(_ strings: [String]) {
         var items = [SearchTextFieldItem]()
         
         for value in strings {
@@ -76,31 +77,31 @@ open class SearchTextField: UITextField {
     }
     
     /// Closure to handle when the user pick an item
-    open var itemSelectionHandler: SearchTextFieldItemHandler?
+    @objc open var itemSelectionHandler: SearchTextFieldItemHandler?
     
     /// Closure to handle when the user stops typing
-    open var userStoppedTypingHandler: (() -> Void)?
+    @objc open var userStoppedTypingHandler: (() -> Void)?
     
     /// Set your custom set of attributes in order to highlight the string found in each item
-    open var highlightAttributes: [NSAttributedString.Key: AnyObject] = [.font: UIFont.boldSystemFont(ofSize: 10)]
+    @objc open var highlightAttributes: [NSAttributedString.Key: AnyObject] = [.font: UIFont.boldSystemFont(ofSize: 10)]
     
     /// Start showing the default loading indicator, useful for searches that take some time.
-    open func showLoadingIndicator() {
+    @objc open func showLoadingIndicator() {
         self.rightViewMode = .always
         indicator.startAnimating()
     }
     
     /// Force the results list to adapt to RTL languages
-    open var forceRightToLeft = false
+    @objc open var forceRightToLeft = false
     
     /// Hide the default loading indicator
-    open func stopLoadingIndicator() {
+    @objc open func stopLoadingIndicator() {
         self.rightViewMode = .never
         indicator.stopAnimating()
     }
     
     /// When InlineMode is true, the suggestions appear in the same line than the entered string. It's useful for email domains suggestion for example.
-    open var inlineMode: Bool = false {
+    @objc open var inlineMode: Bool = false {
         didSet {
             if inlineMode == true {
                 autocorrectionType = .no
@@ -110,28 +111,28 @@ open class SearchTextField: UITextField {
     }
     
     /// Only valid when InlineMode is true. The suggestions appear after typing the provided string (or even better a character like '@')
-    open var startFilteringAfter: String?
+    @objc open var startFilteringAfter: String?
     
     /// Min number of characters to start filtering
-    open var minCharactersNumberToStartFiltering: Int = 0
+    @objc open var minCharactersNumberToStartFiltering: Int = 0
 
     /// Force no filtering (display the entire filtered data source)
-    open var forceNoFiltering: Bool = false
+    @objc open var forceNoFiltering: Bool = false
     
     /// If startFilteringAfter is set, and startSuggestingImmediately is true, the list of suggestions appear immediately
-    open var startSuggestingImmediately = false
+    @objc open var startSuggestingImmediately = false
     
     /// Allow to decide the comparision options
-    open var comparisonOptions: NSString.CompareOptions = [.caseInsensitive]
+    @objc open var comparisonOptions: NSString.CompareOptions = [.caseInsensitive]
     
     /// Set the results list's header
-    open var resultsListHeader: UIView?
+    @objc open var resultsListHeader: UIView?
 
     // Move the table around to customize for your layout
-    open var tableXOffset: CGFloat = 0.0
-    open var tableYOffset: CGFloat = 0.0
-    open var tableCornerRadius: CGFloat = 2.0
-    open var tableBottomMargin: CGFloat = 10.0
+    @objc open var tableXOffset: CGFloat = 0.0
+    @objc open var tableYOffset: CGFloat = 0.0
+    @objc open var tableCornerRadius: CGFloat = 2.0
+    @objc open var tableBottomMargin: CGFloat = 10.0
     
     ////////////////////////////////////////////////////////////////////////
     // Private implementation
@@ -623,18 +624,19 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
 
 ////////////////////////////////////////////////////////////////////////
 // Search Text Field Theme
+@objc(APSearchTextFieldTheme)
+public class SearchTextFieldTheme : NSObject {
+    @objc public var cellHeight: CGFloat
+    @objc public var bgColor: UIColor
+    @objc public var borderColor: UIColor
+    @objc public var borderWidth : CGFloat = 0
+    @objc public var separatorColor: UIColor
+    @objc public var font: UIFont
+    @objc public var fontColor: UIColor
+    @objc public var subtitleFontColor: UIColor
+    @objc public var placeholderColor: UIColor?
 
-public struct SearchTextFieldTheme {
-    public var cellHeight: CGFloat
-    public var bgColor: UIColor
-    public var borderColor: UIColor
-    public var borderWidth : CGFloat = 0
-    public var separatorColor: UIColor
-    public var font: UIFont
-    public var fontColor: UIColor
-    public var subtitleFontColor: UIColor
-    public var placeholderColor: UIColor?
-    
+    @objc(initWithCellHeight:bgColor:borderColor:separatorColor:font:fontColor:subtitleFontColor:)
     init(cellHeight: CGFloat, bgColor:UIColor, borderColor: UIColor, separatorColor: UIColor, font: UIFont, fontColor: UIColor, subtitleFontColor: UIColor? = nil) {
         self.cellHeight = cellHeight
         self.borderColor = borderColor
@@ -644,12 +646,12 @@ public struct SearchTextFieldTheme {
         self.fontColor = fontColor
         self.subtitleFontColor = subtitleFontColor ?? fontColor
     }
-    
-    public static func lightTheme() -> SearchTextFieldTheme {
+
+    @objc public static func lightTheme() -> SearchTextFieldTheme {
         return SearchTextFieldTheme(cellHeight: 30, bgColor: UIColor (red: 1, green: 1, blue: 1, alpha: 0.6), borderColor: UIColor (red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0), separatorColor: UIColor.clear, font: UIFont.systemFont(ofSize: 10), fontColor: UIColor.black)
     }
-    
-    public static func darkTheme() -> SearchTextFieldTheme {
+
+    @objc public static func darkTheme() -> SearchTextFieldTheme {
         return SearchTextFieldTheme(cellHeight: 30, bgColor: UIColor (red: 0.8, green: 0.8, blue: 0.8, alpha: 0.6), borderColor: UIColor (red: 0.7, green: 0.7, blue: 0.7, alpha: 1.0), separatorColor: UIColor.clear, font: UIFont.systemFont(ofSize: 10), fontColor: UIColor.white)
     }
 }
@@ -657,7 +659,8 @@ public struct SearchTextFieldTheme {
 ////////////////////////////////////////////////////////////////////////
 // Filter Item
 
-open class SearchTextFieldItem {
+@objc(APSearchTextFieldItem)
+open class SearchTextFieldItem : NSObject {
     // Private vars
     fileprivate var attributedTitle: NSMutableAttributedString?
     fileprivate var attributedSubtitle: NSMutableAttributedString?
@@ -668,30 +671,43 @@ open class SearchTextFieldItem {
     fileprivate var subtitleSearchRange: NSRange?
 
     // Public interface
-    public var title: String
-    public var subtitle: String?
-    public var image: UIImage?
-    
+    @objc public var title: String
+    @objc public var subtitle: String?
+    @objc public var image: UIImage?
+
+    @objc(initWithTitle:subtitle:image:)
     public init(title: String, subtitle: String?, image: UIImage?) {
         self.title = title
         self.subtitle = subtitle
         self.image = image
     }
-    
+
+    @objc(initWithTitle:subtitle:)
     public init(title: String, subtitle: String?) {
         self.title = title
         self.subtitle = subtitle
     }
-    
+
+    @objc(initWithTitle:)
     public init(title: String) {
         self.title = title
     }
 
+    @objc(initWithAttributedTitle:attributedSubtitle:)
+    public convenience init(
+            attributedTitle: NSAttributedString,
+            attributedSubtitle: NSAttributedString?) {
+        self.init(title: attributedTitle.string, subtitle: attributedSubtitle?.string)
+        self.originalAttributedTitle = (attributedTitle.mutableCopy() as! NSMutableAttributedString)
+        self.originalAttributedSubtitle = (attributedSubtitle?.mutableCopy() as! NSMutableAttributedString)
+    }
+
+    @objc(initWithAttributedTitle:attributedSubtitle:titleSearchRange:subtitleSearchRange:)
     public convenience init(
             attributedTitle: NSAttributedString,
             attributedSubtitle: NSAttributedString?,
-            titleSearchRange: NSRange? = nil,
-            subtitleSearchRange: NSRange? = nil) {
+            titleSearchRange: NSRange,
+            subtitleSearchRange: NSRange) {
         self.init(title: attributedTitle.string, subtitle: attributedSubtitle?.string)
         self.originalAttributedTitle = (attributedTitle.mutableCopy() as! NSMutableAttributedString)
         self.originalAttributedSubtitle = (attributedSubtitle?.mutableCopy() as! NSMutableAttributedString)

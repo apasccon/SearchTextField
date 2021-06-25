@@ -8,6 +8,10 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="iphoneos_1e6509872c68aa1b67da9659a6c9fe9acdd81716" />
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../SearchTextField/Classes/SearchTextField.swift" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/SearchTextFieldWithRange/ViewController.swift" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectId" id="1uLYA7jSZBdLiK7StobrXhAfZQQ" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
