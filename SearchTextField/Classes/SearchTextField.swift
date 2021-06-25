@@ -674,6 +674,8 @@ open class SearchTextFieldItem : NSObject {
     @objc public var title: String
     @objc public var subtitle: String?
     @objc public var image: UIImage?
+    /// Arbitrary object associated with search item
+    @objc public var object: AnyObject?
 
     @objc(initWithTitle:subtitle:image:)
     public init(title: String, subtitle: String?, image: UIImage?) {
@@ -702,17 +704,19 @@ open class SearchTextFieldItem : NSObject {
         self.originalAttributedSubtitle = (attributedSubtitle?.mutableCopy() as! NSMutableAttributedString)
     }
 
-    @objc(initWithAttributedTitle:attributedSubtitle:titleSearchRange:subtitleSearchRange:)
+    @objc(initWithAttributedTitle:attributedSubtitle:titleSearchRange:subtitleSearchRange:object:)
     public convenience init(
             attributedTitle: NSAttributedString,
             attributedSubtitle: NSAttributedString?,
             titleSearchRange: NSRange,
-            subtitleSearchRange: NSRange) {
+            subtitleSearchRange: NSRange,
+            object: AnyObject?) {
         self.init(title: attributedTitle.string, subtitle: attributedSubtitle?.string)
         self.originalAttributedTitle = (attributedTitle.mutableCopy() as! NSMutableAttributedString)
         self.originalAttributedSubtitle = (attributedSubtitle?.mutableCopy() as! NSMutableAttributedString)
         self.titleSearchRange = titleSearchRange
         self.subtitleSearchRange = subtitleSearchRange
+        self.object = object
     }
 }
 
