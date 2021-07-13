@@ -516,9 +516,8 @@ open class SearchTextField: UITextField {
         
         for attr in highlightAttributes {
             if attr.0 == NSAttributedString.Key.font {
-                let fontName = (attr.1 as! UIFont).fontName
                 let pointSize = (attr.1 as! UIFont).pointSize * fontConversionRate
-                highlightAttributesForSubtitle[attr.0] = UIFont(name: fontName, size: pointSize)
+                highlightAttributesForSubtitle[attr.0] = (attr.1 as! UIFont).withSize(pointSize)
             } else {
                 highlightAttributesForSubtitle[attr.0] = attr.1
             }
@@ -590,7 +589,7 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
         cell!.layoutMargins = UIEdgeInsets.zero
         cell!.preservesSuperviewLayoutMargins = false
         cell!.textLabel?.font = theme.font
-        cell!.detailTextLabel?.font = UIFont(name: theme.font.fontName, size: theme.font.pointSize * fontConversionRate)
+        cell!.detailTextLabel?.font = theme.font.withSize(theme.font.pointSize * fontConversionRate)
         cell!.textLabel?.textColor = theme.fontColor
         cell!.detailTextLabel?.textColor = theme.subtitleFontColor
         
