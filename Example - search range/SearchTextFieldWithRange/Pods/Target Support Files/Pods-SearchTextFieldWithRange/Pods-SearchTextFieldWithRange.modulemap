@@ -1,0 +1,6 @@
+module Pods_SearchTextFieldWithRange {
+  umbrella header "Pods-SearchTextFieldWithRange-umbrella.h"
+
+  export *
+  module * { export * }
+}
