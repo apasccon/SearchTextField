@@ -144,7 +144,7 @@ open class SearchTextField: UITextField {
     fileprivate var timer: Timer? = nil
     fileprivate var placeholderLabel: UILabel?
     fileprivate static let cellIdentifier = "APSearchTextFieldCell"
-    fileprivate let indicator = UIActivityIndicatorView(style: .gray)
+    fileprivate let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
     fileprivate var maxTableViewSize: CGFloat = 0
     
     fileprivate var filteredResults = [SearchTextFieldItem]()
@@ -530,7 +530,7 @@ open class SearchTextField: UITextField {
     // MARK: - Prepare for draw table result
     
     fileprivate func prepareDrawTableResult() {
-        guard let frame = self.superview?.convert(self.frame, to: UIApplication.shared.keyWindow) else { return }
+        guard let frame = self.superview?.convert(self.frame, to: UIApplication.shared.windows.first { $0.isKeyWindow }) else { return }
         if let keyboardFrame = keyboardFrame {
             var newFrame = frame
             newFrame.size.height += theme.cellHeight
@@ -543,7 +543,8 @@ open class SearchTextField: UITextField {
             
             redrawSearchTableView()
         } else {
-            if self.center.y + theme.cellHeight > UIApplication.shared.keyWindow!.frame.size.height {
+            let key = UIApplication.shared.windows.first { $0.isKeyWindow }
+            if self.center.y + theme.cellHeight > key!.frame.size.height {
                 direction = .up
             } else {
                 direction = .down
