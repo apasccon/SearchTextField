@@ -253,7 +253,8 @@ open class SearchTextField: UITextField {
             placeholderLabel?.backgroundColor = UIColor.clear
             placeholderLabel?.lineBreakMode = .byClipping
             
-            if let placeholderColor = self.attributedPlaceholder?.attribute(NSAttributedString.Key.foregroundColor, at: 0, effectiveRange: nil) as? UIColor {
+            if let attributedPlaceholder = self.attributedPlaceholder, attributedPlaceholder.length > 0,
+               let placeholderColor = attributedPlaceholder.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? UIColor {
                 placeholderLabel?.textColor = placeholderColor
             } else {
                 placeholderLabel?.textColor = UIColor ( red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0 )
