@@ -588,6 +588,7 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
         cell!.detailTextLabel?.attributedText = filteredResults[(indexPath as NSIndexPath).row].attributedSubtitle
 
         cell!.imageView?.image = filteredResults[(indexPath as NSIndexPath).row].image
+        cell!.imageView?.tintColor = theme.fontColor
 
         cell!.selectionStyle = .none
 
