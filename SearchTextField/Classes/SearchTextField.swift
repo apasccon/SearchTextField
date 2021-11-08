@@ -444,7 +444,7 @@ open class SearchTextField: UITextField {
 
         for i in 0 ..< filterDataSource.count {
 
-            let item = filterDataSource[i]
+            var item = filterDataSource[i]
 
             if !inlineMode {
                 // Find text in title and subtitle
@@ -574,25 +574,30 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: SearchTextField.cellIdentifier)
         }
 
-        cell!.backgroundColor = UIColor.clear
-        cell!.layoutMargins = UIEdgeInsets.zero
-        cell!.preservesSuperviewLayoutMargins = false
-        cell!.textLabel?.font = theme.font
-        cell!.detailTextLabel?.font = theme.font.withSize(theme.font.pointSize * fontConversionRate)
-        cell!.textLabel?.textColor = theme.fontColor
-        cell!.detailTextLabel?.textColor = theme.subtitleFontColor
+        let theCell = cell!
+        let result = filteredResults[(indexPath as NSIndexPath).row]
 
-        cell!.textLabel?.text = filteredResults[(indexPath as NSIndexPath).row].title
-        cell!.detailTextLabel?.text = filteredResults[(indexPath as NSIndexPath).row].subtitle
-        cell!.textLabel?.attributedText = filteredResults[(indexPath as NSIndexPath).row].attributedTitle
-        cell!.detailTextLabel?.attributedText = filteredResults[(indexPath as NSIndexPath).row].attributedSubtitle
+        theCell.backgroundColor = UIColor.clear
+        theCell.layoutMargins = UIEdgeInsets.zero
+        theCell.preservesSuperviewLayoutMargins = false
+        theCell.textLabel?.font = theme.font
+        theCell.detailTextLabel?.font = theme.font.withSize(theme.font.pointSize * fontConversionRate)
+        theCell.textLabel?.textColor = theme.fontColor
+        theCell.detailTextLabel?.textColor = theme.subtitleFontColor
 
-        cell!.imageView?.image = filteredResults[(indexPath as NSIndexPath).row].image
-        cell!.imageView?.tintColor = theme.fontColor
+        theCell.textLabel?.text = result.title
+        theCell.detailTextLabel?.text = result.subtitle
+        theCell.textLabel?.attributedText = result.attributedTitle
+        theCell.detailTextLabel?.attributedText = result.attributedSubtitle
 
-        cell!.selectionStyle = .none
+        theCell.imageView?.image = result.image
+        theCell.imageView?.tintColor = theme.fontColor
 
-        return cell!
+        theCell.accessoryType = result.accessory
+        theCell.selectionStyle = .none
+        theCell.tintColor = theme.subtitleFontColor
+
+        return theCell
     }
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -647,7 +652,7 @@ public struct SearchTextFieldTheme {
 ////////////////////////////////////////////////////////////////////////
 // Filter Item
 
-open class SearchTextFieldItem {
+public struct SearchTextFieldItem {
     // Private vars
     fileprivate var attributedTitle: NSMutableAttributedString?
     fileprivate var attributedSubtitle: NSMutableAttributedString?
@@ -656,20 +661,13 @@ open class SearchTextFieldItem {
     public var title: String
     public var subtitle: String?
     public var image: UIImage?
+    public var accessory: UITableViewCell.AccessoryType = .none
 
-    public init(title: String, subtitle: String?, image: UIImage?) {
+    public init(title: String, subtitle: String? = nil, image: UIImage? = nil, accessory: UITableViewCell.AccessoryType = .none) {
         self.title = title
         self.subtitle = subtitle
         self.image = image
-    }
-
-    public init(title: String, subtitle: String?) {
-        self.title = title
-        self.subtitle = subtitle
-    }
-
-    public init(title: String) {
-        self.title = title
+        self.accessory = accessory
     }
 }
 
