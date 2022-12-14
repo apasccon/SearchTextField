@@ -144,7 +144,7 @@ open class SearchTextField: UITextField {
     fileprivate var timer: Timer? = nil
     fileprivate var placeholderLabel: UILabel?
     fileprivate static let cellIdentifier = "APSearchTextFieldCell"
-    fileprivate let indicator = UIActivityIndicatorView(style: .gray)
+    fileprivate let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     fileprivate var maxTableViewSize: CGFloat = 0
     
     fileprivate var filteredResults = [SearchTextFieldItem]()
@@ -178,9 +178,9 @@ open class SearchTextField: UITextField {
         self.addTarget(self, action: #selector(SearchTextField.textFieldDidEndEditing), for: .editingDidEnd)
         self.addTarget(self, action: #selector(SearchTextField.textFieldDidEndEditingOnExit), for: .editingDidEndOnExit)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(SearchTextField.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SearchTextField.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SearchTextField.keyboardDidChangeFrame(_:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SearchTextField.keyboardWillShow(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SearchTextField.keyboardWillHide(_:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SearchTextField.keyboardDidChangeFrame(_:)), name: Notification.Name.UIKeyboardDidChangeFrame, object: nil)
     }
     
     override open func layoutSubviews() {
@@ -319,11 +319,11 @@ open class SearchTextField: UITextField {
                 })
             }
             
-            superview?.bringSubviewToFront(tableView)
-            superview?.bringSubviewToFront(shadowView!)
+            superview?.bringSubview(toFront: tableView)
+            superview?.bringSubview(toFront: shadowView!)
             
             if self.isFirstResponder {
-                superview?.bringSubviewToFront(self)
+                superview?.bringSubview(toFront: self)
             }
             
             tableView.layer.borderColor = theme.borderColor.cgColor
@@ -339,7 +339,7 @@ open class SearchTextField: UITextField {
     @objc open func keyboardWillShow(_ notification: Notification) {
         if !keyboardIsShowing && isEditing {
             keyboardIsShowing = true
-            keyboardFrame = ((notification as NSNotification).userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            keyboardFrame = ((notification as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             interactedWith = true
             prepareDrawTableResult()
         }
@@ -355,7 +355,8 @@ open class SearchTextField: UITextField {
     
     @objc open func keyboardDidChangeFrame(_ notification: Notification) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            self?.keyboardFrame = ((notification as NSNotification).userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            self?.keyboardFrame = ((notification as NSNotification).userInfo![
+                UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             self?.prepareDrawTableResult()
         }
     }
@@ -596,14 +597,19 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if itemSelectionHandler == nil {
-            self.text = filteredResults[(indexPath as NSIndexPath).row].title
-        } else {
-            let index = indexPath.row
-            itemSelectionHandler!(filteredResults, index)
+        defer {
+            clearResults()
         }
         
-        clearResults()
+        guard let handler = itemSelectionHandler else {
+            if filteredResults.count > indexPath.row {
+                self.text = filteredResults[indexPath.row].title
+            }
+            
+            return
+        }
+
+        handler(filteredResults, indexPath.row)
     }
 }
 

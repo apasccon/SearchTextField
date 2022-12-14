@@ -33,7 +33,7 @@ SearchTextField supports two different modes: the classic dropdown list (by defa
   s.source           = { :git => "https://github.com/apasccon/SearchTextField.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '11.0'
 
   s.user_target_xcconfig = { 'ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES' => '$(inherited)' }
 
