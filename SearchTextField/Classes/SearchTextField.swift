@@ -28,6 +28,9 @@ open class SearchTextField: UITextField {
     /// How long to wait before deciding typing has stopped
     open var typingStoppedDelay = 0.8
     
+    ///  Enable multiline of each row text
+    open var enableMultiline = false
+    
     /// Set your custom visual theme, or just choose between pre-defined SearchTextFieldTheme.lightTheme() and SearchTextFieldTheme.darkTheme() themes
     open var theme = SearchTextFieldTheme.lightTheme() {
         didSet {
@@ -550,6 +553,15 @@ open class SearchTextField: UITextField {
             }
         }
     }
+    
+    
+    // MARK: - Height for label
+    
+    fileprivate func getHeight(forText: String,forWidth: CGFloat ) -> CGFloat {
+        let tempLabel = UILabel.init()
+        tempLabel.text = forText
+        return tempLabel.textHeight(withWidth: forWidth)
+    }
 }
 
 extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
@@ -575,6 +587,7 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
         cell!.layoutMargins = UIEdgeInsets.zero
         cell!.preservesSuperviewLayoutMargins = false
         cell!.textLabel?.font = theme.font
+        cell!.textLabel?.numberOfLines = enableMultiline ? 0 : 1
         cell!.detailTextLabel?.font = UIFont(name: theme.font.fontName, size: theme.font.pointSize * fontConversionRate)
         cell!.textLabel?.textColor = theme.fontColor
         cell!.detailTextLabel?.textColor = theme.subtitleFontColor
@@ -592,7 +605,7 @@ extension SearchTextField: UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return theme.cellHeight
+        return getHeight(forText: filteredResults[(indexPath as NSIndexPath).row].title, forWidth: tableView.frame.width) > theme.cellHeight && enableMultiline ? UITableView.automaticDimension : theme.cellHeight
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -677,4 +690,40 @@ public typealias SearchTextFieldItemHandler = (_ filteredResults: [SearchTextFie
 enum Direction {
     case down
     case up
+}
+
+
+////////////////////////////////////////////////////////////////////////
+// Extension for UILable height calculation
+
+extension UILabel {
+    func textHeight(withWidth width: CGFloat) -> CGFloat {
+        guard let text = text else {
+            return 0
+        }
+        return text.height(withWidth: width, font: font)
+    }
+
+    func attributedTextHeight(withWidth width: CGFloat) -> CGFloat {
+        guard let attributedText = attributedText else {
+            return 0
+        }
+        return attributedText.height(withWidth: width)
+    }
+}
+
+extension String {
+    func height(withWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let maxSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+        let actualSize = self.boundingRect(with: maxSize, options: [.usesLineFragmentOrigin], attributes: [.font : font], context: nil)
+        return actualSize.height
+    }
+}
+
+extension NSAttributedString {
+    func height(withWidth width: CGFloat) -> CGFloat {
+        let maxSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+        let actualSize = boundingRect(with: maxSize, options: [.usesLineFragmentOrigin], context: nil)
+        return actualSize.height
+    }
 }

@@ -41,6 +41,9 @@ class MainViewController: UITableViewController {
         // Start visible even without user's interaction as soon as created - Default: false
         countryTextField.startVisibleWithoutInteraction = true
         
+        // Enable multiline cells - Default: false
+        // countryTextField.enableMultiline = true
+        
         // Set data source
         let countries = localCountries()
         countryTextField.filterStrings(countries)
